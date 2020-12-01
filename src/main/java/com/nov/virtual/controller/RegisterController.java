@@ -1,13 +1,8 @@
 package com.nov.virtual.controller;
 
-import com.nov.virtual.sql.mapper.UserVirtualMapper;
-import com.nov.virtual.sql.model.UserVirtual;
 import com.nov.virtual.sql.service.UserVirtualService;
-import com.nov.virtual.utils.config.Address;
 import com.nov.virtual.utils.pojo.ResultCode;
 import com.nov.virtual.utils.pojo.ResultUtils;
-import com.nov.virtual.utils.pojo.TokenUtils;
-import com.nov.virtual.vo.LoginVo;
 import com.nov.virtual.vo.RegisterVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

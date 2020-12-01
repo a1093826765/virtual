@@ -2,7 +2,7 @@ package com.nov.virtual.controller;
 
 import com.nov.virtual.sql.model.UserVirtual;
 import com.nov.virtual.sql.service.UserVirtualService;
-import com.nov.virtual.utils.config.Address;
+import com.nov.virtual.config.Address;
 import com.nov.virtual.utils.pojo.ResultCode;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.utils.pojo.TokenUtils;

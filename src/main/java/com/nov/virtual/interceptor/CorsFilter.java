@@ -1,4 +1,4 @@
-package com.nov.virtual.utils.Interceptor;
+package com.nov.virtual.interceptor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.nov.virtual.utils.Interceptor;
+package com.nov.virtual.interceptor;
 
 import com.auth0.jwt.JWT;
 import com.nov.virtual.sql.mapper.UserVirtualMapper;

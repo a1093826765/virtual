@@ -56,6 +56,15 @@ public class ResultUtils {
 
     /**
      * 返回成功
+     * @return
+     */
+    public static ResultUtils success(){
+        ResultUtils resultUtils=new ResultUtils(ResultCode.SUCCESS);
+        return resultUtils;
+    }
+
+    /**
+     * 返回成功,有data
      * @param data
      * @return
      */

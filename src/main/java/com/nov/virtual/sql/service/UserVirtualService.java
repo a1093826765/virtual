@@ -19,5 +19,6 @@ public interface UserVirtualService {
     public List<UserVirtual> getMenus(Integer page, Integer limit, UserVirtualExample userExample);
 
     public List<UserVirtual> login(String account,String password);
+    public int register(String account,String password,String userName);
 
 }

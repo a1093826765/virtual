@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 @Transactional
 @Service(value = "UserService")
@@ -62,13 +63,37 @@ public class UserVirtualServiceImpl implements UserVirtualService {
         return null;
     }
 
+    /**
+     * 验证账号密码
+     * @param account
+     * @param password
+     * @return
+     */
     @Override
     public List<UserVirtual> login(String account, String password) {
         UserVirtualExample userVirtualExample=new UserVirtualExample();
         UserVirtualExample.Criteria userCriteria=userVirtualExample.createCriteria();
         userCriteria.andAccountEqualTo(account);
         userCriteria.andPasswordEqualTo(password);
-        List<UserVirtual> userList=userMapper.selectByExample(userVirtualExample);
-        return userList;
+        return userMapper.selectByExample(userVirtualExample);
+    }
+
+    /**
+     * 添加数据
+     * @param account
+     * @param password
+     * @param userName
+     * @return
+     */
+    @Override
+    public int register(String account, String password, String userName) {
+        UserVirtual userVirtual=new UserVirtual();
+        userVirtual.setAccount(account);
+        userVirtual.setMoney("0");
+        userVirtual.setPassword(password);
+        userVirtual.setUsername(userName);
+        userVirtual.setUserUserstautsid(1);
+        userVirtual.setRegistertime(new Date());
+        return userMapper.insert(userVirtual);
     }
 }

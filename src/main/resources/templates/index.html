@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body>
+  <input type="text" name="" id="name" value="">
+  <button onclick="fn()"> 获取登录</button>
+  <script>
+    function fn() {
+      let inputvalue = document.getElementById('name').value;
+      let value = {
+        password:'admin',
+        account:'admin'
+      }
+      $.ajax({
+        headers:{token:''},
+        url:'http://localhost:8080/api',
+        method:'POST',
+        data: JSON.stringify(value),
+        // dataType:"json",
+        contentType:"application/json;charset=utf-8",
+        success:((item)=> {
+          console.log(item)
+        })
+      })
+      console.log(inputvalue)
+      // $.ajax({
+      //   url:'http://localhost:3000/api/users',
+      //   method:'GET',
+      //   success:((item)=> {
+      //     console.log(item)
+      //   })
+      // })
+      
+    }
+  </script>
+</body>
+</html>

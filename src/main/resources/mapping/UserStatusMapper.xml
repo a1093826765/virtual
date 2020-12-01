@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nov.virtual.sql.mapper.UserStatusMapper">
+  <resultMap id="BaseResultMap" type="com.nov.virtual.sql.model.UserStatus">
+    <id column="userStatusId" jdbcType="INTEGER" property="userstatusid" />
+    <result column="userStatusName" jdbcType="VARCHAR" property="userstatusname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    userStatusId, userStatusName
+  </sql>
+  <select id="selectByExample" parameterType="com.nov.virtual.sql.model.UserStatusExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from `userStatus`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.nov.virtual.sql.model.UserStatusKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `userStatus`
+    where userStatusId = #{userstatusid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.nov.virtual.sql.model.UserStatusKey">
+    delete from `userStatus`
+    where userStatusId = #{userstatusid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nov.virtual.sql.model.UserStatusExample">
+    delete from `userStatus`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nov.virtual.sql.model.UserStatus">
+    insert into `userStatus` (userStatusId, userStatusName)
+    values (#{userstatusid,jdbcType=INTEGER}, #{userstatusname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nov.virtual.sql.model.UserStatus">
+    insert into `userStatus`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userstatusid != null">
+        userStatusId,
+      </if>
+      <if test="userstatusname != null">
+        userStatusName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userstatusid != null">
+        #{userstatusid,jdbcType=INTEGER},
+      </if>
+      <if test="userstatusname != null">
+        #{userstatusname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nov.virtual.sql.model.UserStatusExample" resultType="java.lang.Long">
+    select count(*) from `userStatus`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update `userStatus`
+    <set>
+      <if test="record.userstatusid != null">
+        userStatusId = #{record.userstatusid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userstatusname != null">
+        userStatusName = #{record.userstatusname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update `userStatus`
+    set userStatusId = #{record.userstatusid,jdbcType=INTEGER},
+      userStatusName = #{record.userstatusname,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nov.virtual.sql.model.UserStatus">
+    update `userStatus`
+    <set>
+      <if test="userstatusname != null">
+        userStatusName = #{userstatusname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userStatusId = #{userstatusid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nov.virtual.sql.model.UserStatus">
+    update `userStatus`
+    set userStatusName = #{userstatusname,jdbcType=VARCHAR}
+    where userStatusId = #{userstatusid,jdbcType=INTEGER}
+  </update>
+</mapper>

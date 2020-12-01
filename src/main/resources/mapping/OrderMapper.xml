@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nov.virtual.sql.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.nov.virtual.sql.model.Order">
+    <id column="orderId" jdbcType="BIGINT" property="orderid" />
+    <result column="orderNumber" jdbcType="VARCHAR" property="ordernumber" />
+    <result column="orderBuyTime" jdbcType="TIMESTAMP" property="orderbuytime" />
+    <result column="orderSellTime" jdbcType="TIMESTAMP" property="orderselltime" />
+    <result column="orderPrice" jdbcType="VARCHAR" property="orderprice" />
+    <result column="order_TypeId" jdbcType="INTEGER" property="orderTypeid" />
+    <result column="order_StatusId" jdbcType="INTEGER" property="orderStatusid" />
+    <result column="order_UserId" jdbcType="BIGINT" property="orderUserid" />
+    <result column="order_CurrencyId" jdbcType="INTEGER" property="orderCurrencyid" />
+    <result column="order_CurrencyNum" jdbcType="VARCHAR" property="orderCurrencynum" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    orderId, orderNumber, orderBuyTime, orderSellTime, orderPrice, order_TypeId, order_StatusId, 
+    order_UserId, order_CurrencyId, order_CurrencyNum
+  </sql>
+  <select id="selectByExample" parameterType="com.nov.virtual.sql.model.OrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from `order`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.nov.virtual.sql.model.OrderKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `order`
+    where orderId = #{orderid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.nov.virtual.sql.model.OrderKey">
+    delete from `order`
+    where orderId = #{orderid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nov.virtual.sql.model.OrderExample">
+    delete from `order`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nov.virtual.sql.model.Order">
+    insert into `order` (orderId, orderNumber, orderBuyTime, 
+      orderSellTime, orderPrice, order_TypeId, 
+      order_StatusId, order_UserId, order_CurrencyId, 
+      order_CurrencyNum)
+    values (#{orderid,jdbcType=BIGINT}, #{ordernumber,jdbcType=VARCHAR}, #{orderbuytime,jdbcType=TIMESTAMP}, 
+      #{orderselltime,jdbcType=TIMESTAMP}, #{orderprice,jdbcType=VARCHAR}, #{orderTypeid,jdbcType=INTEGER}, 
+      #{orderStatusid,jdbcType=INTEGER}, #{orderUserid,jdbcType=BIGINT}, #{orderCurrencyid,jdbcType=INTEGER}, 
+      #{orderCurrencynum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nov.virtual.sql.model.Order">
+    insert into `order`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        orderId,
+      </if>
+      <if test="ordernumber != null">
+        orderNumber,
+      </if>
+      <if test="orderbuytime != null">
+        orderBuyTime,
+      </if>
+      <if test="orderselltime != null">
+        orderSellTime,
+      </if>
+      <if test="orderprice != null">
+        orderPrice,
+      </if>
+      <if test="orderTypeid != null">
+        order_TypeId,
+      </if>
+      <if test="orderStatusid != null">
+        order_StatusId,
+      </if>
+      <if test="orderUserid != null">
+        order_UserId,
+      </if>
+      <if test="orderCurrencyid != null">
+        order_CurrencyId,
+      </if>
+      <if test="orderCurrencynum != null">
+        order_CurrencyNum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        #{orderid,jdbcType=BIGINT},
+      </if>
+      <if test="ordernumber != null">
+        #{ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderbuytime != null">
+        #{orderbuytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderselltime != null">
+        #{orderselltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderprice != null">
+        #{orderprice,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTypeid != null">
+        #{orderTypeid,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatusid != null">
+        #{orderStatusid,jdbcType=INTEGER},
+      </if>
+      <if test="orderUserid != null">
+        #{orderUserid,jdbcType=BIGINT},
+      </if>
+      <if test="orderCurrencyid != null">
+        #{orderCurrencyid,jdbcType=INTEGER},
+      </if>
+      <if test="orderCurrencynum != null">
+        #{orderCurrencynum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nov.virtual.sql.model.OrderExample" resultType="java.lang.Long">
+    select count(*) from `order`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update `order`
+    <set>
+      <if test="record.orderid != null">
+        orderId = #{record.orderid,jdbcType=BIGINT},
+      </if>
+      <if test="record.ordernumber != null">
+        orderNumber = #{record.ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderbuytime != null">
+        orderBuyTime = #{record.orderbuytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderselltime != null">
+        orderSellTime = #{record.orderselltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderprice != null">
+        orderPrice = #{record.orderprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderTypeid != null">
+        order_TypeId = #{record.orderTypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderStatusid != null">
+        order_StatusId = #{record.orderStatusid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderUserid != null">
+        order_UserId = #{record.orderUserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderCurrencyid != null">
+        order_CurrencyId = #{record.orderCurrencyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderCurrencynum != null">
+        order_CurrencyNum = #{record.orderCurrencynum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update `order`
+    set orderId = #{record.orderid,jdbcType=BIGINT},
+      orderNumber = #{record.ordernumber,jdbcType=VARCHAR},
+      orderBuyTime = #{record.orderbuytime,jdbcType=TIMESTAMP},
+      orderSellTime = #{record.orderselltime,jdbcType=TIMESTAMP},
+      orderPrice = #{record.orderprice,jdbcType=VARCHAR},
+      order_TypeId = #{record.orderTypeid,jdbcType=INTEGER},
+      order_StatusId = #{record.orderStatusid,jdbcType=INTEGER},
+      order_UserId = #{record.orderUserid,jdbcType=BIGINT},
+      order_CurrencyId = #{record.orderCurrencyid,jdbcType=INTEGER},
+      order_CurrencyNum = #{record.orderCurrencynum,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nov.virtual.sql.model.Order">
+    update `order`
+    <set>
+      <if test="ordernumber != null">
+        orderNumber = #{ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderbuytime != null">
+        orderBuyTime = #{orderbuytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderselltime != null">
+        orderSellTime = #{orderselltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderprice != null">
+        orderPrice = #{orderprice,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTypeid != null">
+        order_TypeId = #{orderTypeid,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatusid != null">
+        order_StatusId = #{orderStatusid,jdbcType=INTEGER},
+      </if>
+      <if test="orderUserid != null">
+        order_UserId = #{orderUserid,jdbcType=BIGINT},
+      </if>
+      <if test="orderCurrencyid != null">
+        order_CurrencyId = #{orderCurrencyid,jdbcType=INTEGER},
+      </if>
+      <if test="orderCurrencynum != null">
+        order_CurrencyNum = #{orderCurrencynum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where orderId = #{orderid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nov.virtual.sql.model.Order">
+    update `order`
+    set orderNumber = #{ordernumber,jdbcType=VARCHAR},
+      orderBuyTime = #{orderbuytime,jdbcType=TIMESTAMP},
+      orderSellTime = #{orderselltime,jdbcType=TIMESTAMP},
+      orderPrice = #{orderprice,jdbcType=VARCHAR},
+      order_TypeId = #{orderTypeid,jdbcType=INTEGER},
+      order_StatusId = #{orderStatusid,jdbcType=INTEGER},
+      order_UserId = #{orderUserid,jdbcType=BIGINT},
+      order_CurrencyId = #{orderCurrencyid,jdbcType=INTEGER},
+      order_CurrencyNum = #{orderCurrencynum,jdbcType=VARCHAR}
+    where orderId = #{orderid,jdbcType=BIGINT}
+  </update>
+</mapper>

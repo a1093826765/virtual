@@ -20,7 +20,7 @@ import java.util.List;
  * 用户登录api
  * @author november
  */
-@Api(tags = "用户登录接口")
+@Api(value = "用户登录Controller",tags = {"用户登录接口"})
 @RestController
 @RequestMapping(value = "/api/login",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class LoginController {
@@ -33,7 +33,7 @@ public class LoginController {
      * @param loginVo
      * @return
      */
-    @ApiOperation(value = "用户登录")
+    @ApiOperation(value = "用户登录",notes = "此接口进行用户登录，对账号密码进行验证")
     @PostMapping
     public ResultUtils login(@Validated @RequestBody LoginVo loginVo){
         // 查询账户是否存在（账户+密码）

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 用户注册api
  * @author november
  */
-@Api(tags = "用户注册接口")
+@Api(value = "用户注册Controller",tags = {"用户注册接口"})
 @RestController
 @RequestMapping(value = "/api/register",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class RegisterController {
@@ -32,7 +32,7 @@ public class RegisterController {
      * @param registerVo
      * @return
      */
-    @ApiOperation(value = "用户注册")
+    @ApiOperation(value = "用户登录",notes = "此接口进行用户注册，添加用户信息")
     @PostMapping
     public ResultUtils register(@Validated @RequestBody RegisterVo registerVo){
         if(userVirtualService.register(registerVo.getAccount(),registerVo.getPassword(),registerVo.getPassword())==1){

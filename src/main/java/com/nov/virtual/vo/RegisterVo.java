@@ -1,14 +1,26 @@
 package com.nov.virtual.vo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.NonNull;
 
 /**
  * 存储用户注册信息
  * @author november
  */
 @Data
+@ApiModel(value = "用户注册参数",description="/api/register")
 public class RegisterVo {
+    @NonNull
+    @ApiModelProperty(value="账号",name="account",required=true)
     private String account;
+
+    @NonNull
+    @ApiModelProperty(value="账号",name="password",required=true)
     private String password;
+
+    @NonNull
+    @ApiModelProperty(value="账号",name="userName",required=true)
     private String userName;
 }

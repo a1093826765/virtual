@@ -16,7 +16,9 @@ public enum  ResultCode {
     USER_NOT_LOGIN(201,"用户未登录"),
     USER_LOGIN_ERROR(202,"账户或密码错误"),
     TOKEN_ERROR(203,"token错误"),
-    SYSTEM_ERROR(500,"系统异常，请稍后重试");
+    SYSTEM_ERROR(500,"系统异常，请稍后重试"),
+    // websocket
+    CONNECT_SUCCESS(200,"websocket连接成功");
 
 
     private Integer code;

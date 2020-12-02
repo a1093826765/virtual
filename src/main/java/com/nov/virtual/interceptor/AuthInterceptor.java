@@ -25,6 +25,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token=request.getHeader("token");
+        System.out.println(token);
         if(token==null){
             // token为空,用户未登录
             ResultUtils.fail(ResultCode.USER_NOT_LOGIN);

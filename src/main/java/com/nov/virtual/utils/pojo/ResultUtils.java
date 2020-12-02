@@ -86,6 +86,15 @@ public class ResultUtils {
     }
 
     /**
+     * websocket返回
+     * @param resultCode
+     * @return
+     */
+    public static ResultUtils websocket(ResultCode resultCode){
+        return new ResultUtils(resultCode);
+    }
+
+    /**
      * 返回失败
      * @param resultCode
      * @return

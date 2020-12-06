@@ -44,6 +44,7 @@ public class AuthInterceptor implements HandlerInterceptor {
                 return false;
             }
             // 校验token
+            System.out.println(TokenUtils.verify(token, Address.TOKEN_SEC));
             return TokenUtils.verify(token, Address.TOKEN_SEC);
         }catch (Exception e){
             e.printStackTrace();

@@ -30,7 +30,7 @@ public class GloabllExceptionHandler {
     @ResponseBody
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Object handlerException(HttpMessageNotReadableException e){
-        return new ResultUtils(ResultCode.PARAM_IS_BLANK);
+        return new ResultUtils(ResultCode.PARAM_IS_INVALID);
     }
 
 }

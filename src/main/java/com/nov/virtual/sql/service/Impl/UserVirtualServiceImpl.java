@@ -1,9 +1,9 @@
 package com.nov.virtual.sql.service.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.nov.virtual.sql.mapper.UserVirtualMapper;
-import com.nov.virtual.sql.model.UserVirtual;
-import com.nov.virtual.sql.model.UserVirtualExample;
-import com.nov.virtual.sql.model.UserVirtualKey;
+import com.nov.virtual.sql.model.*;
 import com.nov.virtual.sql.model.UserVirtual;
 import com.nov.virtual.sql.service.UserVirtualService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +59,11 @@ public class UserVirtualServiceImpl implements UserVirtualService {
     }
 
     @Override
-    public List<UserVirtual> getMenus(Integer page, Integer limit, UserVirtualExample userExample) {
-        return null;
+    public PageInfo getMenus(Integer page, Integer limit, UserVirtualExample userExample) {
+        PageHelper.startPage(page, limit);
+        List<UserVirtual> userVirtualList = userMapper.selectByExample(userExample);
+        PageInfo<UserVirtual> pageInfo = new PageInfo<UserVirtual>(userVirtualList);
+        return pageInfo;
     }
 
     /**

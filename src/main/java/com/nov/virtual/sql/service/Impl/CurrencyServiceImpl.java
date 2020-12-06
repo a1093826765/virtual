@@ -1,5 +1,7 @@
 package com.nov.virtual.sql.service.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.nov.virtual.sql.mapper.CurrencyMapper;
 import com.nov.virtual.sql.model.Currency;
 import com.nov.virtual.sql.model.CurrencyExample;
@@ -57,7 +59,10 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    public List<Currency> getMenus(Integer page, Integer limit, CurrencyExample currencyExample) {
-        return null;
+    public PageInfo getMenus(Integer page, Integer limit, CurrencyExample currencyExample) {
+        PageHelper.startPage(page, limit);
+        List<Currency> currencyList = currencyMapper.selectByExample(currencyExample);
+        PageInfo<Currency> pageInfo = new PageInfo<Currency>(currencyList);
+        return pageInfo;
     }
 }

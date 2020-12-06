@@ -1,6 +1,9 @@
 package com.nov.virtual.sql.service.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.nov.virtual.sql.mapper.UserStatusMapper;
+import com.nov.virtual.sql.model.HoldCurrency;
 import com.nov.virtual.sql.model.UserStatus;
 import com.nov.virtual.sql.model.UserStatusExample;
 import com.nov.virtual.sql.model.UserStatusKey;
@@ -57,7 +60,10 @@ public class UserStatusServiceImpl implements UserStatusService {
     }
 
     @Override
-    public List<UserStatus> getMenus(Integer page, Integer limit, UserStatusExample UserStatusExample) {
-        return null;
+    public PageInfo getMenus(Integer page, Integer limit, UserStatusExample UserStatusExample) {
+        PageHelper.startPage(page, limit);
+        List<UserStatus> userStatusList = UserStatusMapper.selectByExample(UserStatusExample);
+        PageInfo<UserStatus> pageInfo = new PageInfo<UserStatus>(userStatusList);
+        return pageInfo;
     }
 }

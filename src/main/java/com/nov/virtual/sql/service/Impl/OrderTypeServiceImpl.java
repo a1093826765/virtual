@@ -1,6 +1,9 @@
 package com.nov.virtual.sql.service.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.nov.virtual.sql.mapper.OrderTypeMapper;
+import com.nov.virtual.sql.model.HoldCurrency;
 import com.nov.virtual.sql.model.OrderType;
 import com.nov.virtual.sql.model.OrderTypeExample;
 import com.nov.virtual.sql.model.OrderTypeKey;
@@ -57,7 +60,10 @@ public class OrderTypeServiceImpl implements OrderTypeService {
     }
 
     @Override
-    public List<OrderType> getMenus(Integer page, Integer limit, OrderTypeExample OrderTypeExample) {
-        return null;
+    public PageInfo getMenus(Integer page, Integer limit, OrderTypeExample OrderTypeExample) {
+        PageHelper.startPage(page, limit);
+        List<OrderType> orderTypeList = OrderTypeMapper.selectByExample(OrderTypeExample);
+        PageInfo<OrderType> pageInfo = new PageInfo<OrderType>(orderTypeList);
+        return pageInfo;
     }
 }

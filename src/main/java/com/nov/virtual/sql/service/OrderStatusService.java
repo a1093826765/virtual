@@ -1,5 +1,6 @@
 package com.nov.virtual.sql.service;
 
+import com.github.pagehelper.PageInfo;
 import com.nov.virtual.sql.model.OrderStatus;
 import com.nov.virtual.sql.model.OrderStatusExample;
 import com.nov.virtual.sql.model.OrderStatusKey;
@@ -15,5 +16,5 @@ public interface OrderStatusService {
     public int deleteByExampleAll(OrderStatusExample OrderStatusExample);
     public int updateByKey(OrderStatus OrderStatus);
     public int updateByExampleAll(OrderStatus OrderStatus, OrderStatusExample OrderStatusyExample);
-    public List<OrderStatus> getMenus(Integer page, Integer limit, OrderStatusExample OrderStatusExample);
+    public PageInfo getMenus(Integer page, Integer limit, OrderStatusExample OrderStatusExample);
 }

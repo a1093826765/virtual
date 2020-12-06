@@ -1,6 +1,9 @@
 package com.nov.virtual.sql.service.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.nov.virtual.sql.mapper.HoldCurrencyMapper;
+import com.nov.virtual.sql.model.Currency;
 import com.nov.virtual.sql.model.HoldCurrency;
 import com.nov.virtual.sql.model.HoldCurrencyExample;
 import com.nov.virtual.sql.model.HoldCurrencyKey;
@@ -57,7 +60,10 @@ public class HoldCurrencyServiceImpl implements HoldCurrencyService {
     }
 
     @Override
-    public List<HoldCurrency> getMenus(Integer page, Integer limit, HoldCurrencyExample HoldCurrencyExample) {
-        return null;
+    public PageInfo getMenus(Integer page, Integer limit, HoldCurrencyExample HoldCurrencyExample) {
+        PageHelper.startPage(page, limit);
+        List<HoldCurrency> holdCurrencyList = HoldCurrencyMapper.selectByExample(HoldCurrencyExample);
+        PageInfo<HoldCurrency> pageInfo = new PageInfo<HoldCurrency>(holdCurrencyList);
+        return pageInfo;
     }
 }

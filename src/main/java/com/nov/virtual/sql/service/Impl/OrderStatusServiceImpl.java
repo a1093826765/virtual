@@ -1,6 +1,9 @@
 package com.nov.virtual.sql.service.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.nov.virtual.sql.mapper.OrderStatusMapper;
+import com.nov.virtual.sql.model.HoldCurrency;
 import com.nov.virtual.sql.model.OrderStatus;
 import com.nov.virtual.sql.model.OrderStatusExample;
 import com.nov.virtual.sql.model.OrderStatusKey;
@@ -57,7 +60,10 @@ public class OrderStatusServiceImpl implements OrderStatusService {
     }
 
     @Override
-    public List<OrderStatus> getMenus(Integer page, Integer limit, OrderStatusExample OrderStatusExample) {
-        return null;
+    public PageInfo getMenus(Integer page, Integer limit, OrderStatusExample OrderStatusExample) {
+        PageHelper.startPage(page, limit);
+        List<OrderStatus> orderStatusList = OrderStatusMapper.selectByExample(OrderStatusExample);
+        PageInfo<OrderStatus> pageInfo = new PageInfo<OrderStatus>(orderStatusList);
+        return pageInfo;
     }
 }

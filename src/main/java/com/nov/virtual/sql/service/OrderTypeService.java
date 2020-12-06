@@ -1,5 +1,6 @@
 package com.nov.virtual.sql.service;
 
+import com.github.pagehelper.PageInfo;
 import com.nov.virtual.sql.model.OrderType;
 import com.nov.virtual.sql.model.OrderTypeExample;
 import com.nov.virtual.sql.model.OrderTypeKey;
@@ -15,5 +16,5 @@ public interface OrderTypeService {
     public int deleteByExampleAll(OrderTypeExample OrderTypeExample);
     public int updateByKey(OrderType OrderType);
     public int updateByExampleAll(OrderType OrderType, OrderTypeExample OrderTypeyExample);
-    public List<OrderType> getMenus(Integer page, Integer limit, OrderTypeExample OrderTypeExample);
+    public PageInfo getMenus(Integer page, Integer limit, OrderTypeExample OrderTypeExample);
 }

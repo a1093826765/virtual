@@ -1,5 +1,6 @@
 package com.nov.virtual.sql.service;
 
+import com.github.pagehelper.PageInfo;
 import com.nov.virtual.sql.model.Currency;
 import com.nov.virtual.sql.model.CurrencyExample;
 import com.nov.virtual.sql.model.CurrencyKey;
@@ -15,5 +16,5 @@ public interface CurrencyService {
     public int deleteByExampleAll(CurrencyExample currencyExample);
     public int updateByKey(Currency currency);
     public int updateByExampleAll(Currency currency, CurrencyExample currencyyExample);
-    public List<Currency> getMenus(Integer page, Integer limit, CurrencyExample currencyExample);
+    public PageInfo getMenus(Integer page, Integer limit, CurrencyExample currencyExample);
 }

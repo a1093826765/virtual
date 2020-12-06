@@ -4,7 +4,7 @@ package com.nov.virtual.utils;
  * 正则匹配
  * @author november
  */
-public class RegexUtils {
+public class RegexUtil {
     /**
      * 匹配邮箱
      * */

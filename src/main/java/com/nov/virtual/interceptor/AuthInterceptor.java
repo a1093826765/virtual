@@ -5,6 +5,8 @@ import com.nov.virtual.sql.mapper.UserVirtualMapper;
 import com.nov.virtual.sql.model.UserVirtual;
 import com.nov.virtual.sql.model.UserVirtualKey;
 import com.nov.virtual.config.Address;
+import com.nov.virtual.utils.NetworkUtil;
+import com.nov.virtual.utils.UserContextUtil;
 import com.nov.virtual.utils.pojo.ResultCode;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.utils.pojo.TokenUtils;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 /**
  * token拦截器
@@ -24,11 +27,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        PrintWriter out=response.getWriter();
         String token=request.getHeader("token");
-        System.out.println(token);
         if(token==null){
             // token为空,用户未登录
-            ResultUtils.fail(ResultCode.USER_NOT_LOGIN);
+            out.println(ResultUtils.fail(ResultCode.USER_NOT_LOGIN));
             return false;
         }
         String userId;
@@ -40,17 +43,22 @@ public class AuthInterceptor implements HandlerInterceptor {
             UserVirtual userVirtual=userVirtualMapper.selectByPrimaryKey(userVirtualKey);
             if(userVirtual==null){
                 // 用户不存在
-                ResultUtils.fail(ResultCode.TOKEN_ERROR);
+                out.println(ResultUtils.fail(ResultCode.TOKEN_ERROR));
                 return false;
             }
             // 校验token
-            System.out.println(TokenUtils.verify(token, Address.TOKEN_SEC));
-            return TokenUtils.verify(token, Address.TOKEN_SEC);
-        }catch (Exception e){
-            e.printStackTrace();
-            // token错误（userId不存在 或者 token验证失败）
-            ResultUtils.fail(ResultCode.TOKEN_ERROR);
+            if(TokenUtils.verify(token, Address.TOKEN_SEC)){
+                UserContextUtil.addUserContext(Long.valueOf(userId), NetworkUtil.getIPAddress(request),token);
+                return true;
+            }
             return false;
+        }catch (Exception e){
+            // token错误（userId不存在 或者 token验证失败）
+            out.println(ResultUtils.fail(ResultCode.TOKEN_ERROR));
+        }finally {
+            out.flush();
+            out.close();
         }
+        return false;
     }
 }

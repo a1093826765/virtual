@@ -16,27 +16,27 @@
         page:1,
         limit:2
       }
-      // $.ajax({
-      //   headers:{token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIn0.1CN_8jXLcWwWBf_V-N_7qPrlhbnIOOiFA4Y2pe9-xL4'},
-      //   url:'http://localhost:8080/api/currency/query',
-      //   method:'POST',
-      //   data: JSON.stringify(value),
-      //   // dataType:"json",
-      //   contentType:"application/json;charset=utf-8",
-      //   success:((item)=> {
-      //     console.log(item)
-      //   })
-      // })
-      console.log(inputvalue)
       $.ajax({
-      headers:{token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIn0.1CN_8jXLcWwWBf_V-N_7qPrlhbnIOOiFA4Y2pe9-xL4'},
-        url:'http://localhost:8080/api/currency/query?page=1&limit=1',
-        method:'GET',
-        data: value,
+        headers:{token:'ey111J0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIn0.1CN_8jXLcWwWBf_V-N_7qPrlhbnIOOiFA4Y2pe9-xL4'},
+        url:'http://localhost:8080/api/currency/query',
+        method:'POST',
+        data: JSON.stringify(value),
+        // dataType:"json",
+        contentType:"application/json;charset=utf-8",
         success:((item)=> {
           console.log(item)
         })
       })
+      console.log(inputvalue)
+      // $.ajax({
+      // headers:{token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIn0.1CN_8jXLcWwWBf_V-N_7qPrlhbnIOOiFA4Y2pe9-xL4'},
+      //   url:'http://localhost:8080/api/currency/query?page=1&limit=1',
+      //   method:'GET',
+      //   data: value,
+      //   success:((item)=> {
+      //     console.log(item)
+      //   })
+      // })
       
     }
   </script>

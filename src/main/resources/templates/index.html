@@ -13,11 +13,12 @@
     function fn() {
       let inputvalue = document.getElementById('name').value;
       let value = {
-        password:'admin'
+        page:1,
+        limit:2
       }
       $.ajax({
-        headers:{token:''},
-        url:'http://localhost:8080/api/login',
+        headers:{token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIn0.1CN_8jXLcWwWBf_V-N_7qPrlhbnIOOiFA4Y2pe9-xL4'},
+        url:'http://localhost:8080/api/currency/query',
         method:'POST',
         data: JSON.stringify(value),
         // dataType:"json",

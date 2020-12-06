@@ -1,5 +1,6 @@
 package com.nov.virtual.sql.service;
 
+import com.github.pagehelper.PageInfo;
 import com.nov.virtual.sql.model.UserVirtual;
 import com.nov.virtual.sql.model.UserVirtualExample;
 import com.nov.virtual.sql.model.UserVirtualKey;
@@ -16,7 +17,7 @@ public interface UserVirtualService {
     public int deleteByExampleAll(UserVirtualExample userExample);
     public int updateByKey(UserVirtual user);
     public int updateByExampleAll(UserVirtual user, UserVirtualExample useryExample);
-    public List<UserVirtual> getMenus(Integer page, Integer limit, UserVirtualExample userExample);
+    public PageInfo getMenus(Integer page, Integer limit, UserVirtualExample userExample);
 
     public List<UserVirtual> login(String account,String password);
     public int register(String account,String password,String userName);

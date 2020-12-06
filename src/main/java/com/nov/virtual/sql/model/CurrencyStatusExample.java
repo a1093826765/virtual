@@ -3,14 +3,14 @@ package com.nov.virtual.sql.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CurrencyExample {
+public class CurrencyStatusExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public CurrencyExample() {
+    public CurrencyStatusExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,193 +104,133 @@ public class CurrencyExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andCurrencyidIsNull() {
-            addCriterion("currencyId is null");
+        public Criteria andCurrencystatusidIsNull() {
+            addCriterion("currencyStatusId is null");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencyidIsNotNull() {
-            addCriterion("currencyId is not null");
+        public Criteria andCurrencystatusidIsNotNull() {
+            addCriterion("currencyStatusId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencyidEqualTo(Integer value) {
-            addCriterion("currencyId =", value, "currencyid");
+        public Criteria andCurrencystatusidEqualTo(Integer value) {
+            addCriterion("currencyStatusId =", value, "currencystatusid");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencyidNotEqualTo(Integer value) {
-            addCriterion("currencyId <>", value, "currencyid");
+        public Criteria andCurrencystatusidNotEqualTo(Integer value) {
+            addCriterion("currencyStatusId <>", value, "currencystatusid");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencyidGreaterThan(Integer value) {
-            addCriterion("currencyId >", value, "currencyid");
+        public Criteria andCurrencystatusidGreaterThan(Integer value) {
+            addCriterion("currencyStatusId >", value, "currencystatusid");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencyidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("currencyId >=", value, "currencyid");
+        public Criteria andCurrencystatusidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("currencyStatusId >=", value, "currencystatusid");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencyidLessThan(Integer value) {
-            addCriterion("currencyId <", value, "currencyid");
+        public Criteria andCurrencystatusidLessThan(Integer value) {
+            addCriterion("currencyStatusId <", value, "currencystatusid");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencyidLessThanOrEqualTo(Integer value) {
-            addCriterion("currencyId <=", value, "currencyid");
+        public Criteria andCurrencystatusidLessThanOrEqualTo(Integer value) {
+            addCriterion("currencyStatusId <=", value, "currencystatusid");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencyidIn(List<Integer> values) {
-            addCriterion("currencyId in", values, "currencyid");
+        public Criteria andCurrencystatusidIn(List<Integer> values) {
+            addCriterion("currencyStatusId in", values, "currencystatusid");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencyidNotIn(List<Integer> values) {
-            addCriterion("currencyId not in", values, "currencyid");
+        public Criteria andCurrencystatusidNotIn(List<Integer> values) {
+            addCriterion("currencyStatusId not in", values, "currencystatusid");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencyidBetween(Integer value1, Integer value2) {
-            addCriterion("currencyId between", value1, value2, "currencyid");
+        public Criteria andCurrencystatusidBetween(Integer value1, Integer value2) {
+            addCriterion("currencyStatusId between", value1, value2, "currencystatusid");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencyidNotBetween(Integer value1, Integer value2) {
-            addCriterion("currencyId not between", value1, value2, "currencyid");
+        public Criteria andCurrencystatusidNotBetween(Integer value1, Integer value2) {
+            addCriterion("currencyStatusId not between", value1, value2, "currencystatusid");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencynameIsNull() {
-            addCriterion("currencyName is null");
+        public Criteria andCurrencystatusnameIsNull() {
+            addCriterion("currencyStatusName is null");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencynameIsNotNull() {
-            addCriterion("currencyName is not null");
+        public Criteria andCurrencystatusnameIsNotNull() {
+            addCriterion("currencyStatusName is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencynameEqualTo(String value) {
-            addCriterion("currencyName =", value, "currencyname");
+        public Criteria andCurrencystatusnameEqualTo(String value) {
+            addCriterion("currencyStatusName =", value, "currencystatusname");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencynameNotEqualTo(String value) {
-            addCriterion("currencyName <>", value, "currencyname");
+        public Criteria andCurrencystatusnameNotEqualTo(String value) {
+            addCriterion("currencyStatusName <>", value, "currencystatusname");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencynameGreaterThan(String value) {
-            addCriterion("currencyName >", value, "currencyname");
+        public Criteria andCurrencystatusnameGreaterThan(String value) {
+            addCriterion("currencyStatusName >", value, "currencystatusname");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencynameGreaterThanOrEqualTo(String value) {
-            addCriterion("currencyName >=", value, "currencyname");
+        public Criteria andCurrencystatusnameGreaterThanOrEqualTo(String value) {
+            addCriterion("currencyStatusName >=", value, "currencystatusname");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencynameLessThan(String value) {
-            addCriterion("currencyName <", value, "currencyname");
+        public Criteria andCurrencystatusnameLessThan(String value) {
+            addCriterion("currencyStatusName <", value, "currencystatusname");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencynameLessThanOrEqualTo(String value) {
-            addCriterion("currencyName <=", value, "currencyname");
+        public Criteria andCurrencystatusnameLessThanOrEqualTo(String value) {
+            addCriterion("currencyStatusName <=", value, "currencystatusname");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencynameLike(String value) {
-            addCriterion("currencyName like", value, "currencyname");
+        public Criteria andCurrencystatusnameLike(String value) {
+            addCriterion("currencyStatusName like", value, "currencystatusname");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencynameNotLike(String value) {
-            addCriterion("currencyName not like", value, "currencyname");
+        public Criteria andCurrencystatusnameNotLike(String value) {
+            addCriterion("currencyStatusName not like", value, "currencystatusname");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencynameIn(List<String> values) {
-            addCriterion("currencyName in", values, "currencyname");
+        public Criteria andCurrencystatusnameIn(List<String> values) {
+            addCriterion("currencyStatusName in", values, "currencystatusname");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencynameNotIn(List<String> values) {
-            addCriterion("currencyName not in", values, "currencyname");
+        public Criteria andCurrencystatusnameNotIn(List<String> values) {
+            addCriterion("currencyStatusName not in", values, "currencystatusname");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencynameBetween(String value1, String value2) {
-            addCriterion("currencyName between", value1, value2, "currencyname");
+        public Criteria andCurrencystatusnameBetween(String value1, String value2) {
+            addCriterion("currencyStatusName between", value1, value2, "currencystatusname");
             return (Criteria) this;
         }
 
-        public Criteria andCurrencynameNotBetween(String value1, String value2) {
-            addCriterion("currencyName not between", value1, value2, "currencyname");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrencyCurrencystatusidIsNull() {
-            addCriterion("currency_currencyStatusId is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrencyCurrencystatusidIsNotNull() {
-            addCriterion("currency_currencyStatusId is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrencyCurrencystatusidEqualTo(Integer value) {
-            addCriterion("currency_currencyStatusId =", value, "currencyCurrencystatusid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrencyCurrencystatusidNotEqualTo(Integer value) {
-            addCriterion("currency_currencyStatusId <>", value, "currencyCurrencystatusid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrencyCurrencystatusidGreaterThan(Integer value) {
-            addCriterion("currency_currencyStatusId >", value, "currencyCurrencystatusid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrencyCurrencystatusidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("currency_currencyStatusId >=", value, "currencyCurrencystatusid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrencyCurrencystatusidLessThan(Integer value) {
-            addCriterion("currency_currencyStatusId <", value, "currencyCurrencystatusid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrencyCurrencystatusidLessThanOrEqualTo(Integer value) {
-            addCriterion("currency_currencyStatusId <=", value, "currencyCurrencystatusid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrencyCurrencystatusidIn(List<Integer> values) {
-            addCriterion("currency_currencyStatusId in", values, "currencyCurrencystatusid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrencyCurrencystatusidNotIn(List<Integer> values) {
-            addCriterion("currency_currencyStatusId not in", values, "currencyCurrencystatusid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrencyCurrencystatusidBetween(Integer value1, Integer value2) {
-            addCriterion("currency_currencyStatusId between", value1, value2, "currencyCurrencystatusid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrencyCurrencystatusidNotBetween(Integer value1, Integer value2) {
-            addCriterion("currency_currencyStatusId not between", value1, value2, "currencyCurrencystatusid");
+        public Criteria andCurrencystatusnameNotBetween(String value1, String value2) {
+            addCriterion("currencyStatusName not between", value1, value2, "currencystatusname");
             return (Criteria) this;
         }
     }

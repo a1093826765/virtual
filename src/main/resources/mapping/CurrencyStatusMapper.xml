@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.nov.virtual.sql.mapper.CurrencyMapper">
-  <resultMap id="BaseResultMap" type="com.nov.virtual.sql.model.Currency">
-    <id column="currencyId" jdbcType="INTEGER" property="currencyid" />
-    <result column="currencyName" jdbcType="VARCHAR" property="currencyname" />
-    <result column="currency_currencyStatusId" jdbcType="INTEGER" property="currencyCurrencystatusid" />
+<mapper namespace="com.nov.virtual.sql.mapper.CurrencyStatusMapper">
+  <resultMap id="BaseResultMap" type="com.nov.virtual.sql.model.CurrencyStatus">
+    <id column="currencyStatusId" jdbcType="INTEGER" property="currencystatusid" />
+    <result column="currencyStatusName" jdbcType="VARCHAR" property="currencystatusname" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,15 +64,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    currencyId, currencyName, currency_currencyStatusId
+    currencyStatusId, currencyStatusName
   </sql>
-  <select id="selectByExample" parameterType="com.nov.virtual.sql.model.CurrencyExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.nov.virtual.sql.model.CurrencyStatusExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from `currency`
+    from `currencyStatus`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -81,70 +80,61 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="com.nov.virtual.sql.model.CurrencyKey" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="com.nov.virtual.sql.model.CurrencyStatusKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from `currency`
-    where currencyId = #{currencyid,jdbcType=INTEGER}
+    from `currencyStatus`
+    where currencyStatusId = #{currencystatusid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.nov.virtual.sql.model.CurrencyKey">
-    delete from `currency`
-    where currencyId = #{currencyid,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="com.nov.virtual.sql.model.CurrencyStatusKey">
+    delete from `currencyStatus`
+    where currencyStatusId = #{currencystatusid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.nov.virtual.sql.model.CurrencyExample">
-    delete from `currency`
+  <delete id="deleteByExample" parameterType="com.nov.virtual.sql.model.CurrencyStatusExample">
+    delete from `currencyStatus`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.nov.virtual.sql.model.Currency">
-    insert into `currency` (currencyId, currencyName, currency_currencyStatusId
+  <insert id="insert" parameterType="com.nov.virtual.sql.model.CurrencyStatus">
+    insert into `currencyStatus` (currencyStatusId, currencyStatusName
       )
-    values (#{currencyid,jdbcType=INTEGER}, #{currencyname,jdbcType=VARCHAR}, #{currencyCurrencystatusid,jdbcType=INTEGER}
+    values (#{currencystatusid,jdbcType=INTEGER}, #{currencystatusname,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.nov.virtual.sql.model.Currency">
-    insert into `currency`
+  <insert id="insertSelective" parameterType="com.nov.virtual.sql.model.CurrencyStatus">
+    insert into `currencyStatus`
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="currencyid != null">
-        currencyId,
+      <if test="currencystatusid != null">
+        currencyStatusId,
       </if>
-      <if test="currencyname != null">
-        currencyName,
-      </if>
-      <if test="currencyCurrencystatusid != null">
-        currency_currencyStatusId,
+      <if test="currencystatusname != null">
+        currencyStatusName,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="currencyid != null">
-        #{currencyid,jdbcType=INTEGER},
+      <if test="currencystatusid != null">
+        #{currencystatusid,jdbcType=INTEGER},
       </if>
-      <if test="currencyname != null">
-        #{currencyname,jdbcType=VARCHAR},
-      </if>
-      <if test="currencyCurrencystatusid != null">
-        #{currencyCurrencystatusid,jdbcType=INTEGER},
+      <if test="currencystatusname != null">
+        #{currencystatusname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.nov.virtual.sql.model.CurrencyExample" resultType="java.lang.Long">
-    select count(*) from `currency`
+  <select id="countByExample" parameterType="com.nov.virtual.sql.model.CurrencyStatusExample" resultType="java.lang.Long">
+    select count(*) from `currencyStatus`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update `currency`
+    update `currencyStatus`
     <set>
-      <if test="record.currencyid != null">
-        currencyId = #{record.currencyid,jdbcType=INTEGER},
+      <if test="record.currencystatusid != null">
+        currencyStatusId = #{record.currencystatusid,jdbcType=INTEGER},
       </if>
-      <if test="record.currencyname != null">
-        currencyName = #{record.currencyname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.currencyCurrencystatusid != null">
-        currency_currencyStatusId = #{record.currencyCurrencystatusid,jdbcType=INTEGER},
+      <if test="record.currencystatusname != null">
+        currencyStatusName = #{record.currencystatusname,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -152,30 +142,25 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update `currency`
-    set currencyId = #{record.currencyid,jdbcType=INTEGER},
-      currencyName = #{record.currencyname,jdbcType=VARCHAR},
-      currency_currencyStatusId = #{record.currencyCurrencystatusid,jdbcType=INTEGER}
+    update `currencyStatus`
+    set currencyStatusId = #{record.currencystatusid,jdbcType=INTEGER},
+      currencyStatusName = #{record.currencystatusname,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.nov.virtual.sql.model.Currency">
-    update `currency`
+  <update id="updateByPrimaryKeySelective" parameterType="com.nov.virtual.sql.model.CurrencyStatus">
+    update `currencyStatus`
     <set>
-      <if test="currencyname != null">
-        currencyName = #{currencyname,jdbcType=VARCHAR},
-      </if>
-      <if test="currencyCurrencystatusid != null">
-        currency_currencyStatusId = #{currencyCurrencystatusid,jdbcType=INTEGER},
+      <if test="currencystatusname != null">
+        currencyStatusName = #{currencystatusname,jdbcType=VARCHAR},
       </if>
     </set>
-    where currencyId = #{currencyid,jdbcType=INTEGER}
+    where currencyStatusId = #{currencystatusid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.nov.virtual.sql.model.Currency">
-    update `currency`
-    set currencyName = #{currencyname,jdbcType=VARCHAR},
-      currency_currencyStatusId = #{currencyCurrencystatusid,jdbcType=INTEGER}
-    where currencyId = #{currencyid,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.nov.virtual.sql.model.CurrencyStatus">
+    update `currencyStatus`
+    set currencyStatusName = #{currencystatusname,jdbcType=VARCHAR}
+    where currencyStatusId = #{currencystatusid,jdbcType=INTEGER}
   </update>
 </mapper>

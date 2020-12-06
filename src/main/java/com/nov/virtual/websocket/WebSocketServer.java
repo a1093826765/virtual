@@ -67,6 +67,10 @@ public class WebSocketServer {
         System.out.println(userName + "加入webSocket！当前人数为" + onlineNum);
         try {
             sendMessage(session, ResultUtils.websocket(ResultCode.CONNECT_SUCCESS).toString());
+            sendMessage(session,"开始发送数据--------------->>");
+            for(int i=0;i<1000;i++){
+                sendMessage(session,"数据包-->"+i);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

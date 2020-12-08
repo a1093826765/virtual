@@ -9,6 +9,7 @@
     <result column="userName" jdbcType="VARCHAR" property="username" />
     <result column="money" jdbcType="VARCHAR" property="money" />
     <result column="user_UserStautsId" jdbcType="INTEGER" property="userUserstautsid" />
+    <result column="user_UserTypeId" jdbcType="INTEGER" property="userUsertypeid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    userId, account, password, registerTime, userName, money, user_UserStautsId
+    userId, account, password, registerTime, userName, money, user_UserStautsId, user_UserTypeId
   </sql>
   <select id="selectByExample" parameterType="com.nov.virtual.sql.model.UserVirtualExample" resultMap="BaseResultMap">
     select
@@ -104,10 +105,10 @@
   <insert id="insert" parameterType="com.nov.virtual.sql.model.UserVirtual">
     insert into `userVirtual` (userId, account, password, 
       registerTime, userName, money, 
-      user_UserStautsId)
+      user_UserStautsId, user_UserTypeId)
     values (#{userid,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{registertime,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}, #{money,jdbcType=VARCHAR}, 
-      #{userUserstautsid,jdbcType=INTEGER})
+      #{userUserstautsid,jdbcType=INTEGER}, #{userUsertypeid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.nov.virtual.sql.model.UserVirtual">
     insert into `userVirtual`
@@ -133,6 +134,9 @@
       <if test="userUserstautsid != null">
         user_UserStautsId,
       </if>
+      <if test="userUsertypeid != null">
+        user_UserTypeId,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userid != null">
@@ -155,6 +159,9 @@
       </if>
       <if test="userUserstautsid != null">
         #{userUserstautsid,jdbcType=INTEGER},
+      </if>
+      <if test="userUsertypeid != null">
+        #{userUsertypeid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="record.userUserstautsid != null">
         user_UserStautsId = #{record.userUserstautsid,jdbcType=INTEGER},
       </if>
+      <if test="record.userUsertypeid != null">
+        user_UserTypeId = #{record.userUsertypeid,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +211,8 @@
       registerTime = #{record.registertime,jdbcType=TIMESTAMP},
       userName = #{record.username,jdbcType=VARCHAR},
       money = #{record.money,jdbcType=VARCHAR},
-      user_UserStautsId = #{record.userUserstautsid,jdbcType=INTEGER}
+      user_UserStautsId = #{record.userUserstautsid,jdbcType=INTEGER},
+      user_UserTypeId = #{record.userUsertypeid,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +238,9 @@
       <if test="userUserstautsid != null">
         user_UserStautsId = #{userUserstautsid,jdbcType=INTEGER},
       </if>
+      <if test="userUsertypeid != null">
+        user_UserTypeId = #{userUsertypeid,jdbcType=INTEGER},
+      </if>
     </set>
     where userId = #{userid,jdbcType=BIGINT}
   </update>
@@ -237,7 +251,8 @@
       registerTime = #{registertime,jdbcType=TIMESTAMP},
       userName = #{username,jdbcType=VARCHAR},
       money = #{money,jdbcType=VARCHAR},
-      user_UserStautsId = #{userUserstautsid,jdbcType=INTEGER}
+      user_UserStautsId = #{userUserstautsid,jdbcType=INTEGER},
+      user_UserTypeId = #{userUsertypeid,jdbcType=INTEGER}
     where userId = #{userid,jdbcType=BIGINT}
   </update>
 </mapper>

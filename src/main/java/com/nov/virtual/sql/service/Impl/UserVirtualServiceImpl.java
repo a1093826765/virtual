@@ -82,7 +82,7 @@ public class UserVirtualServiceImpl implements UserVirtualService {
     }
 
     /**
-     * 添加数据
+     * 注册
      * @param account
      * @param password
      * @param userName
@@ -95,8 +95,19 @@ public class UserVirtualServiceImpl implements UserVirtualService {
         userVirtual.setMoney("0");
         userVirtual.setPassword(password);
         userVirtual.setUsername(userName);
+        // 1：启用，2：禁用，3：异常
         userVirtual.setUserUserstautsid(1);
+        // 1：普通用户，2：管理员
+        userVirtual.setUserUsertypeid(1);
         userVirtual.setRegistertime(new Date());
         return userMapper.insert(userVirtual);
+    }
+
+    @Override
+    public PageInfo getMenusToUserId(Integer page, Integer limit, long userId) {
+        UserVirtualExample userVirtualExample=new UserVirtualExample();
+        UserVirtualExample.Criteria criteria=userVirtualExample.createCriteria();
+        criteria.andUseridEqualTo(userId);
+        return this.getMenus(page, limit, userVirtualExample);
     }
 }

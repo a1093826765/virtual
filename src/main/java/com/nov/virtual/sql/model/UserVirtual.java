@@ -15,6 +15,8 @@ public class UserVirtual extends UserVirtualKey {
 
     private Integer userUserstautsid;
 
+    private Integer userUsertypeid;
+
     public String getAccount() {
         return account;
     }
@@ -61,5 +63,13 @@ public class UserVirtual extends UserVirtualKey {
 
     public void setUserUserstautsid(Integer userUserstautsid) {
         this.userUserstautsid = userUserstautsid;
+    }
+
+    public Integer getUserUsertypeid() {
+        return userUsertypeid;
+    }
+
+    public void setUserUsertypeid(Integer userUsertypeid) {
+        this.userUsertypeid = userUsertypeid;
     }
 }

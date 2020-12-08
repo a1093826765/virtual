@@ -17,4 +17,6 @@ public interface OrderService {
     public int updateByKey(Order order);
     public int updateByExampleAll(Order order, OrderExample orderyExample);
     public PageInfo getMenus(Integer page, Integer limit, OrderExample orderExample);
+
+    public PageInfo getMenusToUserId(Integer page, Integer limit,long userId);
 }

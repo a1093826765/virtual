@@ -63,7 +63,14 @@ public class OrderServiceImpl implements OrderService {
     public PageInfo getMenus(Integer page, Integer limit, OrderExample orderExample) {
         PageHelper.startPage(page, limit);
         List<Order> orderList = orderMapper.selectByExample(orderExample);
-        PageInfo<Order> pageInfo = new PageInfo<Order>(orderList);
-        return pageInfo;
+        return  new PageInfo<Order>(orderList);
+    }
+
+    @Override
+    public PageInfo getMenusToUserId(Integer page, Integer limit, long userId) {
+        OrderExample orderExample=new OrderExample();
+        OrderExample.Criteria criteria=orderExample.createCriteria();
+        criteria.andOrderUseridEqualTo(userId);
+        return this.getMenus(page, limit, orderExample);
     }
 }

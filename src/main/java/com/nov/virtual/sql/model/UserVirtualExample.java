@@ -564,6 +564,66 @@ public class UserVirtualExample {
             addCriterion("user_UserStautsId not between", value1, value2, "userUserstautsid");
             return (Criteria) this;
         }
+
+        public Criteria andUserUsertypeidIsNull() {
+            addCriterion("user_UserTypeId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserUsertypeidIsNotNull() {
+            addCriterion("user_UserTypeId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserUsertypeidEqualTo(Integer value) {
+            addCriterion("user_UserTypeId =", value, "userUsertypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserUsertypeidNotEqualTo(Integer value) {
+            addCriterion("user_UserTypeId <>", value, "userUsertypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserUsertypeidGreaterThan(Integer value) {
+            addCriterion("user_UserTypeId >", value, "userUsertypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserUsertypeidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("user_UserTypeId >=", value, "userUsertypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserUsertypeidLessThan(Integer value) {
+            addCriterion("user_UserTypeId <", value, "userUsertypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserUsertypeidLessThanOrEqualTo(Integer value) {
+            addCriterion("user_UserTypeId <=", value, "userUsertypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserUsertypeidIn(List<Integer> values) {
+            addCriterion("user_UserTypeId in", values, "userUsertypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserUsertypeidNotIn(List<Integer> values) {
+            addCriterion("user_UserTypeId not in", values, "userUsertypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserUsertypeidBetween(Integer value1, Integer value2) {
+            addCriterion("user_UserTypeId between", value1, value2, "userUsertypeid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserUsertypeidNotBetween(Integer value1, Integer value2) {
+            addCriterion("user_UserTypeId not between", value1, value2, "userUsertypeid");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

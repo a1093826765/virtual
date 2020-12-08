@@ -35,13 +35,13 @@ public class OrderController {
 
     @ApiOperation(value = "订单分页查询",notes = "此接口分页查询订单")
     @PostMapping("/query")
-    public ResultUtils queryCurrency(@Validated @RequestBody AdminPageVo adminPageVo){
+    public ResultUtils queryOrder(@Validated @RequestBody AdminPageVo adminPageVo){
         return ResultUtils.success(orderService.getMenusToUserId(adminPageVo.getPage(),adminPageVo.getLimit(),adminPageVo.getUserId()));
     }
 
     @ApiOperation(value = "添加订单信息",notes = "此接口添加订单信息")
     @PostMapping("/insert")
-    public ResultUtils insertCurrency(@Validated @RequestBody OrderVo orderVo){
+    public ResultUtils insertOrder(@Validated @RequestBody OrderVo orderVo){
         Order order=new Order();
         order.setOrderbuytime(new Date());
         order.setOrderCurrencyid(orderVo.getOrderCurrencyId());
@@ -59,7 +59,7 @@ public class OrderController {
 
     @ApiOperation(value = "删除订单",notes = "此接口删除订单信息")
     @PostMapping("/delete")
-    public ResultUtils deleteCurrency(@Validated @RequestBody OrderVo orderVo){
+    public ResultUtils deleteOrder(@Validated @RequestBody OrderVo orderVo){
         OrderKey orderKey=new OrderKey();
         orderKey.setOrderid(orderVo.getOrderId());
         if(orderService.deleteByKey(orderKey)==1){
@@ -70,7 +70,7 @@ public class OrderController {
 
     @ApiOperation(value = "修改订单",notes = "此接口修改订单信息")
     @PostMapping("/update")
-    public ResultUtils updateCurrency(@Validated @RequestBody OrderVo orderVo){
+    public ResultUtils updateOrder(@Validated @RequestBody OrderVo orderVo){
         Order order=new Order();
         order.setOrderid(orderVo.getOrderId());
         order.setOrderCurrencyid(orderVo.getOrderCurrencyId());

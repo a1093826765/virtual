@@ -33,13 +33,13 @@ public class HoldCurrencyController {
 
     @ApiOperation(value = "对应用户持有货币查询",notes = "此接口查询对应用户持有货币货币信息")
     @GetMapping("/query/{userId}")
-    public ResultUtils queryCurrency(@PathVariable long userId){
+    public ResultUtils queryHoldCurrency(@PathVariable long userId){
         return ResultUtils.success(holdCurrencyService.getDataJsonToUserID(userId));
     }
 
     @ApiOperation(value = "添加持有货币",notes = "此接口添加持有货币")
     @PostMapping("/insert")
-    public ResultUtils insertCurrency(@Validated @RequestBody HoldCurrencyVo holdCurrencyVo){
+    public ResultUtils insertHoldCurrency(@Validated @RequestBody HoldCurrencyVo holdCurrencyVo){
         if(holdCurrencyService.insert(holdCurrencyVo)==1){
             return ResultUtils.success();
         }
@@ -48,7 +48,7 @@ public class HoldCurrencyController {
 
     @ApiOperation(value = "删除持有货币",notes = "此接口持有货币信息")
     @PostMapping("/delete")
-    public ResultUtils deleteCurrency(@Validated @RequestBody HoldCurrencyVo holdCurrencyVo){
+    public ResultUtils deleteHoldCurrency(@Validated @RequestBody HoldCurrencyVo holdCurrencyVo){
         HoldCurrencyKey holdCurrencyKey=new HoldCurrencyKey();
         holdCurrencyKey.setHoldcurrencyid(holdCurrencyVo.getHoldCurrencyId());
         if(holdCurrencyService.deleteByKey(holdCurrencyKey)==1){
@@ -59,7 +59,7 @@ public class HoldCurrencyController {
 
     @ApiOperation(value = "修改持有货币",notes = "此接口修改持有货币信息")
     @PostMapping("/update")
-    public ResultUtils updateCurrency(@Validated @RequestBody HoldCurrencyVo holdCurrencyVo){
+    public ResultUtils updateHoldCurrency(@Validated @RequestBody HoldCurrencyVo holdCurrencyVo){
         HoldCurrency holdCurrency=new HoldCurrency();
         holdCurrency.setHoldcurrencyid(holdCurrencyVo.getHoldCurrencyId());
         holdCurrency.setHoldcurrencynum(holdCurrencyVo.getHoldCurrencyNum());

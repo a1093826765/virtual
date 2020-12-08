@@ -30,7 +30,7 @@ public class CurrencyStatusController {
 
     @ApiOperation(value = "可操作货币状态查询",notes = "此接口查询系统可操作货币状态信息")
     @GetMapping("/query")
-    public ResultUtils queryCurrency(){
+    public ResultUtils queryCurrencyStatus(){
         List<CurrencyStatus> currencyStatusList = currencyStatusService.getCurrencyStatusByExample(new CurrencyStatusExample());
         JSONArray jsonArray=new JSONArray();
         for(int i=0;i<currencyStatusList.size();i++){
@@ -45,7 +45,7 @@ public class CurrencyStatusController {
 
     @ApiOperation(value = "添加可操作货币状态",notes = "此接口添加系统可操作货币状态信息")
     @PostMapping("/insert")
-    public ResultUtils insertCurrency(@Validated @RequestBody CurrencyStatusVo currencyStatusVo){
+    public ResultUtils insertCurrencyStatus(@Validated @RequestBody CurrencyStatusVo currencyStatusVo){
         CurrencyStatus currencyStatus =new CurrencyStatus();
         currencyStatus.setCurrencystatusname(currencyStatusVo.getCurrencyStatusName());
         if(currencyStatusService.save(currencyStatus)==1){
@@ -56,7 +56,7 @@ public class CurrencyStatusController {
 
     @ApiOperation(value = "删除可操作货币状态",notes = "此接口删除系统可操作货币状态信息")
     @PostMapping("/delete")
-    public ResultUtils deleteCurrency(@Validated @RequestBody CurrencyStatusVo currencyStatusVo){
+    public ResultUtils deleteCurrencyStatus(@Validated @RequestBody CurrencyStatusVo currencyStatusVo){
         CurrencyStatusKey currencyStatusKey=new CurrencyStatusKey();
         currencyStatusKey.setCurrencystatusid(currencyStatusVo.getCurrencyStatusId());
         if(currencyStatusService.deleteByKey(currencyStatusKey)==1){
@@ -67,7 +67,7 @@ public class CurrencyStatusController {
 
     @ApiOperation(value = "修改可操作货币状态",notes = "此接口修改系统可操作货币状态信息")
     @PostMapping("/update")
-    public ResultUtils updateCurrency(@Validated @RequestBody CurrencyStatusVo currencyStatusVo){
+    public ResultUtils updateCurrencyStatus(@Validated @RequestBody CurrencyStatusVo currencyStatusVo){
         CurrencyStatus currencyStatus =new CurrencyStatus();
         currencyStatus.setCurrencystatusid(currencyStatusVo.getCurrencyStatusId());
         currencyStatus.setCurrencystatusname(currencyStatusVo.getCurrencyStatusName());

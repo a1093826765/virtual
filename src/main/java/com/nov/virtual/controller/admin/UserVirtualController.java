@@ -29,20 +29,20 @@ import java.util.Date;
  */
 @Api(value = "用户Controller",tags = {"用户接口"})
 @RestController
-@RequestMapping(value = "/api/admin/order",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/admin/user",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class UserVirtualController {
     @Autowired
     UserVirtualService userVirtualService;
 
     @ApiOperation(value = "用户分页查询",notes = "此接口分页查询用户")
     @PostMapping("/query")
-    public ResultUtils queryCurrency(@Validated @RequestBody AdminPageVo adminPageVo){
+    public ResultUtils queryUser(@Validated @RequestBody AdminPageVo adminPageVo){
         return ResultUtils.success(userVirtualService.getMenusToUserId(adminPageVo.getPage(),adminPageVo.getLimit(),adminPageVo.getUserId()));
     }
 
     @ApiOperation(value = "添加用户信息",notes = "此接口添加用户信息")
     @PostMapping("/insert")
-    public ResultUtils insertCurrency(@Validated @RequestBody UserVirtualVo userVirtualVo){
+    public ResultUtils insertUser(@Validated @RequestBody UserVirtualVo userVirtualVo){
         UserVirtual userVirtual=new UserVirtual();
         userVirtual.setUserUsertypeid(userVirtualVo.getUserTypeId());
         userVirtual.setRegistertime(new Date());
@@ -58,7 +58,7 @@ public class UserVirtualController {
 
     @ApiOperation(value = "删除用户",notes = "此接口删除用户信息")
     @PostMapping("/delete")
-    public ResultUtils deleteCurrency(@Validated @RequestBody UserVirtualVo userVirtualVo){
+    public ResultUtils deleteUser(@Validated @RequestBody UserVirtualVo userVirtualVo){
         UserVirtualKey userVirtualKey=new UserVirtualKey();
         userVirtualKey.setUserid(userVirtualVo.getUserId());
         if(userVirtualService.deleteByKey(userVirtualKey)==1){
@@ -69,7 +69,7 @@ public class UserVirtualController {
 
     @ApiOperation(value = "修改用户",notes = "此接口修改用户信息")
     @PostMapping("/update")
-    public ResultUtils updateCurrency(@Validated @RequestBody UserVirtualVo userVirtualVo){
+    public ResultUtils updateUser(@Validated @RequestBody UserVirtualVo userVirtualVo){
         UserVirtual userVirtual=new UserVirtual();
         userVirtual.setUserid(userVirtualVo.getUserId());
         userVirtual.setUserUsertypeid(userVirtualVo.getUserTypeId());

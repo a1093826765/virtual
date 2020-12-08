@@ -31,7 +31,7 @@ public class OrderStatusController {
 
     @ApiOperation(value = "订单类型查询",notes = "此接口查询订单类型信息")
     @GetMapping("/query")
-    public ResultUtils queryCurrency(){
+    public ResultUtils queryOrder(){
         List<OrderStatus> orderStatusList = orderStatusService.getOrderStatusByExample(new OrderStatusExample());
         JSONArray jsonArray=new JSONArray();
         for(int i=0;i<orderStatusList.size();i++){
@@ -46,7 +46,7 @@ public class OrderStatusController {
 
     @ApiOperation(value = "添加订单类型",notes = "此接口添加订单类型信息")
     @PostMapping("/insert")
-    public ResultUtils insertCurrency(@Validated @RequestBody OrderStatusVo orderStatusVo){
+    public ResultUtils insertOrder(@Validated @RequestBody OrderStatusVo orderStatusVo){
         OrderStatus orderStatus =new OrderStatus();
         orderStatus.setOrderstatusname(orderStatusVo.getOrderStatusName());
         if(orderStatusService.save(orderStatus)==1){
@@ -57,7 +57,7 @@ public class OrderStatusController {
 
     @ApiOperation(value = "删除订单类型",notes = "此接口删除订单类型信息")
     @PostMapping("/delete")
-    public ResultUtils deleteCurrency(@Validated @RequestBody OrderStatusVo orderStatusVo){
+    public ResultUtils deleteOrder(@Validated @RequestBody OrderStatusVo orderStatusVo){
         OrderStatusKey orderStatusKey=new OrderStatusKey();
         orderStatusKey.setOrderstatusid(orderStatusVo.getOrderStatusId());
         if(orderStatusService.deleteByKey(orderStatusKey)==1){
@@ -68,7 +68,7 @@ public class OrderStatusController {
 
     @ApiOperation(value = "修改订单类型",notes = "此接口修改订单类型信息")
     @PostMapping("/update")
-    public ResultUtils updateCurrency(@Validated @RequestBody OrderStatusVo orderStatusVo){
+    public ResultUtils updateOrder(@Validated @RequestBody OrderStatusVo orderStatusVo){
         OrderStatus orderStatus =new OrderStatus();
         orderStatus.setOrderstatusid(orderStatusVo.getOrderStatusId());
         orderStatus.setOrderstatusname(orderStatusVo.getOrderStatusName());

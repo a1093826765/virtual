@@ -31,7 +31,7 @@ public class UserStatusController {
 
     @ApiOperation(value = "订单类型查询",notes = "此接口查询订单类型信息")
     @GetMapping("/query")
-    public ResultUtils queryCurrency(){
+    public ResultUtils queryUser(){
         List<UserStatus> userStatusList = userStatusService.getUserStatusByExample(new UserStatusExample());
         JSONArray jsonArray=new JSONArray();
         for(int i=0;i<userStatusList.size();i++){
@@ -46,7 +46,7 @@ public class UserStatusController {
 
     @ApiOperation(value = "添加订单类型",notes = "此接口添加订单类型信息")
     @PostMapping("/insert")
-    public ResultUtils insertCurrency(@Validated @RequestBody UserStatusVo userStatusVo){
+    public ResultUtils insertUser(@Validated @RequestBody UserStatusVo userStatusVo){
         UserStatus userStatus =new UserStatus();
         userStatus.setUserstatusname(userStatusVo.getUserStatusName());
         if(userStatusService.save(userStatus)==1){
@@ -57,7 +57,7 @@ public class UserStatusController {
 
     @ApiOperation(value = "删除订单类型",notes = "此接口删除订单类型信息")
     @PostMapping("/delete")
-    public ResultUtils deleteCurrency(@Validated @RequestBody UserStatusVo userStatusVo){
+    public ResultUtils deleteUser(@Validated @RequestBody UserStatusVo userStatusVo){
         UserStatusKey userStatusKey=new UserStatusKey();
         userStatusKey.setUserstatusid(userStatusVo.getUserStatusId());
         if(userStatusService.deleteByKey(userStatusKey)==1){
@@ -68,7 +68,7 @@ public class UserStatusController {
 
     @ApiOperation(value = "修改订单类型",notes = "此接口修改订单类型信息")
     @PostMapping("/update")
-    public ResultUtils updateCurrency(@Validated @RequestBody UserStatusVo userStatusVo){
+    public ResultUtils updateUser(@Validated @RequestBody UserStatusVo userStatusVo){
         UserStatus userStatus =new UserStatus();
         userStatus.setUserstatusid(userStatusVo.getUserStatusId());
         userStatus.setUserstatusname(userStatusVo.getUserStatusName());

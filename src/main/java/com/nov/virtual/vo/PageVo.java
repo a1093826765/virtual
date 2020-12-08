@@ -10,7 +10,7 @@ import lombok.NonNull;
  * @author november
  */
 @Data
-@ApiModel(value = "分页查询参数",description="/api/**/query")
+@ApiModel(value = "分页查询参数",description="/api/web/**/query")
 public class PageVo {
 
     @ApiModelProperty(value="页数",name="page",required=true)

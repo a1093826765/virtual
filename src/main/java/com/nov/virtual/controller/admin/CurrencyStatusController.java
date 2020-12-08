@@ -1,4 +1,4 @@
-package com.nov.virtual.controller;
+package com.nov.virtual.controller.admin;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -22,19 +22,19 @@ import java.util.List;
  */
 @Api(value = "可操作货币状态Controller",tags = {"可操作货币状态接口"})
 @RestController
-@RequestMapping(value = "/api/currencyStatus",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/admin/currencyStatus",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class CurrencyStatusController {
 
     @Autowired
     CurrencyStatusService currencyStatusService;
 
-    @ApiOperation(value = "可操作货币状态查询",notes = "此接口分页查询系统可操作货币状态信息")
+    @ApiOperation(value = "可操作货币状态查询",notes = "此接口查询系统可操作货币状态信息")
     @GetMapping("/query")
     public ResultUtils queryCurrency(){
         List<CurrencyStatus> currencyStatusList = currencyStatusService.getCurrencyStatusByExample(new CurrencyStatusExample());
         JSONArray jsonArray=new JSONArray();
         for(int i=0;i<currencyStatusList.size();i++){
-            CurrencyStatus currencyStatus=currencyStatusList.get(0);
+            CurrencyStatus currencyStatus=currencyStatusList.get(i);
             JSONObject jsonObject=new JSONObject();
             jsonObject.put("currencyStatusId",currencyStatus.getCurrencystatusid());
             jsonObject.put("currencyStatusName",currencyStatus.getCurrencystatusname());

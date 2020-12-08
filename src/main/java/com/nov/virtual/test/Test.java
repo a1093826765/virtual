@@ -2,6 +2,7 @@ package com.nov.virtual.test;
 
 import com.nov.virtual.utils.pojo.ResultUtils;
 
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -10,9 +11,10 @@ import java.util.HashMap;
  */
 public class Test {
     public static void main(String[] args) {
-        HashMap<String,String> data=new HashMap<>();
-        data.put("c1","c2");
-        ResultUtils success = ResultUtils.success(data);
-        System.out.println(success);
+//        HashMap<String,String> data=new HashMap<>();
+//        data.put("c1","c2");
+//        ResultUtils success = ResultUtils.success(data);
+//        System.out.println(success);
+        System.out.println(new Date());
     }
 }

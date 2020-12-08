@@ -27,11 +27,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        PrintWriter out=response.getWriter();
+        System.out.println("token拦截器");
         String token=request.getHeader("token");
         if(token==null){
             // token为空,用户未登录
-            out.println(ResultUtils.fail(ResultCode.USER_NOT_LOGIN));
+            // response.sendRedirect("");
             return false;
         }
         String userId;
@@ -43,7 +43,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             UserVirtual userVirtual=userVirtualMapper.selectByPrimaryKey(userVirtualKey);
             if(userVirtual==null){
                 // 用户不存在
-                out.println(ResultUtils.fail(ResultCode.TOKEN_ERROR));
+                // response.sendRedirect("");
                 return false;
             }
             // 校验token
@@ -51,13 +51,12 @@ public class AuthInterceptor implements HandlerInterceptor {
                 UserContextUtil.addUserContext(Long.valueOf(userId), NetworkUtil.getIPAddress(request),token);
                 return true;
             }
+            // response.sendRedirect("");
             return false;
         }catch (Exception e){
+            e.printStackTrace();
             // token错误（userId不存在 或者 token验证失败）
-            out.println(ResultUtils.fail(ResultCode.TOKEN_ERROR));
-        }finally {
-            out.flush();
-            out.close();
+            // response.sendRedirect("");
         }
         return false;
     }

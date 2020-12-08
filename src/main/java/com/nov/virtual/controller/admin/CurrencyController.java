@@ -1,4 +1,4 @@
-package com.nov.virtual.controller;
+package com.nov.virtual.controller.admin;
 
 import com.github.pagehelper.PageInfo;
 import com.nov.virtual.sql.model.Currency;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(value = "可操作货币Controller",tags = {"可操作货币接口"})
 @RestController
-@RequestMapping(value = "/api/currency",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/admin/currency",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class CurrencyController {
 
     @Autowired

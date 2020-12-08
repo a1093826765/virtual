@@ -1,4 +1,4 @@
-package com.nov.virtual.controller;
+package com.nov.virtual.controller.web;
 
 import com.nov.virtual.sql.model.UserVirtual;
 import com.nov.virtual.sql.service.UserVirtualService;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Api(value = "用户登录Controller",tags = {"用户登录接口"})
 @RestController
-@RequestMapping(value = "/api/login",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/web/login",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class LoginController {
 
     @Autowired

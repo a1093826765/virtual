@@ -1,4 +1,4 @@
-package com.nov.virtual.controller;
+package com.nov.virtual.controller.web;
 
 import com.nov.virtual.sql.service.UserVirtualService;
 import com.nov.virtual.utils.pojo.ResultCode;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(value = "用户注册Controller",tags = {"用户注册接口"})
 @RestController
-@RequestMapping(value = "/api/register",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/web/register",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class RegisterController {
 
     @Autowired

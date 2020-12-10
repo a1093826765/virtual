@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
 import com.nov.virtual.utils.pojo.ResultCode;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +33,23 @@ public class GloabllExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Object handlerException(HttpMessageNotReadableException e){
         return new ResultUtils(ResultCode.PARAM_IS_INVALID);
+    }
+
+    /**
+     * 参数异常
+     * @param e
+     * @return
+     */
+    @ResponseBody
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    public Object handlerException(HttpMediaTypeNotSupportedException e){
+        return new ResultUtils(ResultCode.PARAM_IS_INVALID);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public Object handlerException(HttpRequestMethodNotSupportedException e){
+        return new ResultUtils(ResultCode.USER_RE);
     }
 
 }

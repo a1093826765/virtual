@@ -10,12 +10,14 @@ public enum  ResultCode {
     // 成功
     SUCCESS(200,"成功"),
     // 参数错误
-    PARAM_IS_INVALID(204,"参数无效"),
-    PARAM_IS_BLANK(205,"参数为空"),
+    PARAM_IS_INVALID(205,"参数无效"),
+    PARAM_IS_BLANK(206,"参数为空"),
     // 用户错误
     USER_NOT_LOGIN(201,"用户未登录"),
     USER_LOGIN_ERROR(202,"账户或密码错误"),
     TOKEN_ERROR(203,"token错误"),
+    USER_EXISTENCE_ERROR(204,"用户已存在"),
+    USER_RE(2000,"参数异常，请修改请求方式"),
     SYSTEM_ERROR(500,"系统异常，请稍后重试"),
     // websocket
     CONNECT_SUCCESS(200,"websocket连接成功");

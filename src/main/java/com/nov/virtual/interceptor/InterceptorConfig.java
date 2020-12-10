@@ -32,4 +32,5 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public AdminInterceptor adminInterceptor(){
         return new AdminInterceptor();
     }
+
 }

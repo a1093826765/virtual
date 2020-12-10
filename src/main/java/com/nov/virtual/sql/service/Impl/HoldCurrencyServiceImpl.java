@@ -91,31 +91,6 @@ public class HoldCurrencyServiceImpl implements HoldCurrencyService {
     }
 
     /**
-     * 查询对应用户持有货币信息
-     * @param userId
-     * @return
-     */
-    @Override
-    public JSONArray getDataJsonToUserID(long userId) {
-        HoldCurrencyExample holdCurrencyExample=new HoldCurrencyExample();
-        HoldCurrencyExample.Criteria criteria=holdCurrencyExample.createCriteria();
-        criteria.andHoldcurrencyUseridEqualTo(userId);
-        List<HoldCurrency> holdCurrencyList = this.getHoldCurrencyByExample(holdCurrencyExample);
-        JSONArray jsonArray=new JSONArray();
-        for(int i=0;i<holdCurrencyList.size();i++){
-            HoldCurrency holdCurrency=holdCurrencyList.get(i);
-            JSONObject jsonObject=new JSONObject();
-            jsonObject.put("holdCurrencyId",holdCurrency.getHoldcurrencyid());
-            jsonObject.put("holdCurrencyMoney",holdCurrency.getHoldcurrencymoney());
-            jsonObject.put("holdCurrencyNum",holdCurrency.getHoldcurrencynum());
-            jsonObject.put("currencyId",holdCurrency.getHoldcurrencyCurrencyid());
-            jsonArray.add(jsonObject);
-        }
-        return jsonArray;
-    }
-
-
-    /**
      * api添加数据
      * @param holdCurrencyVo
      * @return

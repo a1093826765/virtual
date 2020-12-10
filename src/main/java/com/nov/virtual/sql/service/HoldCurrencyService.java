@@ -22,6 +22,5 @@ public interface HoldCurrencyService {
     public PageInfo getMenus(Integer page, Integer limit, HoldCurrencyExample HoldCurrencyExample);
 
     public PageInfo getMenusToUserId(Integer page, Integer limit,long userId);
-    public JSONArray getDataJsonToUserID(long userId);
     public int insert(HoldCurrencyVo holdCurrencyVo);
 }

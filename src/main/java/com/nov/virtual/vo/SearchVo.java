@@ -6,12 +6,17 @@ import lombok.Data;
 import lombok.NonNull;
 
 /**
- * 分页查询(带userId)
+ * 搜索数参
  * @author november
  */
 @Data
-@ApiModel(value = "分页查询参数(带userId)",description="/api/admin/**/query")
-public class AdminPageVo {
+@ApiModel(value = "搜索参数",description="/api/admin/**/search")
+public class SearchVo {
+
+    @NonNull
+    @ApiModelProperty(value="搜索信息",name="title",required=true)
+    private String title;
+
     @ApiModelProperty(value="页数",name="page",required=true)
     @NonNull
     private Integer page;
@@ -19,8 +24,4 @@ public class AdminPageVo {
     @ApiModelProperty(value="数据行数",name="limit",required=true)
     @NonNull
     private Integer limit;
-
-    @ApiModelProperty(value="用户Id",name="userId",required=true)
-    @NonNull
-    private long userId;
 }

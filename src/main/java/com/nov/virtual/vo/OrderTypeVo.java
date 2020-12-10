@@ -9,7 +9,7 @@ import lombok.Data;
  * @author november
  */
 @Data
-@ApiModel(value = "用户订单类型参数",description="/api/admin/orderType/**")
+@ApiModel(value = "用户订单类型参数",description="/api/public/orderType/**")
 public class OrderTypeVo {
 
     @ApiModelProperty(value="订单类型Id",name="orderTypeId",required=false)

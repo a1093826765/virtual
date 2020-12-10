@@ -1,10 +1,14 @@
 package com.nov.virtual.controller.admin;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
-import com.nov.virtual.sql.model.Currency;
-import com.nov.virtual.sql.model.CurrencyExample;
-import com.nov.virtual.sql.model.CurrencyKey;
+import com.nov.virtual.bean.ResultJsonData.CurrencyJsonData;
+import com.nov.virtual.bean.ResultJsonData.PageJsonData;
+import com.nov.virtual.sql.model.*;
 import com.nov.virtual.sql.service.CurrencyService;
+import com.nov.virtual.sql.service.CurrencyStatusService;
+import com.nov.virtual.sql.service.UserVirtualService;
 import com.nov.virtual.utils.pojo.ResultCode;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.vo.CurrencyVo;
@@ -19,23 +23,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
- * 可操作货币接口
+ * 管理员可操作货币接口
  * @author november
  */
-@Api(value = "可操作货币Controller",tags = {"可操作货币接口"})
+@Api(value = "管理员可操作货币Controller",tags = {"管理员可操作货币接口"})
 @RestController
 @RequestMapping(value = "/api/admin/currency",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-public class CurrencyController {
+public class AdminCurrencyController {
 
     @Autowired
     CurrencyService currencyService;
+
+    @Autowired
+    CurrencyStatusService currencyStatusService;
 
     @ApiOperation(value = "分页货币查询",notes = "此接口分页查询系统可操作的货币信息")
     @PostMapping("/query")
     public ResultUtils queryCurrency(@Validated @RequestBody PageVo pageVo){
         PageInfo<Currency> pageInfo = currencyService.getMenus(pageVo.getPage(), pageVo.getLimit(), new CurrencyExample());
-        return ResultUtils.success(pageInfo);
+        List<Currency> currencyList=pageInfo.getList();
+        JSONArray jsonArray=new JSONArray();
+        CurrencyStatusKey currencyStatusKey=new CurrencyStatusKey();
+        for(int i=0;i<currencyList.size();i++){
+            Currency currency=currencyList.get(i);
+            currencyStatusKey.setCurrencystatusid(currency.getCurrencyCurrencystatusid());
+            CurrencyJsonData currencyJsonData=new CurrencyJsonData(currency.getCurrencyid(),currency.getCurrencyname(),currencyStatusService.getCurrencyStatusByKey(currencyStatusKey).getCurrencystatusname());
+            jsonArray.add(currencyJsonData.toQueryJson());
+        }
+        return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(),pageInfo.getPages(),jsonArray).toJson());
     }
 
     @ApiOperation(value = "添加货币",notes = "此接口添加系统可操作的货币信息")

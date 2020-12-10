@@ -1,7 +1,8 @@
-package com.nov.virtual.controller.admin;
+package com.nov.virtual.controller.publicController;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.nov.virtual.bean.ResultJsonData.OrderStatusJsonData;
 import com.nov.virtual.sql.model.OrderStatus;
 import com.nov.virtual.sql.model.OrderStatusExample;
 import com.nov.virtual.sql.model.OrderStatusKey;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 @Api(value = "订单类型Controller",tags = {"订单类型接口"})
 @RestController
-@RequestMapping(value = "/api/admin/orderStatus",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/public/orderStatus",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class OrderStatusController {
     @Autowired
     OrderStatusService orderStatusService;
@@ -36,10 +37,8 @@ public class OrderStatusController {
         JSONArray jsonArray=new JSONArray();
         for(int i=0;i<orderStatusList.size();i++){
             OrderStatus orderStatus=orderStatusList.get(i);
-            JSONObject jsonObject=new JSONObject();
-            jsonObject.put("orderStatusId",orderStatus.getOrderstatusid());
-            jsonObject.put("orderStatusName",orderStatus.getOrderstatusname());
-            jsonArray.add(jsonObject);
+            OrderStatusJsonData orderStatusJsonData=new OrderStatusJsonData(orderStatus.getOrderstatusid(),orderStatus.getOrderstatusname());
+            jsonArray.add(orderStatusJsonData.toQueryJson());
         }
         return ResultUtils.success(jsonArray);
     }

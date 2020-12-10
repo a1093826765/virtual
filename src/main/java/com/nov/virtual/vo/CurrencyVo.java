@@ -10,7 +10,7 @@ import lombok.NonNull;
  * @author november
  */
 @Data
-@ApiModel(value = "可操作货币api参数（除查询）",description="/api/currency/**")
+@ApiModel(value = "可操作货币api参数（除查询）",description="/api/public/currency/**")
 public class CurrencyVo {
 
     @ApiModelProperty(value="可操作货币货币Id——删除，修改",name="currencyId",required=false)

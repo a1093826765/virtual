@@ -9,7 +9,7 @@ import lombok.Data;
  * @author november
  */
 @Data
-@ApiModel(value = "可操作货币api参数",description="/api/currencyStatus/**")
+@ApiModel(value = "可操作货币api参数",description="/api/public/currencyStatus/**")
 public class CurrencyStatusVo {
     @ApiModelProperty(value="可操作货币货币Id——删除，修改",name="currencyId",required=false)
     private Integer currencyStatusId;

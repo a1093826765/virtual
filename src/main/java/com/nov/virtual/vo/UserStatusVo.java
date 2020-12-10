@@ -9,7 +9,7 @@ import lombok.Data;
  * @author november
  */
 @Data
-@ApiModel(value = "用户状态参数",description="/api/admin/userStatus/**")
+@ApiModel(value = "用户状态参数",description="/api/public/userStatus/**")
 public class UserStatusVo {
 
     @ApiModelProperty(value="用户状态Id",name="userStatusId",required=false)

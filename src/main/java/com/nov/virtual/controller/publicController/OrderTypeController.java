@@ -1,7 +1,8 @@
-package com.nov.virtual.controller.admin;
+package com.nov.virtual.controller.publicController;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.nov.virtual.bean.ResultJsonData.OrderTypeJsonData;
 import com.nov.virtual.sql.model.OrderType;
 import com.nov.virtual.sql.model.OrderTypeExample;
 import com.nov.virtual.sql.model.OrderTypeKey;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 @Api(value = "订单类型Controller",tags = {"订单类型接口"})
 @RestController
-@RequestMapping(value = "/api/admin/orderType",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/public/orderType",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class OrderTypeController {
     @Autowired
     OrderTypeService orderTypeService;
@@ -36,10 +37,8 @@ public class OrderTypeController {
         JSONArray jsonArray=new JSONArray();
         for(int i=0;i<orderTypeList.size();i++){
             OrderType orderType=orderTypeList.get(i);
-            JSONObject jsonObject=new JSONObject();
-            jsonObject.put("orderTypeId",orderType.getOrdertypeid());
-            jsonObject.put("orderTypeName",orderType.getOrdertypename());
-            jsonArray.add(jsonObject);
+            OrderTypeJsonData orderTypeJsonData=new OrderTypeJsonData(orderType.getOrdertypeid(),orderType.getOrdertypename());
+            jsonArray.add(orderTypeJsonData.toQueryJson());
         }
         return ResultUtils.success(jsonArray);
     }

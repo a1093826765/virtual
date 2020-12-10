@@ -9,7 +9,7 @@ import lombok.Data;
  * @author november
  */
 @Data
-@ApiModel(value = "用户类型参数",description="/api/admin/userType/**")
+@ApiModel(value = "用户类型参数",description="/api/public/userType/**")
 public class UserTypeVo {
 
     @ApiModelProperty(value="用户类型Id",name="userTypeId",required=false)

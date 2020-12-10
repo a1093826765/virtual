@@ -1,10 +1,12 @@
 package com.nov.virtual.controller.admin;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
-import com.nov.virtual.sql.model.CurrencyStatus;
-import com.nov.virtual.sql.model.CurrencyStatusKey;
-import com.nov.virtual.sql.model.HoldCurrency;
-import com.nov.virtual.sql.model.HoldCurrencyKey;
+import com.nov.virtual.bean.ResultJsonData.HoldCurrencyJsonData;
+import com.nov.virtual.sql.mapper.CurrencyMapper;
+import com.nov.virtual.sql.model.*;
+import com.nov.virtual.sql.service.CurrencyService;
 import com.nov.virtual.sql.service.HoldCurrencyService;
 import com.nov.virtual.utils.UserContextUtil;
 import com.nov.virtual.utils.pojo.ResultCode;
@@ -19,22 +21,41 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
- * 持有货币接口
+ * 持有货币管理员接口
  * @author november
  */
-@Api(value = "持有货币Controller",tags = {"持有货币接口"})
+@Api(value = "持有货币Controller",tags = {"持有货币管理员接口"})
 @RestController
 @RequestMapping(value = "/api/admin/holdCurrency",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-public class HoldCurrencyController {
+public class AdminHoldCurrencyController {
 
     @Autowired
     HoldCurrencyService holdCurrencyService;
 
+    @Autowired
+    CurrencyService currencyService;
+
     @ApiOperation(value = "对应用户持有货币查询",notes = "此接口查询对应用户持有货币货币信息")
     @GetMapping("/query/{userId}")
     public ResultUtils queryHoldCurrency(@PathVariable long userId){
-        return ResultUtils.success(holdCurrencyService.getDataJsonToUserID(userId));
+//    @GetMapping("/query")
+//    public ResultUtils queryHoldCurrency(@RequestParam long userId){
+        HoldCurrencyExample holdCurrencyExample=new HoldCurrencyExample();
+        HoldCurrencyExample.Criteria criteria=holdCurrencyExample.createCriteria();
+        criteria.andHoldcurrencyUseridEqualTo(userId);
+        List<HoldCurrency> holdCurrencyList = holdCurrencyService.getHoldCurrencyByExample(holdCurrencyExample);
+        CurrencyKey currencyKey=new CurrencyKey();
+        JSONArray jsonArray=new JSONArray();
+        for(int i=0;i<holdCurrencyList.size();i++){
+            HoldCurrency holdCurrency=holdCurrencyList.get(i);
+            currencyKey.setCurrencyid(holdCurrency.getHoldcurrencyCurrencyid());
+            HoldCurrencyJsonData holdCurrencyJsonData=new HoldCurrencyJsonData(holdCurrency.getHoldcurrencyid(),holdCurrency.getHoldcurrencymoney(),holdCurrency.getHoldcurrencynum(),currencyService.getCurrencyByKey(currencyKey).getCurrencyname());
+            jsonArray.add(holdCurrencyJsonData.toQueryJson());
+        }
+        return ResultUtils.success(jsonArray);
     }
 
     @ApiOperation(value = "添加持有货币",notes = "此接口添加持有货币")

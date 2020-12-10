@@ -1,7 +1,8 @@
-package com.nov.virtual.controller.admin;
+package com.nov.virtual.controller.publicController;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.nov.virtual.bean.ResultJsonData.UserTypeJsonData;
 import com.nov.virtual.sql.model.UserType;
 import com.nov.virtual.sql.model.UserTypeExample;
 import com.nov.virtual.sql.model.UserTypeKey;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 @Api(value = "订单类型Controller",tags = {"订单类型接口"})
 @RestController
-@RequestMapping(value = "/api/admin/userType",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/public/userType",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class UserTypeController {
     @Autowired
     UserTypeService userTypeService;
@@ -36,10 +37,8 @@ public class UserTypeController {
         JSONArray jsonArray=new JSONArray();
         for(int i=0;i<userTypeList.size();i++){
             UserType userType=userTypeList.get(i);
-            JSONObject jsonObject=new JSONObject();
-            jsonObject.put("userTypeId",userType.getUsertypeid());
-            jsonObject.put("userTypeName",userType.getUsertypename());
-            jsonArray.add(jsonObject);
+            UserTypeJsonData userTypeJsonData=new UserTypeJsonData(userType.getUsertypeid(),userType.getUsertypename());
+            jsonArray.add(userTypeJsonData.toQueryJson());
         }
         return ResultUtils.success(jsonArray);
     }

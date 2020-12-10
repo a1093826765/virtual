@@ -10,7 +10,7 @@ import lombok.NonNull;
  * @author november
  */
 @Data
-@ApiModel(value = "用户注册参数",description="/api/register")
+@ApiModel(value = "用户注册参数",description="/api/web/register")
 public class RegisterVo {
     @NonNull
     @ApiModelProperty(value="账号",name="account",required=true)

@@ -75,9 +75,9 @@ public class OkExWebSocketStart {
 //        list.add("spot/candle180s:ETH-USDT");
 //        list.add("spot/depth5:BTC-USDT");
 //        list.add("spot/depth5:ETH-USDT");
-        list.add("spot/trade:ETH-USDT");
+//        list.add("spot/trade:ETH-USDT");
         // 公共交易频道
-//        list.add("swap/trade:BTC-USD-SWAP");
+        list.add("swap/trade:BTC-USD-SWAP");
         webSocketClient.subscribe(list);
         //为保证测试方法不停，需要让线程延迟
 //        try {

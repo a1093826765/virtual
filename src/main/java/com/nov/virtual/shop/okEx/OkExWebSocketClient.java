@@ -138,8 +138,7 @@ public class OkExWebSocketClient {
             @Override
             public void onMessage(final WebSocket webSocket, final ByteString bytes) {
                 final String s = OkExWebSocketClient.uncompress(bytes.toByteArray());
-//                System.out.println(s);
-                if (!"pong".equals(s) && s != null) {
+                if (!"pong".equals(s) && s != null && isConnect) {
                     JSONObject jsonObject = (JSONObject) JSONObject.parse(s);
                     String data = jsonObject.getString("data");
                     if (data != null) {
@@ -147,22 +146,15 @@ public class OkExWebSocketClient {
                             data = data.replaceAll("\\[", "");
                             data = data.replaceAll("]", "");
                             System.out.println("数据：" + data);
-                        WebSocketServer.sendMessage(session,data);
+                            WebSocketServer.sendMessage(session, data);
                         } catch (Exception e) {
                             webSocket.close(1000, "stop");
                             isConnect = false;
                         }
                     }
-//                    try {
-//
-//                        FileWriter f_writer = new FileWriter("/Users/november/Desktop/file/sqlTest.txt", true);
-//                        BufferedWriter writer = new BufferedWriter(f_writer);
-//                        writer.write(data+"\n");
-//                        writer.close();
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                System.out.println(DateFormatUtils.format(new Date(), DateUtils.TIME_STYLE_S4) + " Receive: " + s);
+                }else {
+                    webSocket.close(1000, "stop");
+                    isConnect = false;
                 }
             }
         });

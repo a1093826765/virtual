@@ -34,6 +34,10 @@ public class WebSocketServer {
 
     public static ConcurrentHashMap<String, Boolean> okExServicePd = new ConcurrentHashMap<>();
 
+    public static String[] getCurrency(String currency) {
+        return currency.split("-");
+    }
+
 
     /**
      * 发送消息
@@ -52,7 +56,9 @@ public class WebSocketServer {
      * @param message  给指定用户发送信息
      */
     public static void sendInfo(String currency, String message) {
-        Session session = sessionPools.get(currency);
+        String[] split = getCurrency(currency);
+        String account = split[2];
+        Session session = sessionPools.get(account);
         try {
             sendMessage(session, message);
         } catch (Exception e) {
@@ -63,32 +69,41 @@ public class WebSocketServer {
 
     /**
      * 建立连接成功调用
+     * cuy-BTC,xxx-admin
      *
      * @param session
      * @param currency
      */
     @OnOpen
     public void onOpen(Session session, @PathParam(value = "currency") String currency) {
-        if (sessionPools.get(currency) == null) {
-            sessionPools.put(currency, session);
-            addOnlineCount();
-            System.out.println(currency + "加入webSocket！当前人数为" + onlineNum);
+        String[] split = getCurrency(currency);
+        String account = split[2];
+        if (sessionPools.get(account) == null) {
+            OkExWebSocketClient webSocketClient = new OkExWebSocketClient();
             try {
-                String currencyName=currency.substring(0,3);
+                String currencyName = split[0];
+                String[] currencyStr = split[1].split(",");
+                sessionPools.put(account, session);
+                addOnlineCount();
+                System.out.println(account + "加入webSocket！当前人数为" + onlineNum);
                 final ArrayList<String> list = new ArrayList<>();
                 if ("buy".equals(currencyName)) {
-                    currencyName = currency.substring(3, 6);
-                    list.add("spot/trade:" + currencyName + "-USD-SWAP");
+                    for (int i = 0; i < currencyStr.length; i++) {
+                        list.add("swap/trade:" + currencyStr[i] + "-USD-SWAP");
+                    }
                 } else {
-                    list.add("index/ticker:" + currencyName + "-USD");
+                    // currencyName==cuy
+                    for (int i = 0; i < currencyStr.length; i++) {
+                        list.add("index/ticker:" + currencyStr[i] + "-USD");
+                    }
                 }
-                OkExWebSocketClient webSocketClient = new OkExWebSocketClient();
                 OkExWebSocketConfig.publicConnect(webSocketClient);
+                Thread.sleep(1000);
                 webSocketClient.setSession(session);
                 webSocketClient.subscribe(list);
-                okExServicePd.put(currency, true);
+                okExServicePd.put(account, true);
                 sendMessage(session, ResultUtils.websocket(ResultCode.CONNECT_SUCCESS).toString());
-                while (okExServicePd.get(currency)) {
+                while (okExServicePd.get(account)) {
                 }
 //            System.out.println("开始发送数据--------------->>");
 //
@@ -96,7 +111,8 @@ public class WebSocketServer {
 
 
             } catch (Exception e) {
-//            e.printStackTrace();
+                webSocketClient.closeConnection();
+                e.printStackTrace();
             }
         }
     }
@@ -108,13 +124,14 @@ public class WebSocketServer {
      */
     @OnClose
     public void onClose(@PathParam(value = "currency") String currency) {
-
-        if (sessionPools.get(currency) != null) {
-            sessionPools.remove(currency);
+        String[] split = getCurrency(currency);
+        String account = split[2];
+        if (sessionPools.get(account) != null) {
+            sessionPools.remove(account);
             subOnlineCount();
-            okExServicePd.put(currency, false);
+            okExServicePd.put(account, false);
         }
-        System.out.println(currency + "断开webSocket连接！当前人数为" + onlineNum);
+        System.out.println(account + "断开webSocket连接！当前人数为" + onlineNum);
     }
 
 
@@ -122,14 +139,17 @@ public class WebSocketServer {
      * 收到客户端信息
      *
      * @param message
-     * @param userName
+     * @param currency
      * @throws IOException
      */
     @OnMessage
-    public void onMessage(String message, @PathParam(value = "currency") String userName) throws IOException {
+    public void onMessage(String message, @PathParam(value = "currency") String currency) throws IOException {
         message = "客户端：" + message + ",已收到";
-        System.out.println(userName + " - " + message);
-        sendInfo(userName, message);
+        if("ping".equals(message)){
+            sendInfo(currency, "pong");
+        }
+//        System.out.println(currency + " - " + message);
+//        sendInfo(account, message);
 //        for (Session session: sessionPools.values()) {
 //            try {
 //                sendMessage(session, message);

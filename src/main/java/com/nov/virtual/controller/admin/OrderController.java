@@ -112,13 +112,17 @@ public class OrderController {
     @PostMapping("/insert")
     public ResultUtils insertOrder(@Validated @RequestBody OrderVo orderVo){
         Order order=new Order();
-        order.setOrderbuytime(new Date());
         order.setOrderCurrencyid(orderVo.getOrderCurrencyId());
         order.setOrderCurrencynum(orderVo.getOrderNum());
         order.setOrdernumber(orderVo.getOrderNum());
         order.setOrderprice(orderVo.getOrderPrice());
         order.setOrderStatusid(orderVo.getOrderStatusId());
         order.setOrderTypeid(orderVo.getOrderTypeId());
+        if(orderVo.getOrderTypeId()==1){
+            order.setOrderbuytime(new Date());
+        }else{
+            order.setOrderselltime(new Date());
+        }
         order.setOrderUserid(orderVo.getOrderUserId());
         if(orderService.save(order)==1){
             return ResultUtils.fail(ResultCode.SUCCESS);

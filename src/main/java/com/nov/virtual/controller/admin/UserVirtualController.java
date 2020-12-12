@@ -87,18 +87,25 @@ public class UserVirtualController {
     @ApiOperation(value = "添加用户信息", notes = "此接口添加用户信息")
     @PostMapping("/insert")
     public ResultUtils insertUser(@Validated @RequestBody UserVirtualVo userVirtualVo) {
-        UserVirtual userVirtual = new UserVirtual();
-        userVirtual.setAccount(userVirtualVo.getAccount());
-        userVirtual.setUserUsertypeid(userVirtualVo.getUserTypeId());
-        userVirtual.setRegistertime(new Date());
-        userVirtual.setUserUserstautsid(userVirtualVo.getUserStatusId());
-        userVirtual.setUsername(userVirtualVo.getUserName());
-        userVirtual.setPassword(userVirtualVo.getPassword());
-        userVirtual.setMoney(userVirtualVo.getMoney());
-        if (userVirtualService.save(userVirtual) == 1) {
-            return ResultUtils.fail(ResultCode.SUCCESS);
+        UserVirtualExample userVirtualExample=new UserVirtualExample();
+        UserVirtualExample.Criteria criteria = userVirtualExample.createCriteria();
+        criteria.andAccountEqualTo(userVirtualVo.getAccount());
+        if(userVirtualService.getUserByExample(userVirtualExample).size()>0){
+            UserVirtual userVirtual = new UserVirtual();
+            userVirtual.setAccount(userVirtualVo.getAccount());
+            userVirtual.setUserUsertypeid(userVirtualVo.getUserTypeId());
+            userVirtual.setRegistertime(new Date());
+            userVirtual.setUserUserstautsid(userVirtualVo.getUserStatusId());
+            userVirtual.setUsername(userVirtualVo.getUserName());
+            userVirtual.setPassword(userVirtualVo.getPassword());
+            userVirtual.setMoney(userVirtualVo.getMoney());
+            if (userVirtualService.save(userVirtual) == 1) {
+                return ResultUtils.fail(ResultCode.SUCCESS);
+            }
+            return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        }else{
+            return ResultUtils.fail(ResultCode.USER_EXISTENCE_ERROR);
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
     }
 
     @ApiOperation(value = "删除用户", notes = "此接口删除用户信息")

@@ -39,13 +39,13 @@ public class AdminHoldCurrencyController {
     CurrencyService currencyService;
 
     @ApiOperation(value = "对应用户持有货币查询",notes = "此接口查询对应用户持有货币货币信息")
-    @GetMapping("/query/{userId}")
-    public ResultUtils queryHoldCurrency(@PathVariable long userId){
-//    @GetMapping("/query")
-//    public ResultUtils queryHoldCurrency(@RequestParam long userId){
+//    @GetMapping("/query/{userId}")
+//    public ResultUtils queryHoldCurrency(@PathVariable long userId){
+    @PostMapping("/query")
+    public ResultUtils queryHoldCurrency(@Validated @RequestBody HoldCurrencyVo holdCurrencyVo){
         HoldCurrencyExample holdCurrencyExample=new HoldCurrencyExample();
         HoldCurrencyExample.Criteria criteria=holdCurrencyExample.createCriteria();
-        criteria.andHoldcurrencyUseridEqualTo(userId);
+        criteria.andHoldcurrencyUseridEqualTo(holdCurrencyVo.getUserId());
         List<HoldCurrency> holdCurrencyList = holdCurrencyService.getHoldCurrencyByExample(holdCurrencyExample);
         CurrencyKey currencyKey=new CurrencyKey();
         JSONArray jsonArray=new JSONArray();

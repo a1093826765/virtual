@@ -1,5 +1,7 @@
-package com.nov.virtual.interceptor;
+package com.nov.virtual.config;
 
+import com.nov.virtual.interceptor.AdminInterceptor;
+import com.nov.virtual.interceptor.AuthInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;

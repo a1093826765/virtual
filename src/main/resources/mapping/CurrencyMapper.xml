@@ -4,7 +4,9 @@
   <resultMap id="BaseResultMap" type="com.nov.virtual.sql.model.Currency">
     <id column="currencyId" jdbcType="INTEGER" property="currencyid" />
     <result column="currencyName" jdbcType="VARCHAR" property="currencyname" />
-    <result column="currency_currencyStatusId" jdbcType="INTEGER" property="currencyCurrencystatusid" />
+    <result column="currency_CurrencyStatusId" jdbcType="INTEGER" property="currencyCurrencystatusid" />
+    <result column="currency_Img" jdbcType="VARCHAR" property="currencyImg" />
+    <result column="currency_ChineName" jdbcType="VARCHAR" property="currencyChinename" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    currencyId, currencyName, currency_currencyStatusId
+    currencyId, currencyName, currency_CurrencyStatusId, currency_Img, currency_ChineName
   </sql>
   <select id="selectByExample" parameterType="com.nov.virtual.sql.model.CurrencyExample" resultMap="BaseResultMap">
     select
@@ -98,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.nov.virtual.sql.model.Currency">
-    insert into `currency` (currencyId, currencyName, currency_currencyStatusId
-      )
-    values (#{currencyid,jdbcType=INTEGER}, #{currencyname,jdbcType=VARCHAR}, #{currencyCurrencystatusid,jdbcType=INTEGER}
-      )
+    insert into `currency` (currencyId, currencyName, currency_CurrencyStatusId, 
+      currency_Img, currency_ChineName)
+    values (#{currencyid,jdbcType=INTEGER}, #{currencyname,jdbcType=VARCHAR}, #{currencyCurrencystatusid,jdbcType=INTEGER}, 
+      #{currencyImg,jdbcType=VARCHAR}, #{currencyChinename,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.nov.virtual.sql.model.Currency">
     insert into `currency`
@@ -113,7 +115,13 @@
         currencyName,
       </if>
       <if test="currencyCurrencystatusid != null">
-        currency_currencyStatusId,
+        currency_CurrencyStatusId,
+      </if>
+      <if test="currencyImg != null">
+        currency_Img,
+      </if>
+      <if test="currencyChinename != null">
+        currency_ChineName,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -125,6 +133,12 @@
       </if>
       <if test="currencyCurrencystatusid != null">
         #{currencyCurrencystatusid,jdbcType=INTEGER},
+      </if>
+      <if test="currencyImg != null">
+        #{currencyImg,jdbcType=VARCHAR},
+      </if>
+      <if test="currencyChinename != null">
+        #{currencyChinename,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -144,7 +158,13 @@
         currencyName = #{record.currencyname,jdbcType=VARCHAR},
       </if>
       <if test="record.currencyCurrencystatusid != null">
-        currency_currencyStatusId = #{record.currencyCurrencystatusid,jdbcType=INTEGER},
+        currency_CurrencyStatusId = #{record.currencyCurrencystatusid,jdbcType=INTEGER},
+      </if>
+      <if test="record.currencyImg != null">
+        currency_Img = #{record.currencyImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currencyChinename != null">
+        currency_ChineName = #{record.currencyChinename,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -155,7 +175,9 @@
     update `currency`
     set currencyId = #{record.currencyid,jdbcType=INTEGER},
       currencyName = #{record.currencyname,jdbcType=VARCHAR},
-      currency_currencyStatusId = #{record.currencyCurrencystatusid,jdbcType=INTEGER}
+      currency_CurrencyStatusId = #{record.currencyCurrencystatusid,jdbcType=INTEGER},
+      currency_Img = #{record.currencyImg,jdbcType=VARCHAR},
+      currency_ChineName = #{record.currencyChinename,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -167,7 +189,13 @@
         currencyName = #{currencyname,jdbcType=VARCHAR},
       </if>
       <if test="currencyCurrencystatusid != null">
-        currency_currencyStatusId = #{currencyCurrencystatusid,jdbcType=INTEGER},
+        currency_CurrencyStatusId = #{currencyCurrencystatusid,jdbcType=INTEGER},
+      </if>
+      <if test="currencyImg != null">
+        currency_Img = #{currencyImg,jdbcType=VARCHAR},
+      </if>
+      <if test="currencyChinename != null">
+        currency_ChineName = #{currencyChinename,jdbcType=VARCHAR},
       </if>
     </set>
     where currencyId = #{currencyid,jdbcType=INTEGER}
@@ -175,7 +203,9 @@
   <update id="updateByPrimaryKey" parameterType="com.nov.virtual.sql.model.Currency">
     update `currency`
     set currencyName = #{currencyname,jdbcType=VARCHAR},
-      currency_currencyStatusId = #{currencyCurrencystatusid,jdbcType=INTEGER}
+      currency_CurrencyStatusId = #{currencyCurrencystatusid,jdbcType=INTEGER},
+      currency_Img = #{currencyImg,jdbcType=VARCHAR},
+      currency_ChineName = #{currencyChinename,jdbcType=VARCHAR}
     where currencyId = #{currencyid,jdbcType=INTEGER}
   </update>
 </mapper>

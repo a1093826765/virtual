@@ -235,62 +235,202 @@ public class CurrencyExample {
         }
 
         public Criteria andCurrencyCurrencystatusidIsNull() {
-            addCriterion("currency_currencyStatusId is null");
+            addCriterion("currency_CurrencyStatusId is null");
             return (Criteria) this;
         }
 
         public Criteria andCurrencyCurrencystatusidIsNotNull() {
-            addCriterion("currency_currencyStatusId is not null");
+            addCriterion("currency_CurrencyStatusId is not null");
             return (Criteria) this;
         }
 
         public Criteria andCurrencyCurrencystatusidEqualTo(Integer value) {
-            addCriterion("currency_currencyStatusId =", value, "currencyCurrencystatusid");
+            addCriterion("currency_CurrencyStatusId =", value, "currencyCurrencystatusid");
             return (Criteria) this;
         }
 
         public Criteria andCurrencyCurrencystatusidNotEqualTo(Integer value) {
-            addCriterion("currency_currencyStatusId <>", value, "currencyCurrencystatusid");
+            addCriterion("currency_CurrencyStatusId <>", value, "currencyCurrencystatusid");
             return (Criteria) this;
         }
 
         public Criteria andCurrencyCurrencystatusidGreaterThan(Integer value) {
-            addCriterion("currency_currencyStatusId >", value, "currencyCurrencystatusid");
+            addCriterion("currency_CurrencyStatusId >", value, "currencyCurrencystatusid");
             return (Criteria) this;
         }
 
         public Criteria andCurrencyCurrencystatusidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("currency_currencyStatusId >=", value, "currencyCurrencystatusid");
+            addCriterion("currency_CurrencyStatusId >=", value, "currencyCurrencystatusid");
             return (Criteria) this;
         }
 
         public Criteria andCurrencyCurrencystatusidLessThan(Integer value) {
-            addCriterion("currency_currencyStatusId <", value, "currencyCurrencystatusid");
+            addCriterion("currency_CurrencyStatusId <", value, "currencyCurrencystatusid");
             return (Criteria) this;
         }
 
         public Criteria andCurrencyCurrencystatusidLessThanOrEqualTo(Integer value) {
-            addCriterion("currency_currencyStatusId <=", value, "currencyCurrencystatusid");
+            addCriterion("currency_CurrencyStatusId <=", value, "currencyCurrencystatusid");
             return (Criteria) this;
         }
 
         public Criteria andCurrencyCurrencystatusidIn(List<Integer> values) {
-            addCriterion("currency_currencyStatusId in", values, "currencyCurrencystatusid");
+            addCriterion("currency_CurrencyStatusId in", values, "currencyCurrencystatusid");
             return (Criteria) this;
         }
 
         public Criteria andCurrencyCurrencystatusidNotIn(List<Integer> values) {
-            addCriterion("currency_currencyStatusId not in", values, "currencyCurrencystatusid");
+            addCriterion("currency_CurrencyStatusId not in", values, "currencyCurrencystatusid");
             return (Criteria) this;
         }
 
         public Criteria andCurrencyCurrencystatusidBetween(Integer value1, Integer value2) {
-            addCriterion("currency_currencyStatusId between", value1, value2, "currencyCurrencystatusid");
+            addCriterion("currency_CurrencyStatusId between", value1, value2, "currencyCurrencystatusid");
             return (Criteria) this;
         }
 
         public Criteria andCurrencyCurrencystatusidNotBetween(Integer value1, Integer value2) {
-            addCriterion("currency_currencyStatusId not between", value1, value2, "currencyCurrencystatusid");
+            addCriterion("currency_CurrencyStatusId not between", value1, value2, "currencyCurrencystatusid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyImgIsNull() {
+            addCriterion("currency_Img is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyImgIsNotNull() {
+            addCriterion("currency_Img is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyImgEqualTo(String value) {
+            addCriterion("currency_Img =", value, "currencyImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyImgNotEqualTo(String value) {
+            addCriterion("currency_Img <>", value, "currencyImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyImgGreaterThan(String value) {
+            addCriterion("currency_Img >", value, "currencyImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyImgGreaterThanOrEqualTo(String value) {
+            addCriterion("currency_Img >=", value, "currencyImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyImgLessThan(String value) {
+            addCriterion("currency_Img <", value, "currencyImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyImgLessThanOrEqualTo(String value) {
+            addCriterion("currency_Img <=", value, "currencyImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyImgLike(String value) {
+            addCriterion("currency_Img like", value, "currencyImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyImgNotLike(String value) {
+            addCriterion("currency_Img not like", value, "currencyImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyImgIn(List<String> values) {
+            addCriterion("currency_Img in", values, "currencyImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyImgNotIn(List<String> values) {
+            addCriterion("currency_Img not in", values, "currencyImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyImgBetween(String value1, String value2) {
+            addCriterion("currency_Img between", value1, value2, "currencyImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyImgNotBetween(String value1, String value2) {
+            addCriterion("currency_Img not between", value1, value2, "currencyImg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyChinenameIsNull() {
+            addCriterion("currency_ChineName is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyChinenameIsNotNull() {
+            addCriterion("currency_ChineName is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyChinenameEqualTo(String value) {
+            addCriterion("currency_ChineName =", value, "currencyChinename");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyChinenameNotEqualTo(String value) {
+            addCriterion("currency_ChineName <>", value, "currencyChinename");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyChinenameGreaterThan(String value) {
+            addCriterion("currency_ChineName >", value, "currencyChinename");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyChinenameGreaterThanOrEqualTo(String value) {
+            addCriterion("currency_ChineName >=", value, "currencyChinename");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyChinenameLessThan(String value) {
+            addCriterion("currency_ChineName <", value, "currencyChinename");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyChinenameLessThanOrEqualTo(String value) {
+            addCriterion("currency_ChineName <=", value, "currencyChinename");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyChinenameLike(String value) {
+            addCriterion("currency_ChineName like", value, "currencyChinename");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyChinenameNotLike(String value) {
+            addCriterion("currency_ChineName not like", value, "currencyChinename");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyChinenameIn(List<String> values) {
+            addCriterion("currency_ChineName in", values, "currencyChinename");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyChinenameNotIn(List<String> values) {
+            addCriterion("currency_ChineName not in", values, "currencyChinename");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyChinenameBetween(String value1, String value2) {
+            addCriterion("currency_ChineName between", value1, value2, "currencyChinename");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrencyChinenameNotBetween(String value1, String value2) {
+            addCriterion("currency_ChineName not between", value1, value2, "currencyChinename");
             return (Criteria) this;
         }
     }

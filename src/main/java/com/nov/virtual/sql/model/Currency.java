@@ -5,6 +5,10 @@ public class Currency extends CurrencyKey {
 
     private Integer currencyCurrencystatusid;
 
+    private String currencyImg;
+
+    private String currencyChinename;
+
     public String getCurrencyname() {
         return currencyname;
     }
@@ -19,5 +23,21 @@ public class Currency extends CurrencyKey {
 
     public void setCurrencyCurrencystatusid(Integer currencyCurrencystatusid) {
         this.currencyCurrencystatusid = currencyCurrencystatusid;
+    }
+
+    public String getCurrencyImg() {
+        return currencyImg;
+    }
+
+    public void setCurrencyImg(String currencyImg) {
+        this.currencyImg = currencyImg == null ? null : currencyImg.trim();
+    }
+
+    public String getCurrencyChinename() {
+        return currencyChinename;
+    }
+
+    public void setCurrencyChinename(String currencyChinename) {
+        this.currencyChinename = currencyChinename == null ? null : currencyChinename.trim();
     }
 }

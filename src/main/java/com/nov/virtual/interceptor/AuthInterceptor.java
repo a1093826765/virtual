@@ -27,7 +27,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("token拦截器");
+//        System.out.println("token拦截器");
         String token=request.getHeader("Authorization");
 //        System.out.println(token);
         if(token==null){

@@ -50,7 +50,7 @@ public class AdminCurrencyController {
         for(int i=0;i<currencyList.size();i++){
             Currency currency=currencyList.get(i);
             currencyStatusKey.setCurrencystatusid(currency.getCurrencyCurrencystatusid());
-            CurrencyJsonData currencyJsonData=new CurrencyJsonData(currency.getCurrencyid(),currency.getCurrencyname(),currencyStatusService.getCurrencyStatusByKey(currencyStatusKey).getCurrencystatusname());
+            CurrencyJsonData currencyJsonData=new CurrencyJsonData(currency.getCurrencyid(),currency.getCurrencyname(),currencyStatusService.getCurrencyStatusByKey(currencyStatusKey).getCurrencystatusname(),currency.getCurrencyChinename(),currency.getCurrencyImg());
             jsonArray.add(currencyJsonData.toQueryJson());
         }
         return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(),pageInfo.getPages(),jsonArray).toJson());
@@ -61,6 +61,9 @@ public class AdminCurrencyController {
     public ResultUtils insertCurrency(@Validated @RequestBody CurrencyVo currencyVo){
         Currency currency =new Currency();
         currency.setCurrencyname(currencyVo.getCurrencyName());
+        currency.setCurrencyCurrencystatusid(currencyVo.getCurrencyStatusId());
+        currency.setCurrencyChinename(currencyVo.getCurrencyChineName());
+        currency.setCurrencyImg("/img/currency/"+currencyVo.getCurrencyName()+".jpg");
         if(currencyService.save(currency)==1){
             return ResultUtils.success();
         }
@@ -85,6 +88,8 @@ public class AdminCurrencyController {
         currency.setCurrencyid(currencyVo.getCurrencyId());
         currency.setCurrencyname(currencyVo.getCurrencyName());
         currency.setCurrencyCurrencystatusid(currencyVo.getCurrencyStatusId());
+        currency.setCurrencyChinename(currencyVo.getCurrencyChineName());
+        currency.setCurrencyImg("/img/currency/"+currencyVo.getCurrencyName()+".jpg");
         if(currencyService.updateByKey(currency)==1){
             return ResultUtils.success();
         }

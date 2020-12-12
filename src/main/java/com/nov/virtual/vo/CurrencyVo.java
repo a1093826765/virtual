@@ -21,4 +21,7 @@ public class CurrencyVo {
 
     @ApiModelProperty(value="可操作货币货状态Id——添加，修改",name="currencyStatusId",required=false)
     private Integer currencyStatusId;
+
+    @ApiModelProperty(value="可操作货币中文名——添加，修改",name="currencyChineName",required=false)
+    private String currencyChineName;
 }

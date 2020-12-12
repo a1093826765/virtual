@@ -48,7 +48,7 @@ public class CurrencyController {
         JSONArray jsonArray=new JSONArray();
         for(int i=0;i<currencyList.size();i++){
             Currency currency=currencyList.get(i);
-            CurrencyJsonData currencyJsonData=new CurrencyJsonData(currency.getCurrencyid(),currency.getCurrencyname(),"启用");
+            CurrencyJsonData currencyJsonData=new CurrencyJsonData(currency.getCurrencyid(),currency.getCurrencyname(),"启用",currency.getCurrencyChinename(),currency.getCurrencyImg());
             jsonArray.add(currencyJsonData.toQueryJson());
         }
         return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(),pageInfo.getPages(),jsonArray).toJson());

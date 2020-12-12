@@ -14,30 +14,30 @@
       let inputvalue = document.getElementById('name').value;
       let value = {
         page:1,
-        limit:2,
-        orderUserId:1
+        limit:10,
+        title:'a'
       }
+      // $.ajax({
+      //   headers:{Authorization:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIn0.1CN_8jXLcWwWBf_V-N_7qPrlhbnIOOiFA4Y2pe9-xL4'},
+      //   url:'http://192.168.43.253:8080/api/admin/order/search',
+      //   method:'POST',
+      //   data: JSON.stringify(value),
+      //   // dataType:"json",
+      //   contentType:"application/json;charset=utf-8",
+      //   success:((item)=> {
+      //     console.log(item)
+      //   })
+      // })
+      // console.log(inputvalue)
       $.ajax({
-        headers:{token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIn0.1CN_8jXLcWwWBf_V-N_7qPrlhbnIOOiFA4Y2pe9-xL4'},
-        url:'http://localhost:8080/api/admin/order/query',
-        method:'POST',
-        data: JSON.stringify(value),
-        // dataType:"json",
+      headers:{Authorization:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIn0.1CN_8jXLcWwWBf_V-N_7qPrlhbnIOOiFA4Y2pe9-xL4'},
+        url:'http://192.168.43.253:8080/api/admin/holdCurrency/query/1',
+        method:'GET',
         contentType:"application/json;charset=utf-8",
         success:((item)=> {
           console.log(item)
         })
       })
-      console.log(inputvalue)
-      // $.ajax({
-      // headers:{token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxIn0.1CN_8jXLcWwWBf_V-N_7qPrlhbnIOOiFA4Y2pe9-xL4'},
-      //   url:'http://localhost:8080/api/currency/query?page=1&limit=1',
-      //   method:'GET',
-      //   data: value,
-      //   success:((item)=> {
-      //     console.log(item)
-      //   })
-      // })
       
     }
   </script>

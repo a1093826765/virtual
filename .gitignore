@@ -36,4 +36,5 @@ build/
 Address.java
 application.properties
 generatorConfig.xml
+application.yml
 

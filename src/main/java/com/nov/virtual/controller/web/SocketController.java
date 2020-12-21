@@ -10,9 +10,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SocketController {
 
-        @GetMapping("/websocket")
-        public ModelAndView socket() {
-            ModelAndView mav=new ModelAndView("/websocket");
-            return mav;
-        }
+    @GetMapping("/websocket")
+    public ModelAndView socket() {
+        ModelAndView mav = new ModelAndView("/websocket");
+        return mav;
+    }
+
+    @GetMapping("/kWebsocket")
+    public ModelAndView kSocket() {
+        ModelAndView mav = new ModelAndView("/kWebsocket");
+        return mav;
+    }
 }

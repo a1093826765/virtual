@@ -81,7 +81,7 @@ public class KWebSocketServer {
                 addOnlineCount();
                 System.out.println(split[2] + "加入webSocket！当前人数为" + onlineNum);
                 final ArrayList<String> list = new ArrayList<>();
-                list.add("swap/candle"+split[1]+":"+split[0] +"-USD-SWAP");
+                list.add("swap/candle"+split[1]+"s:"+split[0] +"-USD-SWAP");
                 OkExWebSocketConfig.publicConnect(webSocketClient);
                 Thread.sleep(1000);
                 webSocketClient.setSession(session);

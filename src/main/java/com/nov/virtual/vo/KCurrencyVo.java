@@ -14,17 +14,17 @@ import lombok.NonNull;
 @Data
 @ApiModel(value = "货币K线参数",description="/api/web/KCurrency")
 public class KCurrencyVo {
-    @ApiModelProperty(value="货币数量",name="startTime",required=false)
+    @ApiModelProperty(value="开始时间",name="startTime",required=false)
     private String startTime;
 
-    @ApiModelProperty(value="货币数量",name="stopTime",required=false)
+    @ApiModelProperty(value="接送时间",name="stopTime",required=false)
     private String stopTime;
 
-    @ApiModelProperty(value="货币数量",name="granularity",required=true)
+    @ApiModelProperty(value="K线类",name="granularity",required=true)
     @NonNull
-    private String granularity;
+    private Integer granularity;
 
     @ApiModelProperty(value="货币名称",name="currencyName",required=true)
     @NonNull
-    private Integer currencyName;
+    private String currencyName;
 }

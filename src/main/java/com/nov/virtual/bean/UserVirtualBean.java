@@ -1,5 +1,6 @@
 package com.nov.virtual.bean;
 
+import com.nov.virtual.sql.model.UserVirtual;
 import lombok.Data;
 
 /**
@@ -8,7 +9,7 @@ import lombok.Data;
  */
 @Data
 public class UserVirtualBean {
-    private Long userId;
+    private UserVirtual userVirtual;
 
     private String token;
 

@@ -17,17 +17,12 @@ public class AdminInterceptor implements HandlerInterceptor {
 
     private static final Integer ADMIN_ID=2;
 
-    @Autowired(required = false)
-    private UserVirtualMapper userVirtualMapper;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 //        System.out.println("后端拦截器");
         try {
-            Long userId = UserContextUtil.getUserVirtualBean().getUserId();
-            UserVirtualKey userVirtualKey = new UserVirtualKey();
-            userVirtualKey.setUserid(Long.valueOf(userId));
-            UserVirtual userVirtual = userVirtualMapper.selectByPrimaryKey(userVirtualKey);
+            UserVirtual userVirtual =UserContextUtil.getUserVirtualBean().getUserVirtual();
             if (userVirtual == null || !userVirtual.getUserUsertypeid().equals(ADMIN_ID)) {
                 return false;
             }

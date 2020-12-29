@@ -49,7 +49,8 @@ public class AuthInterceptor implements HandlerInterceptor {
             }
             // 校验token
             if(TokenUtils.verify(token, Address.TOKEN_SEC)){
-                UserContextUtil.addUserContext(Long.valueOf(userId), NetworkUtil.getIPAddress(request),token);
+                UserContextUtil userContextUtil=new UserContextUtil();
+                userContextUtil.addUserContext(userVirtual, NetworkUtil.getIPAddress(request),token);
                 return true;
             }
             // response.sendRedirect("");
@@ -57,6 +58,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         }catch (Exception e){
             // token错误（userId不存在 或者 token验证失败）
             // response.sendRedirect("");
+            e.printStackTrace();
         }
         return false;
     }

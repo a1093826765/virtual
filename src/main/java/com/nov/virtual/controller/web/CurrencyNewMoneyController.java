@@ -25,7 +25,7 @@ import java.text.ParseException;
  */
 @Api(value = "货币最新价Controller",tags = {"货币最新价接口"})
 @RestController
-@RequestMapping(value = "/api/web/NewMoney",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/web/newMoney",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class CurrencyNewMoneyController {
     @ApiOperation(value = "货币最新价",notes = "此接口进行货币最新价查询")
     @PostMapping

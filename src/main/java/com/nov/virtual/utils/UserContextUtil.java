@@ -1,8 +1,13 @@
 package com.nov.virtual.utils;
 
 import com.nov.virtual.bean.UserVirtualBean;
+import com.nov.virtual.sql.mapper.UserVirtualMapper;
+import com.nov.virtual.sql.model.UserVirtual;
+import com.nov.virtual.sql.model.UserVirtualKey;
+import com.nov.virtual.sql.service.UserVirtualService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 用于储存用户的登录信息
@@ -21,12 +26,12 @@ public class UserContextUtil {
         UserContextUtil.context.remove();
     }
 
-    public static void addUserContext(long userId, String ip, String token) {
+    public void addUserContext(UserVirtual userVirtual, String ip, String token) {
         UserContextUtil.clear();
         UserVirtualBean userVirtualBean = new UserVirtualBean();
         userVirtualBean.setIp(ip);
         userVirtualBean.setToken(token);
-        userVirtualBean.setUserId(userId);
+        userVirtualBean.setUserVirtual(userVirtual);
         context.set(userVirtualBean);
     }
 

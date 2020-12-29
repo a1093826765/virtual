@@ -18,5 +18,5 @@ public class SellVo {
 
     @ApiModelProperty(value="货币名称",name="currencyName",required=true)
     @NonNull
-    private Integer currencyName;
+    private String currencyName;
 }

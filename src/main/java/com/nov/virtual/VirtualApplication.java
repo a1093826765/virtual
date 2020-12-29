@@ -17,7 +17,7 @@ import java.util.Properties;
  * @author november
  */
 @SpringBootApplication
-//@EnableTransactionManagement
+@EnableTransactionManagement
 @MapperScan("com.nov.virtual.sql.mapper")
 @EnableSwagger2
 //@ComponentScan(basePackages = "com.nov.virtual.sql.*")

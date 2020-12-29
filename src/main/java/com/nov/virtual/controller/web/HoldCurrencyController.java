@@ -43,7 +43,7 @@ public class HoldCurrencyController {
     public ResultUtils queryHoldCurrency(){
         HoldCurrencyExample holdCurrencyExample=new HoldCurrencyExample();
         HoldCurrencyExample.Criteria criteria=holdCurrencyExample.createCriteria();
-        criteria.andHoldcurrencyUseridEqualTo(UserContextUtil.getUserVirtualBean().getUserId());
+        criteria.andHoldcurrencyUseridEqualTo(UserContextUtil.getUserVirtualBean().getUserVirtual().getUserid());
         List<HoldCurrency> holdCurrencyList = holdCurrencyService.getHoldCurrencyByExample(holdCurrencyExample);
         CurrencyKey currencyKey=new CurrencyKey();
         JSONArray jsonArray=new JSONArray();

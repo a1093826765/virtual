@@ -12,7 +12,7 @@ import lombok.NonNull;
  * Date: 2020/12/23 4:08 下午
  */
 @Data
-@ApiModel(value = "用户买币参数",description="/api/web/NewMoney")
+@ApiModel(value = "用户买币参数",description="/api/web/newMoney")
 public class CurrencyNewMoencyVo {
     @ApiModelProperty(value="货币名称",name="currencyName",required=true)
     @NonNull

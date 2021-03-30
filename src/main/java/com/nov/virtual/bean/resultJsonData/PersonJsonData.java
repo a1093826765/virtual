@@ -1,4 +1,4 @@
-package com.nov.virtual.bean.ResultJsonData;
+package com.nov.virtual.bean.resultJsonData;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
@@ -24,18 +24,24 @@ public class PersonJsonData {
     /**
      * 收益金额
      */
-    private String profitMoney;
+    private double profitMoney;
 
     /**
      * 总币数
      */
     private double currencyNumSize;
 
-    public PersonJsonData(String moneySize, String profit, String profitMoney, double currencyNumSize) {
+    /**
+     * 个人名称
+     */
+    private String userName;
+
+    public PersonJsonData(String moneySize, String profit, double profitMoney, double currencyNumSize, String userName) {
         this.moneySize = moneySize;
         this.profit = profit;
         this.profitMoney = profitMoney;
         this.currencyNumSize = currencyNumSize;
+        this.userName = userName;
     }
 
     public JSONObject toJson() {
@@ -44,6 +50,7 @@ public class PersonJsonData {
         jsonObject.put("profit",profit);
         jsonObject.put("profitMoney",profitMoney);
         jsonObject.put("currencyNumSize",currencyNumSize);
+        jsonObject.put("userName",userName);
         return jsonObject;
     }
 }

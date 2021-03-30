@@ -1,8 +1,7 @@
 package com.nov.virtual.controller.publicController;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.nov.virtual.bean.ResultJsonData.OrderTypeJsonData;
+import com.nov.virtual.bean.resultJsonData.OrderTypeJsonData;
 import com.nov.virtual.sql.model.OrderType;
 import com.nov.virtual.sql.model.OrderTypeExample;
 import com.nov.virtual.sql.model.OrderTypeKey;
@@ -31,7 +30,7 @@ public class OrderTypeController {
     OrderTypeService orderTypeService;
 
     @ApiOperation(value = "订单类型查询",notes = "此接口查询订单类型信息")
-    @GetMapping("/query")
+    @PostMapping("/query")
     public ResultUtils queryOrder(){
         List<OrderType> orderTypeList = orderTypeService.getOrderTypeByExample(new OrderTypeExample());
         JSONArray jsonArray=new JSONArray();

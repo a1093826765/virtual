@@ -1,8 +1,7 @@
 package com.nov.virtual.controller.publicController;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.nov.virtual.bean.ResultJsonData.CurrencyStatusJsonData;
+import com.nov.virtual.bean.resultJsonData.CurrencyStatusJsonData;
 import com.nov.virtual.sql.model.*;
 import com.nov.virtual.sql.service.CurrencyStatusService;
 import com.nov.virtual.utils.pojo.ResultCode;
@@ -30,7 +29,7 @@ public class CurrencyStatusController {
     CurrencyStatusService currencyStatusService;
 
     @ApiOperation(value = "可操作货币状态查询",notes = "此接口查询系统可操作货币状态信息")
-    @GetMapping("/query")
+    @PostMapping("/query")
     public ResultUtils queryCurrencyStatus(){
         List<CurrencyStatus> currencyStatusList = currencyStatusService.getCurrencyStatusByExample(new CurrencyStatusExample());
         JSONArray jsonArray=new JSONArray();

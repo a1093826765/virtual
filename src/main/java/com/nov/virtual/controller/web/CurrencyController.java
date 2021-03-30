@@ -2,15 +2,11 @@ package com.nov.virtual.controller.web;
 
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageInfo;
-import com.nov.virtual.bean.ResultJsonData.CurrencyJsonData;
-import com.nov.virtual.bean.ResultJsonData.HoldCurrencyJsonData;
-import com.nov.virtual.bean.ResultJsonData.PageJsonData;
+import com.nov.virtual.bean.resultJsonData.CurrencyJsonData;
+import com.nov.virtual.bean.resultJsonData.PageJsonData;
 import com.nov.virtual.sql.model.Currency;
 import com.nov.virtual.sql.model.CurrencyExample;
-import com.nov.virtual.sql.model.CurrencyStatus;
-import com.nov.virtual.sql.model.CurrencyStatusKey;
 import com.nov.virtual.sql.service.CurrencyService;
-import com.nov.virtual.sql.service.CurrencyStatusService;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.vo.PageVo;
 import io.swagger.annotations.Api;
@@ -51,6 +47,6 @@ public class CurrencyController {
             CurrencyJsonData currencyJsonData=new CurrencyJsonData(currency.getCurrencyid(),currency.getCurrencyname(),"启用",currency.getCurrencyChinename(),currency.getCurrencyImg());
             jsonArray.add(currencyJsonData.toQueryJson());
         }
-        return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(),pageInfo.getPages(),jsonArray).toJson());
+        return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(),pageInfo.getPages(),jsonArray,pageInfo.getSize()).toJson());
     }
 }

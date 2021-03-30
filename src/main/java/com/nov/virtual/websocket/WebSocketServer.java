@@ -30,9 +30,10 @@ public class WebSocketServer {
     /**
      * concurrent包的线程安全Set，用来存放每个客户端对应的WebSocketServer对象。
      */
-    public static ConcurrentHashMap<String, Session> sessionPools = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, Session> sessionPools = new ConcurrentHashMap<>();
 
-    public static ConcurrentHashMap<String, Boolean> okExServicePd = new ConcurrentHashMap<>();
+    private OkExWebSocketClient webSocketClient = new OkExWebSocketClient();
+
 
     public static String[] getCurrency(String currency) {
         return currency.split("-");
@@ -79,7 +80,6 @@ public class WebSocketServer {
         String[] split = getCurrency(currency);
         String account = split[2];
         if (sessionPools.get(account) == null) {
-            OkExWebSocketClient webSocketClient = new OkExWebSocketClient();
             try {
                 String currencyName = split[0];
                 String[] currencyStr = split[1].split(",");
@@ -101,10 +101,9 @@ public class WebSocketServer {
                 Thread.sleep(1000);
                 webSocketClient.setSession(session);
                 webSocketClient.subscribe(list);
-                okExServicePd.put(account, true);
                 sendMessage(session, ResultUtils.websocket(ResultCode.CONNECT_SUCCESS).toString());
-                while (okExServicePd.get(account)) {
-                }
+//                while (okExServicePd.get(account)) {
+//                }
 //            System.out.println("开始发送数据--------------->>");
 //
 //            sendMessage(session, "");
@@ -129,7 +128,6 @@ public class WebSocketServer {
         if (sessionPools.get(account) != null) {
             sessionPools.remove(account);
             subOnlineCount();
-            okExServicePd.put(account, false);
         }
         System.out.println(account + "断开webSocket连接！当前人数为" + onlineNum);
     }
@@ -144,10 +142,20 @@ public class WebSocketServer {
      */
     @OnMessage
     public void onMessage(String message, @PathParam(value = "currency") String currency) throws IOException {
-        message = "客户端：" + message + ",已收到";
-        if("ping".equals(message)){
-            sendInfo(currency, "pong");
+        System.out.println(message);
+        switch (message){
+            case "ping":
+                sendInfo(currency, "pong");
+                break;
+            case "close":
+                webSocketClient.setIsConnect(false);
+                sendInfo(currency, "ok");
+                onClose(currency);
+                break;
+            default:
+                break;
         }
+    }
 //        System.out.println(currency + " - " + message);
 //        sendInfo(account, message);
 //        for (Session session: sessionPools.values()) {
@@ -158,7 +166,7 @@ public class WebSocketServer {
 //                continue;
 //            }
 //        }
-    }
+//    }
 
 
     /**

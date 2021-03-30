@@ -36,4 +36,7 @@ public class OrderVo {
     @ApiModelProperty(value="订单货币数量",name="orderCurrencyNum",required=false)
     private String orderCurrencyNum;
 
+    @ApiModelProperty(value="订单货币数量",name="account",required=false)
+    private String account;
+
 }

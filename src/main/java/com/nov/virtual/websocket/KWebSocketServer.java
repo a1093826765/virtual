@@ -30,8 +30,6 @@ public class KWebSocketServer {
      */
     public static ConcurrentHashMap<String, Session> sessionPools = new ConcurrentHashMap<>();
 
-    public static ConcurrentHashMap<String, Boolean> okExServicePd = new ConcurrentHashMap<>();
-
     public static String[] getCurrency(String currency) {
         return currency.split("-");
     }
@@ -86,10 +84,9 @@ public class KWebSocketServer {
                 Thread.sleep(1000);
                 webSocketClient.setSession(session);
                 webSocketClient.subscribe(list);
-                okExServicePd.put(split[2], true);
                 sendMessage(session, ResultUtils.websocket(ResultCode.CONNECT_SUCCESS).toString());
-                while (okExServicePd.get(split[2])) {
-                }
+//                while (okExServicePd.get(split[2])) {
+//                }
 //            System.out.println("开始发送数据--------------->>");
 //
 //            sendMessage(session, "");
@@ -113,7 +110,6 @@ public class KWebSocketServer {
         if (sessionPools.get(split[2]) != null) {
             sessionPools.remove(split[2]);
             subOnlineCount();
-            okExServicePd.put(split[2], false);
         }
         System.out.println(split[2] + "断开webSocket连接！当前人数为" + onlineNum);
     }
@@ -128,9 +124,15 @@ public class KWebSocketServer {
      */
     @OnMessage
     public void onMessage(String message, @PathParam(value = "currency") String currency) throws IOException {
-        message = "客户端：" + message + ",已收到";
-        if("ping".equals(message)){
-            sendInfo(currency, "pong");
+        System.out.println(message);
+        switch (message){
+            case "ping":
+                sendInfo(currency, "pong");
+                break;
+            case "close":
+                onClose(currency);
+                sendInfo(currency, "ok");
+                break;
         }
 //        System.out.println(currency + " - " + message);
 //        sendInfo(account, message);

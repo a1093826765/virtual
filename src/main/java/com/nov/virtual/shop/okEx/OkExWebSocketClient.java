@@ -31,7 +31,12 @@ import java.util.concurrent.TimeUnit;
 public class OkExWebSocketClient {
     private static WebSocket webSocket = null;
     private static Boolean isLogin = false;
+
     private static Boolean isConnect = false;
+
+    public void setIsConnect(Boolean isConnect) {
+        OkExWebSocketClient.isConnect = isConnect;
+    }
 
     private Session session;
 
@@ -145,7 +150,7 @@ public class OkExWebSocketClient {
                         try {
                             data = data.replaceAll("\\[", "");
                             data = data.replaceAll("]", "");
-                            System.out.println("数据：" + data);
+                            System.out.println(getSession()+"数据：" + data);
                             WebSocketServer.sendMessage(session, data);
                         } catch (Exception e) {
                             webSocket.close(1000, "stop");
@@ -212,11 +217,12 @@ public class OkExWebSocketClient {
      *
      * @param list
      */
-    public void subscribe(final List<String> list) {
+    public void subscribe(final List<String> list ) {
         final String s = listToJson(list);
         final String str = "{\"op\": \"subscribe\", \"args\":" + s + "}";
         sendMessage(str);
     }
+
 
     /**
      * 取消订阅，参数为频道组成的集合 unsubscribe

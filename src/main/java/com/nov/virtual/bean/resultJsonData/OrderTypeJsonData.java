@@ -1,4 +1,4 @@
-package com.nov.virtual.bean.ResultJsonData;
+package com.nov.virtual.bean.resultJsonData;
 
 
 import com.alibaba.fastjson.JSONObject;

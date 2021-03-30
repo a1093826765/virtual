@@ -2,32 +2,28 @@ package com.nov.virtual.controller.web;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.PageInfo;
-import com.nov.virtual.bean.ResultJsonData.HoldCurrencyJsonData;
-import com.nov.virtual.sql.mapper.CurrencyMapper;
+import com.nov.virtual.bean.resultJsonData.HoldCurrencyJsonData;
+import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.client.ApiHttp;
+import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.config.APIConfiguration;
 import com.nov.virtual.sql.model.*;
 import com.nov.virtual.sql.service.CurrencyService;
 import com.nov.virtual.sql.service.HoldCurrencyService;
 import com.nov.virtual.utils.UserContextUtil;
-import com.nov.virtual.utils.pojo.ResultCode;
 import com.nov.virtual.utils.pojo.ResultUtils;
-import com.nov.virtual.vo.CurrencyStatusVo;
-import com.nov.virtual.vo.HoldCurrencyVo;
-import com.nov.virtual.vo.PageVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
- * 持有货币接口
+ * 当前用户持有货币接口
  * @author november
  */
-@Api(value = "持有货币Controller",tags = {"持有货币接口"})
+@Api(value = "当前用户持有货币Controller",tags = {"当前用户持有货币接口"})
 @RestController
 @RequestMapping(value = "/api/web/holdCurrency",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class HoldCurrencyController {
@@ -50,10 +46,24 @@ public class HoldCurrencyController {
         for(int i=0;i<holdCurrencyList.size();i++){
             HoldCurrency holdCurrency=holdCurrencyList.get(i);
             currencyKey.setCurrencyid(holdCurrency.getHoldcurrencyCurrencyid());
-            HoldCurrencyJsonData holdCurrencyJsonData=new HoldCurrencyJsonData(holdCurrency.getHoldcurrencyid(),holdCurrency.getHoldcurrencymoney(),holdCurrency.getHoldcurrencynum(),currencyService.getCurrencyByKey(currencyKey).getCurrencyname());
+            String currencyName= currencyService.getCurrencyByKey(currencyKey).getCurrencyname();
+            HoldCurrencyJsonData holdCurrencyJsonData=new HoldCurrencyJsonData(holdCurrency.getHoldcurrencyid(),getNewPrice(currencyName),holdCurrency.getHoldcurrencynum(),currencyName);
             jsonArray.add(holdCurrencyJsonData.toQueryJson());
         }
         return ResultUtils.success(jsonArray);
+    }
+
+    /**
+     * 获取最新价格
+     *
+     * @return
+     */
+    private String getNewPrice(String currencyName) {
+        ApiHttp apiHttp = new ApiHttp(new APIConfiguration("https://www.okex.com"), new OkHttpClient());
+        String result = apiHttp.get("/api/index/v3/" + currencyName + "-USD/constituents");
+        JSONObject jsonObject = (JSONObject) JSONObject.parse(result);
+        jsonObject = (JSONObject) JSONObject.parse(jsonObject.getString("data"));
+        return jsonObject.getString("last");
     }
 
 //    @ApiOperation(value = "添加持有货币",notes = "此接口添加持有货币")

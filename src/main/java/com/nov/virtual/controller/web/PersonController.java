@@ -1,31 +1,24 @@
 package com.nov.virtual.controller.web;
 
 import com.alibaba.fastjson.JSONObject;
-import com.nov.virtual.bean.ResultJsonData.PersonJsonData;
-import com.nov.virtual.config.Address;
+import com.nov.virtual.bean.resultJsonData.PersonJsonData;
 import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.client.ApiHttp;
 import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.config.APIConfiguration;
-import com.nov.virtual.sql.model.HoldCurrency;
-import com.nov.virtual.sql.model.HoldCurrencyExample;
-import com.nov.virtual.sql.model.UserVirtual;
+import com.nov.virtual.sql.model.*;
 import com.nov.virtual.sql.service.CurrencyService;
 import com.nov.virtual.sql.service.HoldCurrencyService;
 import com.nov.virtual.utils.UserContextUtil;
-import com.nov.virtual.utils.pojo.ResultCode;
 import com.nov.virtual.utils.pojo.ResultUtils;
-import com.nov.virtual.utils.pojo.TokenUtils;
-import com.nov.virtual.vo.LoginVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -52,6 +45,7 @@ public class PersonController {
     @ApiOperation(value = "个人信息",notes = "此接口进行查询个人信息")
     @PostMapping
     public ResultUtils person(){
+
         UserVirtual userVirtual= UserContextUtil.getUserVirtualBean().getUserVirtual();
 
         //持有货币List
@@ -59,14 +53,30 @@ public class PersonController {
         HoldCurrencyExample.Criteria holdCurrencyExampleCriteria = holdCurrencyExample.createCriteria();
         holdCurrencyExampleCriteria.andHoldcurrencyUseridEqualTo(userVirtual.getUserid());
         List<HoldCurrency> holdCurrencyList = holdCurrencyService.getHoldCurrencyByExample(holdCurrencyExample);
+        //货币总数
         double currencyNumSize=0;
+        //总购买价格
+        double moneySize=0;
+        //当前最新总价
+        double newMoneySize=0;
+        //货币购买价格
+        double currencyMoney=0;
+        CurrencyKey currencyKey=new CurrencyKey();
         for(HoldCurrency holdCurrency:holdCurrencyList){
+            currencyMoney=Double.parseDouble(holdCurrency.getHoldcurrencymoney());
+            moneySize+=currencyMoney;
             currencyNumSize=currencyNumSize+Double.parseDouble(holdCurrency.getHoldcurrencynum());
-
+            currencyKey.setCurrencyid(holdCurrency.getHoldcurrencyCurrencyid());
+            String newPrice = getNewPrice(currencyService.getCurrencyByKey(currencyKey).getCurrencyname());
+            newMoneySize+=(Double.parseDouble(newPrice)*Double.parseDouble(holdCurrency.getHoldcurrencynum()));
         }
-//        PersonJsonData personJsonData=new PersonJsonData(userVirtual.getMoney(),profit,profitMoney,currencyNumSize);
-//        return ResultUtils.success(personJsonData.toJson());
-        return null;
+        //盈利金额
+        double profitMoney=newMoneySize-moneySize;
+        DecimalFormat dcmFmt = new DecimalFormat("0.0000");
+        String profit = dcmFmt.format(((1-(moneySize/newMoneySize))*100));
+
+        PersonJsonData personJsonData=new PersonJsonData(String.valueOf(Double.parseDouble(userVirtual.getMoney())+profitMoney),profit,profitMoney,currencyNumSize,userVirtual.getUsername());
+        return ResultUtils.success(personJsonData.toJson());
     }
 
     /**

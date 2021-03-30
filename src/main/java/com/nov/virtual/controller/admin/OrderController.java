@@ -1,10 +1,9 @@
 package com.nov.virtual.controller.admin;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
-import com.nov.virtual.bean.ResultJsonData.OrderJsonData;
-import com.nov.virtual.bean.ResultJsonData.PageJsonData;
+import com.nov.virtual.bean.resultJsonData.OrderJsonData;
+import com.nov.virtual.bean.resultJsonData.PageJsonData;
 import com.nov.virtual.sql.model.*;
 import com.nov.virtual.sql.service.*;
 import com.nov.virtual.utils.pojo.ResultCode;
@@ -47,6 +46,7 @@ public class OrderController {
     @ApiOperation(value = "订单分页搜索",notes = "此接口分页搜索订单")
     @PostMapping("/search")
     public ResultUtils searchOrder(@Validated @RequestBody SearchVo searchVo){
+
         // 模糊查询账号account
         UserVirtualExample userVirtualExample=new UserVirtualExample();
         UserVirtualExample.Criteria userCriteria = userVirtualExample.createCriteria();
@@ -77,12 +77,12 @@ public class OrderController {
             Order order=orderList.get(i);
             userVirtualKey.setUserid(order.getOrderUserid());
             currencyKey.setCurrencyid(order.getOrderCurrencyid());
-            orderTypeKey.setOrdertypeid(order.getOrderStatusid());
+            orderTypeKey.setOrdertypeid(order.getOrderTypeid());
             orderStatusKey.setOrderstatusid(order.getOrderStatusid());
             OrderJsonData orderJsonData=new OrderJsonData(order.getOrderid(),order.getOrderbuytime(),order.getOrderselltime(),currencyService.getCurrencyByKey(currencyKey).getCurrencyname(),order.getOrderCurrencynum(),order.getOrderprice(),orderTypeService.getOrderTypeByKey(orderTypeKey).getOrdertypename(),order.getOrdernumber(),orderStatusService.getOrderStatusByKey(orderStatusKey).getOrderstatusname(),userVirtualService.getUserByKey(userVirtualKey).getAccount());
             jsonArray.add(orderJsonData.toQueryJson());
         }
-        return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(),pageInfo.getPages(),jsonArray).toJson());
+        return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(),pageInfo.getPages(),jsonArray,pageInfo.getTotal()).toJson());
     }
 
     @ApiOperation(value = "订单分页查询",notes = "此接口分页查询订单")
@@ -105,7 +105,7 @@ public class OrderController {
             OrderJsonData orderJsonData=new OrderJsonData(order.getOrderid(),order.getOrderbuytime(),order.getOrderselltime(),currencyService.getCurrencyByKey(currencyKey).getCurrencyname(),order.getOrderCurrencynum(),order.getOrderprice(),orderTypeService.getOrderTypeByKey(orderTypeKey).getOrdertypename(),order.getOrdernumber(),orderStatusService.getOrderStatusByKey(orderStatusKey).getOrderstatusname(),userVirtual.getAccount());
             jsonArray.add(orderJsonData.toQueryJson());
         }
-        return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(),pageInfo.getPages(),jsonArray).toJson());
+        return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(),pageInfo.getPages(),jsonArray,pageInfo.getTotal()).toJson());
     }
 
     @ApiOperation(value = "添加订单信息",notes = "此接口添加订单信息")
@@ -144,17 +144,27 @@ public class OrderController {
     @ApiOperation(value = "修改订单",notes = "此接口修改订单信息")
     @PostMapping("/update")
     public ResultUtils updateOrder(@Validated @RequestBody OrderVo orderVo){
-        Order order=new Order();
-        order.setOrderid(orderVo.getOrderId());
-        order.setOrderCurrencyid(orderVo.getOrderCurrencyId());
-        order.setOrderCurrencynum(orderVo.getOrderNum());
-        order.setOrdernumber(orderVo.getOrderNum());
-        order.setOrderprice(orderVo.getOrderPrice());
-        order.setOrderStatusid(orderVo.getOrderStatusId());
-        order.setOrderTypeid(orderVo.getOrderTypeId());
-        if(orderService.updateByKey(order)==1){
-            return ResultUtils.success();
-        }
+        UserVirtualExample userVirtualExample=new UserVirtualExample();
+        UserVirtualExample.Criteria userVirtualExampleCriteria = userVirtualExample.createCriteria();
+        userVirtualExampleCriteria.andAccountEqualTo(orderVo.getAccount());
+        List<UserVirtual> userVirtualList = userVirtualService.getUserByExample(userVirtualExample);
+            if (userVirtualList.size() > 0) {
+                OrderKey orderKey=new OrderKey();
+                orderKey.setOrderid(orderVo.getOrderId());
+                Order order =orderService.getOrderByKey(orderKey);
+                order.setOrderCurrencyid(orderVo.getOrderCurrencyId());
+                order.setOrderCurrencynum(orderVo.getOrderCurrencyNum());
+                order.setOrdernumber(orderVo.getOrderNum());
+                order.setOrderprice(orderVo.getOrderPrice());
+                order.setOrderStatusid(orderVo.getOrderStatusId());
+                order.setOrderTypeid(orderVo.getOrderTypeId());
+                if (orderService.updateByKey(order) == 1) {
+                    return ResultUtils.success();
+                }
+            } else {
+                return ResultUtils.fail(ResultCode.PARAM_IS_INVALID);
+            }
+
         return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
     }
 }

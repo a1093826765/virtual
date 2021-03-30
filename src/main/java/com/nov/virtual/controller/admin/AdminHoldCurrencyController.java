@@ -1,19 +1,13 @@
 package com.nov.virtual.controller.admin;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.PageInfo;
-import com.nov.virtual.bean.ResultJsonData.HoldCurrencyJsonData;
-import com.nov.virtual.sql.mapper.CurrencyMapper;
+import com.nov.virtual.bean.resultJsonData.HoldCurrencyJsonData;
 import com.nov.virtual.sql.model.*;
 import com.nov.virtual.sql.service.CurrencyService;
 import com.nov.virtual.sql.service.HoldCurrencyService;
-import com.nov.virtual.utils.UserContextUtil;
 import com.nov.virtual.utils.pojo.ResultCode;
 import com.nov.virtual.utils.pojo.ResultUtils;
-import com.nov.virtual.vo.CurrencyStatusVo;
 import com.nov.virtual.vo.HoldCurrencyVo;
-import com.nov.virtual.vo.PageVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +21,7 @@ import java.util.List;
  * 持有货币管理员接口
  * @author november
  */
-@Api(value = "持有货币Controller",tags = {"持有货币管理员接口"})
+@Api(value = "管理员持有货币Controller",tags = {"持有货币管理员接口"})
 @RestController
 @RequestMapping(value = "/api/admin/holdCurrency",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class AdminHoldCurrencyController {

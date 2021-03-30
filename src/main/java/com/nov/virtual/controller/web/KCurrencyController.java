@@ -36,11 +36,10 @@ public class KCurrencyController {
     @ApiOperation(value = "货币K线",notes = "此接口进行货币K线查询")
     @PostMapping
     public ResultUtils KCurrency(@Validated @RequestBody KCurrencyVo kCurrencyVo) throws ParseException {
-        System.out.println(kCurrencyVo.getGranularity()+"   "+kCurrencyVo.getCurrencyName() );
         ApiHttp apiHttp=new ApiHttp(new APIConfiguration("https://www.okex.com"),new OkHttpClient());
 //        String result=apiHttp.get("/api/spot/v3/instruments/"+kCurrencyVo.getCurrencyName()+"-USDT/candles?granularity="+kCurrencyVo.getGranularity()+"&start="+kCurrencyVo.getStartTime()+"&end="+kCurrencyVo.getStopTime());
         String result=apiHttp.get("/api/spot/v3/instruments/"+kCurrencyVo.getCurrencyName()+"-USDT/candles?granularity="+kCurrencyVo.getGranularity());
-        System.out.println(result);
+//        System.out.println(result);
         String[] split = result.split(",");
         JSONArray jsonArray=new JSONArray();
         for(int i=0;i<split.length;i++) {
@@ -49,6 +48,7 @@ public class KCurrencyController {
                 JSONObject jsonObject=new JSONObject();
                 Date date = DateUtil.parse(split[i-5], "yyyy-MM-dd");
                 jsonObject.put("time",date.toString().substring(0,date.toString().indexOf(" ")));
+                jsonObject.put("dateTime",split[i-5]);
                 jsonObject.put("open",split[i-4]);
                 jsonObject.put("high",split[i-3]);
                 jsonObject.put("low",split[i-2]);

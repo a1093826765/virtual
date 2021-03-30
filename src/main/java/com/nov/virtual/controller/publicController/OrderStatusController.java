@@ -1,8 +1,7 @@
 package com.nov.virtual.controller.publicController;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.nov.virtual.bean.ResultJsonData.OrderStatusJsonData;
+import com.nov.virtual.bean.resultJsonData.OrderStatusJsonData;
 import com.nov.virtual.sql.model.OrderStatus;
 import com.nov.virtual.sql.model.OrderStatusExample;
 import com.nov.virtual.sql.model.OrderStatusKey;
@@ -20,18 +19,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 订单类型接口
+ * 订单状态接口
  * @author november
  */
-@Api(value = "订单类型Controller",tags = {"订单类型接口"})
+@Api(value = "订单状态Controller",tags = {"订单状态接口"})
 @RestController
 @RequestMapping(value = "/api/public/orderStatus",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class OrderStatusController {
     @Autowired
     OrderStatusService orderStatusService;
 
-    @ApiOperation(value = "订单类型查询",notes = "此接口查询订单类型信息")
-    @GetMapping("/query")
+    @ApiOperation(value = "订单状态查询",notes = "此接口查询订单状态信息")
+    @PostMapping("/query")
     public ResultUtils queryOrder(){
         List<OrderStatus> orderStatusList = orderStatusService.getOrderStatusByExample(new OrderStatusExample());
         JSONArray jsonArray=new JSONArray();
@@ -43,7 +42,7 @@ public class OrderStatusController {
         return ResultUtils.success(jsonArray);
     }
 
-    @ApiOperation(value = "添加订单类型",notes = "此接口添加订单类型信息")
+    @ApiOperation(value = "添加订单状态",notes = "此接口添加订单状态信息")
     @PostMapping("/insert")
     public ResultUtils insertOrder(@Validated @RequestBody OrderStatusVo orderStatusVo){
         OrderStatus orderStatus =new OrderStatus();
@@ -54,7 +53,7 @@ public class OrderStatusController {
         return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
     }
 
-    @ApiOperation(value = "删除订单类型",notes = "此接口删除订单类型信息")
+    @ApiOperation(value = "删除订单状态",notes = "此接口删除订单状态信息")
     @PostMapping("/delete")
     public ResultUtils deleteOrder(@Validated @RequestBody OrderStatusVo orderStatusVo){
         OrderStatusKey orderStatusKey=new OrderStatusKey();
@@ -65,7 +64,7 @@ public class OrderStatusController {
         return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
     }
 
-    @ApiOperation(value = "修改订单类型",notes = "此接口修改订单类型信息")
+    @ApiOperation(value = "修改订单状态",notes = "此接口修改订单状态信息")
     @PostMapping("/update")
     public ResultUtils updateOrder(@Validated @RequestBody OrderStatusVo orderStatusVo){
         OrderStatus orderStatus =new OrderStatus();

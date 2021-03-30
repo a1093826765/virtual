@@ -2,10 +2,9 @@ package com.nov.virtual.controller.admin;
 
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageInfo;
-import com.nov.virtual.bean.ResultJsonData.PageJsonData;
-import com.nov.virtual.bean.ResultJsonData.UserVirtualJsonData;
+import com.nov.virtual.bean.resultJsonData.PageJsonData;
+import com.nov.virtual.bean.resultJsonData.UserVirtualJsonData;
 import com.nov.virtual.sql.model.*;
-import com.nov.virtual.sql.service.OrderService;
 import com.nov.virtual.sql.service.UserStatusService;
 import com.nov.virtual.sql.service.UserTypeService;
 import com.nov.virtual.sql.service.UserVirtualService;
@@ -14,7 +13,6 @@ import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.vo.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.omg.CORBA.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -62,7 +60,7 @@ public class UserVirtualController {
             UserVirtualJsonData userVirtualJsonData = new UserVirtualJsonData(userVirtual.getUserid(), userVirtual.getAccount(), userVirtual.getPassword(), userVirtual.getRegistertime(), userVirtual.getUsername(), userVirtual.getMoney(), userStatusService.getUserStatusByKey(userStatusKey).getUserstatusname(), userTypeService.getUserTypeByKey(userTypeKey).getUsertypename());
             jsonArray.add(userVirtualJsonData.toQueryJson());
         }
-        return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(), pageInfo.getPages(), jsonArray));
+        return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(), pageInfo.getPages(), jsonArray,pageInfo.getTotal()));
     }
 
 
@@ -81,7 +79,7 @@ public class UserVirtualController {
             UserVirtualJsonData userVirtualJsonData = new UserVirtualJsonData(userVirtual.getUserid(), userVirtual.getAccount(), userVirtual.getPassword(), userVirtual.getRegistertime(), userVirtual.getUsername(), userVirtual.getMoney(), userStatusService.getUserStatusByKey(userStatusKey).getUserstatusname(), userTypeService.getUserTypeByKey(userTypeKey).getUsertypename());
             jsonArray.add(userVirtualJsonData.toQueryJson());
         }
-        return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(), pageInfo.getPages(), jsonArray));
+        return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(), pageInfo.getPages(), jsonArray,pageInfo.getTotal()));
     }
 
     @ApiOperation(value = "添加用户信息", notes = "此接口添加用户信息")

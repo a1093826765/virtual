@@ -3,7 +3,7 @@ package com.nov.virtual.controller.web;
 import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.client.ApiHttp;
 import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.config.APIConfiguration;
 import com.nov.virtual.utils.pojo.ResultUtils;
-import com.nov.virtual.vo.CurrencyNewMoencyVo;
+import com.nov.virtual.vo.CurrencyNewMoneyVo;
 import com.nov.virtual.vo.KCurrencyVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,9 +29,9 @@ import java.text.ParseException;
 public class CurrencyNewMoneyController {
     @ApiOperation(value = "货币最新价",notes = "此接口进行货币最新价查询")
     @PostMapping
-    public ResultUtils KCurrency(@Validated @RequestBody CurrencyNewMoencyVo currencyNewMoencyVo) throws ParseException {
+    public ResultUtils KCurrency(@Validated @RequestBody CurrencyNewMoneyVo currencyNewMoneyVo) throws ParseException {
         ApiHttp apiHttp=new ApiHttp(new APIConfiguration("https://www.okex.com"),new OkHttpClient());
-        String result=apiHttp.get("api/spot/v3/instruments/"+currencyNewMoencyVo.getCurrencyName()+"-USDT/ticker");
+        String result=apiHttp.get("/api/spot/v3/instruments/"+currencyNewMoneyVo.getCurrencyName()+"-USDT/ticker");
         return ResultUtils.success(result);
     }
 }

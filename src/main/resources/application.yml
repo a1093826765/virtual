@@ -9,13 +9,24 @@ spring:
     url: jdbc:mysql://localhost:3306/virtual?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     username: root
     password: a2288311
+    xa:
+      properties:
+        useInformationSchema: true
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
-
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+      exclude: src/main/resources
+  freemarker:
+    cache: false
 mybatis:
   type-aliases-package: com.nov.virtual.sql.mapper
   mapper-locations: classpath:mapping/*.xml
+
+
 
 

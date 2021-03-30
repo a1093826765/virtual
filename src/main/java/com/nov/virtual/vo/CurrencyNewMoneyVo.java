@@ -13,8 +13,8 @@ import lombok.NonNull;
  */
 @Data
 @ApiModel(value = "用户买币参数",description="/api/web/newMoney")
-public class CurrencyNewMoencyVo {
-    @ApiModelProperty(value="货币名称",name="currencyName",required=true)
-    @NonNull
+public class CurrencyNewMoneyVo {
+    @ApiModelProperty(value="货币名称",name="currencyName",required=false)
+//    @NonNull
     private String currencyName;
 }

@@ -1,14 +1,12 @@
 package com.nov.virtual.controller.admin;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
-import com.nov.virtual.bean.ResultJsonData.CurrencyJsonData;
-import com.nov.virtual.bean.ResultJsonData.PageJsonData;
+import com.nov.virtual.bean.resultJsonData.CurrencyJsonData;
+import com.nov.virtual.bean.resultJsonData.PageJsonData;
 import com.nov.virtual.sql.model.*;
 import com.nov.virtual.sql.service.CurrencyService;
 import com.nov.virtual.sql.service.CurrencyStatusService;
-import com.nov.virtual.sql.service.UserVirtualService;
 import com.nov.virtual.utils.pojo.ResultCode;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.vo.CurrencyVo;
@@ -53,7 +51,7 @@ public class AdminCurrencyController {
             CurrencyJsonData currencyJsonData=new CurrencyJsonData(currency.getCurrencyid(),currency.getCurrencyname(),currencyStatusService.getCurrencyStatusByKey(currencyStatusKey).getCurrencystatusname(),currency.getCurrencyChinename(),currency.getCurrencyImg());
             jsonArray.add(currencyJsonData.toQueryJson());
         }
-        return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(),pageInfo.getPages(),jsonArray).toJson());
+        return ResultUtils.success(new PageJsonData(pageInfo.getPageNum(),pageInfo.getPages(),jsonArray,pageInfo.getTotal()).toJson());
     }
 
     @ApiOperation(value = "添加货币",notes = "此接口添加系统可操作的货币信息")

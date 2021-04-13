@@ -5,9 +5,12 @@ import com.nov.virtual.bean.resultJsonData.HoldCurrencyJsonData;
 import com.nov.virtual.sql.model.*;
 import com.nov.virtual.sql.service.CurrencyService;
 import com.nov.virtual.sql.service.HoldCurrencyService;
-import com.nov.virtual.utils.pojo.ResultCode;
+import com.nov.virtual.enums.ResultCodeEnum;
 import com.nov.virtual.utils.pojo.ResultUtils;
-import com.nov.virtual.vo.HoldCurrencyVo;
+import com.nov.virtual.vo.admin.holdCurrency.DeleteHoldCurrencyVo;
+import com.nov.virtual.vo.admin.holdCurrency.InsertHoldCurrencyVo;
+import com.nov.virtual.vo.admin.holdCurrency.QueryHoldCurrencyVo;
+import com.nov.virtual.vo.admin.holdCurrency.UpdateHoldCurrencyVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,7 @@ import java.util.List;
  * 持有货币管理员接口
  * @author november
  */
-@Api(value = "管理员持有货币Controller",tags = {"持有货币管理员接口"})
+@Api(value = "管理员持有货币Controller",tags = {"管理员持有货币管理员接口"})
 @RestController
 @RequestMapping(value = "/api/admin/holdCurrency",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class AdminHoldCurrencyController {
@@ -36,10 +39,10 @@ public class AdminHoldCurrencyController {
 //    @GetMapping("/query/{userId}")
 //    public ResultUtils queryHoldCurrency(@PathVariable long userId){
     @PostMapping("/query")
-    public ResultUtils queryHoldCurrency(@Validated @RequestBody HoldCurrencyVo holdCurrencyVo){
+    public ResultUtils queryHoldCurrency(@Validated @RequestBody QueryHoldCurrencyVo queryHoldCurrencyVo){
         HoldCurrencyExample holdCurrencyExample=new HoldCurrencyExample();
         HoldCurrencyExample.Criteria criteria=holdCurrencyExample.createCriteria();
-        criteria.andHoldcurrencyUseridEqualTo(holdCurrencyVo.getUserId());
+        criteria.andHoldcurrencyUseridEqualTo(queryHoldCurrencyVo.getUserId());
         List<HoldCurrency> holdCurrencyList = holdCurrencyService.getHoldCurrencyByExample(holdCurrencyExample);
         CurrencyKey currencyKey=new CurrencyKey();
         JSONArray jsonArray=new JSONArray();
@@ -54,35 +57,36 @@ public class AdminHoldCurrencyController {
 
     @ApiOperation(value = "添加持有货币",notes = "此接口添加持有货币")
     @PostMapping("/insert")
-    public ResultUtils insertHoldCurrency(@Validated @RequestBody HoldCurrencyVo holdCurrencyVo){
-        if(holdCurrencyService.insert(holdCurrencyVo)==1){
+    public ResultUtils insertHoldCurrency(@Validated @RequestBody InsertHoldCurrencyVo insertHoldCurrencyVo){
+        if(holdCurrencyService.insert(insertHoldCurrencyVo)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 
     @ApiOperation(value = "删除持有货币",notes = "此接口持有货币信息")
     @PostMapping("/delete")
-    public ResultUtils deleteHoldCurrency(@Validated @RequestBody HoldCurrencyVo holdCurrencyVo){
+    public ResultUtils deleteHoldCurrency(@Validated @RequestBody DeleteHoldCurrencyVo deleteHoldCurrencyVo){
         HoldCurrencyKey holdCurrencyKey=new HoldCurrencyKey();
-        holdCurrencyKey.setHoldcurrencyid(holdCurrencyVo.getHoldCurrencyId());
+        holdCurrencyKey.setHoldcurrencyid(deleteHoldCurrencyVo.getHoldCurrencyId());
         if(holdCurrencyService.deleteByKey(holdCurrencyKey)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 
     @ApiOperation(value = "修改持有货币",notes = "此接口修改持有货币信息")
     @PostMapping("/update")
-    public ResultUtils updateHoldCurrency(@Validated @RequestBody HoldCurrencyVo holdCurrencyVo){
-        HoldCurrency holdCurrency=new HoldCurrency();
-        holdCurrency.setHoldcurrencyid(holdCurrencyVo.getHoldCurrencyId());
-        holdCurrency.setHoldcurrencynum(holdCurrencyVo.getHoldCurrencyNum());
-        holdCurrency.setHoldcurrencymoney(holdCurrencyVo.getHoldCurrencyMoney());
-        holdCurrency.setHoldcurrencyCurrencyid(holdCurrencyVo.getCurrencyId());
+    public ResultUtils updateHoldCurrency(@Validated @RequestBody UpdateHoldCurrencyVo updateHoldCurrencyVo){
+        HoldCurrencyKey holdCurrencyKey=new HoldCurrencyKey();
+        holdCurrencyKey.setHoldcurrencyid(updateHoldCurrencyVo.getHoldCurrencyId());
+        HoldCurrency holdCurrency=holdCurrencyService.getHoldCurrencyByKey(holdCurrencyKey);
+        holdCurrency.setHoldcurrencynum(updateHoldCurrencyVo.getHoldCurrencyNum());
+        holdCurrency.setHoldcurrencymoney(updateHoldCurrencyVo.getHoldCurrencyMoney());
+        holdCurrency.setHoldcurrencyCurrencyid(updateHoldCurrencyVo.getCurrencyId());
         if(holdCurrencyService.updateByKey(holdCurrency)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 }

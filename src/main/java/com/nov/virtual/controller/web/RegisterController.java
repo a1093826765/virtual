@@ -3,7 +3,7 @@ package com.nov.virtual.controller.web;
 import com.nov.virtual.sql.model.UserVirtual;
 import com.nov.virtual.sql.model.UserVirtualExample;
 import com.nov.virtual.sql.service.UserVirtualService;
-import com.nov.virtual.utils.pojo.ResultCode;
+import com.nov.virtual.enums.ResultCodeEnum;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.vo.RegisterVo;
 import io.swagger.annotations.Api;
@@ -45,11 +45,11 @@ public class RegisterController {
         List<UserVirtual> userVirtualList = userVirtualService.getUserByExample(userVirtualExample);
         if(userVirtualList.size()>0){
             // 用户已存在
-            return ResultUtils.fail(ResultCode.USER_EXISTENCE_ERROR);
+            return ResultUtils.fail(ResultCodeEnum.USER_EXISTENCE_ERROR);
         }
         if(userVirtualService.register(registerVo.getAccount(),registerVo.getPassword(),registerVo.getPassword())==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 }

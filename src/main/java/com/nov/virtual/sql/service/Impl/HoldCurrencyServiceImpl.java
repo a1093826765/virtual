@@ -1,17 +1,15 @@
 package com.nov.virtual.sql.service.Impl;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.nov.virtual.sql.mapper.CurrencyMapper;
 import com.nov.virtual.sql.mapper.HoldCurrencyMapper;
-import com.nov.virtual.sql.model.Currency;
 import com.nov.virtual.sql.model.HoldCurrency;
 import com.nov.virtual.sql.model.HoldCurrencyExample;
 import com.nov.virtual.sql.model.HoldCurrencyKey;
 import com.nov.virtual.sql.service.HoldCurrencyService;
-import com.nov.virtual.vo.HoldCurrencyVo;
+import com.nov.virtual.vo.admin.holdCurrency.InsertHoldCurrencyVo;
+import com.nov.virtual.vo.admin.holdCurrency.QueryHoldCurrencyVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -92,17 +90,35 @@ public class HoldCurrencyServiceImpl implements HoldCurrencyService {
 
     /**
      * api添加数据
-     * @param holdCurrencyVo
+     * @param insertHoldCurrencyVo
      * @return
      */
     @Override
-    public int insert(HoldCurrencyVo holdCurrencyVo) {
-        HoldCurrency holdCurrency=new HoldCurrency();
-        holdCurrency.setHoldcurrencyCurrencyid(holdCurrencyVo.getCurrencyId());
-        holdCurrency.setHoldcurrencymoney(holdCurrencyVo.getHoldCurrencyMoney());
-        holdCurrency.setHoldcurrencynum(holdCurrencyVo.getHoldCurrencyNum());
-        holdCurrency.setHoldcurrencyUserid(holdCurrencyVo.getUserId());
-        return this.save(holdCurrency);
+    public int insert(InsertHoldCurrencyVo insertHoldCurrencyVo) {
+        try {
+            HoldCurrencyExample holdCurrencyExample = new HoldCurrencyExample();
+            holdCurrencyExample.createCriteria().andHoldcurrencyCurrencyidEqualTo(insertHoldCurrencyVo.getCurrencyId())
+                    .andHoldcurrencyUseridEqualTo(insertHoldCurrencyVo.getUserId());
+            List<HoldCurrency> holdCurrencyList = this.getHoldCurrencyByExample(holdCurrencyExample);
+            HoldCurrency holdCurrency = new HoldCurrency();
+            if (holdCurrencyList.size() > 0) {
+                holdCurrency=holdCurrencyList.get(0);
+                double money=Double.parseDouble(holdCurrency.getHoldcurrencymoney()) + Double.parseDouble(insertHoldCurrencyVo.getHoldCurrencyMoney());
+                double num=Double.parseDouble(holdCurrency.getHoldcurrencynum()) + Double.parseDouble(insertHoldCurrencyVo.getHoldCurrencyNum());
+                holdCurrency.setHoldcurrencymoney(String.valueOf(money));
+                holdCurrency.setHoldcurrencynum(String.valueOf(num));
+                return this.updateByKey(holdCurrency);
+            } else {
+                holdCurrency.setHoldcurrencyCurrencyid(insertHoldCurrencyVo.getCurrencyId());
+                holdCurrency.setHoldcurrencymoney(insertHoldCurrencyVo.getHoldCurrencyMoney());
+                holdCurrency.setHoldcurrencynum(insertHoldCurrencyVo.getHoldCurrencyNum());
+                holdCurrency.setHoldcurrencyUserid(insertHoldCurrencyVo.getUserId());
+                return this.save(holdCurrency);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
     }
 
 

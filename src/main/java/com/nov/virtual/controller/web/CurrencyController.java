@@ -8,7 +8,7 @@ import com.nov.virtual.sql.model.Currency;
 import com.nov.virtual.sql.model.CurrencyExample;
 import com.nov.virtual.sql.service.CurrencyService;
 import com.nov.virtual.utils.pojo.ResultUtils;
-import com.nov.virtual.vo.PageVo;
+import com.nov.virtual.vo.config.PageVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

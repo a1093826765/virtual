@@ -6,9 +6,13 @@ import com.nov.virtual.bean.resultJsonData.OrderJsonData;
 import com.nov.virtual.bean.resultJsonData.PageJsonData;
 import com.nov.virtual.sql.model.*;
 import com.nov.virtual.sql.service.*;
-import com.nov.virtual.utils.pojo.ResultCode;
+import com.nov.virtual.enums.ResultCodeEnum;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.vo.*;
+import com.nov.virtual.vo.admin.order.DeleteOrderVo;
+import com.nov.virtual.vo.admin.order.InsertOrderVo;
+import com.nov.virtual.vo.admin.order.UpdateOrderVo;
+import com.nov.virtual.vo.config.AdminPageVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +24,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 订单接口
+ * 管理员订单管理接口
  * @author november
  */
-@Api(value = "订单Controller",tags = {"订单接口"})
+@Api(value = "管理员订单管理Controller",tags = {"管理员订单接口"})
 @RestController
 @RequestMapping(value = "/api/admin/order",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class OrderController {
@@ -110,61 +114,61 @@ public class OrderController {
 
     @ApiOperation(value = "添加订单信息",notes = "此接口添加订单信息")
     @PostMapping("/insert")
-    public ResultUtils insertOrder(@Validated @RequestBody OrderVo orderVo){
+    public ResultUtils insertOrder(@Validated @RequestBody InsertOrderVo insertOrderVo){
         Order order=new Order();
-        order.setOrderCurrencyid(orderVo.getOrderCurrencyId());
-        order.setOrderCurrencynum(orderVo.getOrderNum());
-        order.setOrdernumber(orderVo.getOrderNum());
-        order.setOrderprice(orderVo.getOrderPrice());
-        order.setOrderStatusid(orderVo.getOrderStatusId());
-        order.setOrderTypeid(orderVo.getOrderTypeId());
-        if(orderVo.getOrderTypeId()==1){
+        order.setOrderCurrencyid(insertOrderVo.getOrderCurrencyId());
+        order.setOrderCurrencynum(insertOrderVo.getOrderNum());
+        order.setOrdernumber(insertOrderVo.getOrderNum());
+        order.setOrderprice(insertOrderVo.getOrderPrice());
+        order.setOrderStatusid(insertOrderVo.getOrderStatusId());
+        order.setOrderTypeid(insertOrderVo.getOrderTypeId());
+        if(insertOrderVo.getOrderTypeId()==1){
             order.setOrderbuytime(new Date());
         }else{
             order.setOrderselltime(new Date());
         }
-        order.setOrderUserid(orderVo.getOrderUserId());
+        order.setOrderUserid(insertOrderVo.getOrderUserId());
         if(orderService.save(order)==1){
-            return ResultUtils.fail(ResultCode.SUCCESS);
+            return ResultUtils.fail(ResultCodeEnum.SUCCESS);
         }
-            return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+            return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 
     @ApiOperation(value = "删除订单",notes = "此接口删除订单信息")
     @PostMapping("/delete")
-    public ResultUtils deleteOrder(@Validated @RequestBody OrderVo orderVo){
+    public ResultUtils deleteOrder(@Validated @RequestBody DeleteOrderVo deleteOrderVo){
         OrderKey orderKey=new OrderKey();
-        orderKey.setOrderid(orderVo.getOrderId());
+        orderKey.setOrderid(deleteOrderVo.getOrderId());
         if(orderService.deleteByKey(orderKey)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 
     @ApiOperation(value = "修改订单",notes = "此接口修改订单信息")
     @PostMapping("/update")
-    public ResultUtils updateOrder(@Validated @RequestBody OrderVo orderVo){
+    public ResultUtils updateOrder(@Validated @RequestBody UpdateOrderVo updateOrderVo){
         UserVirtualExample userVirtualExample=new UserVirtualExample();
         UserVirtualExample.Criteria userVirtualExampleCriteria = userVirtualExample.createCriteria();
-        userVirtualExampleCriteria.andAccountEqualTo(orderVo.getAccount());
+        userVirtualExampleCriteria.andAccountEqualTo(updateOrderVo.getAccount());
         List<UserVirtual> userVirtualList = userVirtualService.getUserByExample(userVirtualExample);
             if (userVirtualList.size() > 0) {
                 OrderKey orderKey=new OrderKey();
-                orderKey.setOrderid(orderVo.getOrderId());
+                orderKey.setOrderid(updateOrderVo.getOrderId());
                 Order order =orderService.getOrderByKey(orderKey);
-                order.setOrderCurrencyid(orderVo.getOrderCurrencyId());
-                order.setOrderCurrencynum(orderVo.getOrderCurrencyNum());
-                order.setOrdernumber(orderVo.getOrderNum());
-                order.setOrderprice(orderVo.getOrderPrice());
-                order.setOrderStatusid(orderVo.getOrderStatusId());
-                order.setOrderTypeid(orderVo.getOrderTypeId());
+                order.setOrderCurrencyid(updateOrderVo.getOrderCurrencyId());
+                order.setOrderCurrencynum(updateOrderVo.getOrderCurrencyNum());
+                order.setOrdernumber(updateOrderVo.getOrderNum());
+                order.setOrderprice(updateOrderVo.getOrderPrice());
+                order.setOrderStatusid(updateOrderVo.getOrderStatusId());
+                order.setOrderTypeid(updateOrderVo.getOrderTypeId());
                 if (orderService.updateByKey(order) == 1) {
                     return ResultUtils.success();
                 }
             } else {
-                return ResultUtils.fail(ResultCode.PARAM_IS_INVALID);
+                return ResultUtils.fail(ResultCodeEnum.PARAM_IS_INVALID);
             }
 
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 }

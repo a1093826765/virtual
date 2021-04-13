@@ -2,7 +2,7 @@ package com.nov.virtual.websocket;
 
 import com.nov.virtual.shop.okEx.OkExWebSocketClient;
 import com.nov.virtual.shop.okEx.OkExWebSocketConfig;
-import com.nov.virtual.utils.pojo.ResultCode;
+import com.nov.virtual.enums.ResultCodeEnum;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import org.springframework.stereotype.Component;
 
@@ -84,13 +84,12 @@ public class KWebSocketServer {
                 Thread.sleep(1000);
                 webSocketClient.setSession(session);
                 webSocketClient.subscribe(list);
-                sendMessage(session, ResultUtils.websocket(ResultCode.CONNECT_SUCCESS).toString());
+                sendMessage(session, ResultUtils.websocket(ResultCodeEnum.CONNECT_SUCCESS).toString());
 //                while (okExServicePd.get(split[2])) {
 //                }
 //            System.out.println("开始发送数据--------------->>");
 //
 //            sendMessage(session, "");
-
 
             } catch (Exception e) {
                 webSocketClient.closeConnection();

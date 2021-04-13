@@ -6,7 +6,7 @@ import com.nov.virtual.sql.model.UserStatus;
 import com.nov.virtual.sql.model.UserStatusExample;
 import com.nov.virtual.sql.model.UserStatusKey;
 import com.nov.virtual.sql.service.UserStatusService;
-import com.nov.virtual.utils.pojo.ResultCode;
+import com.nov.virtual.enums.ResultCodeEnum;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.vo.UserStatusVo;
 import io.swagger.annotations.Api;
@@ -50,7 +50,7 @@ public class UserStatusController {
         if(userStatusService.save(userStatus)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 
     @ApiOperation(value = "删除用户状态",notes = "此接口删除用户状态信息")
@@ -61,7 +61,7 @@ public class UserStatusController {
         if(userStatusService.deleteByKey(userStatusKey)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 
     @ApiOperation(value = "修改用户状态",notes = "此接口修改用户状态信息")
@@ -73,6 +73,6 @@ public class UserStatusController {
         if(userStatusService.updateByKey(userStatus)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 }

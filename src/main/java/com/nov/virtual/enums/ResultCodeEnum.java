@@ -1,4 +1,4 @@
-package com.nov.virtual.utils.pojo;
+package com.nov.virtual.enums;
 
 
 /**
@@ -6,7 +6,7 @@ package com.nov.virtual.utils.pojo;
  * @author november
  */
 
-public enum  ResultCode {
+public enum ResultCodeEnum {
     // 成功
     SUCCESS(200,"成功"),
     // 参数错误
@@ -28,7 +28,7 @@ public enum  ResultCode {
     private Integer code;
     private String message;
 
-    private ResultCode(Integer code, String message){
+    private ResultCodeEnum(Integer code, String message){
         this.code=code;
         this.message=message;
     }

@@ -9,10 +9,9 @@ import com.nov.virtual.sql.service.HoldCurrencyService;
 import com.nov.virtual.sql.service.OrderService;
 import com.nov.virtual.sql.service.UserVirtualService;
 import com.nov.virtual.utils.UserContextUtil;
-import com.nov.virtual.utils.pojo.ResultCode;
+import com.nov.virtual.enums.ResultCodeEnum;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.vo.BuyVo;
-import com.nov.virtual.vo.LoginVo;
 import com.nov.virtual.vo.SellVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -89,7 +88,8 @@ public class TransactionController {
             order.setOrderTypeid(1);
             order.setOrderStatusid(1);
             order.setOrderprice(String.valueOf(buyVo.getMoney()));
-            order.setOrdernumber("xxxxxx");
+            String orderNum=UserContextUtil.getUserVirtualBean().getUserVirtual().getUserid()+""+System.currentTimeMillis();
+            order.setOrdernumber(orderNum);
             order.setOrderCurrencynum(amountStr);
             order.setOrderCurrencyid(currency.getCurrencyid());
             order.setOrderbuytime(new Date());
@@ -119,7 +119,7 @@ public class TransactionController {
             userVirtualService.updateByKey(user);
             return ResultUtils.success();
         } else {
-            return ResultUtils.fail(ResultCode.USER_NOT_MONEY);
+            return ResultUtils.fail(ResultCodeEnum.USER_NOT_MONEY);
         }
     }
 
@@ -185,7 +185,7 @@ public class TransactionController {
                 return ResultUtils.success();
             }
         }
-        return ResultUtils.fail(ResultCode.USER_NOT_CURRENCY_NUM);
+        return ResultUtils.fail(ResultCodeEnum.USER_NOT_CURRENCY_NUM);
     }
 
     /**

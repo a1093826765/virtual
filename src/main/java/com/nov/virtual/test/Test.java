@@ -6,11 +6,17 @@ import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.config.APIConfigur
 import com.nov.virtual.shop.okEx.okcoin.rest.HttpUtilManager;
 import com.nov.virtual.shop.okEx.okcoin.rest.future.IFutureRestApi;
 import com.nov.virtual.shop.okEx.okcoin.rest.future.impl.FutureRestApiV1;
+import com.nov.virtual.utils.FileUtil;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import okhttp3.OkHttpClient;
 import org.apache.http.HttpException;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -18,8 +24,12 @@ import java.util.HashMap;
  * 测试
  * @author november
  */
+@Component
+@Configurable
+@EnableScheduling
 public class Test {
-    public static void main(String[] args) throws IOException, HttpException {
+
+    public static void main(String[] args) throws Exception{
 //        HashMap<String,String> data=new HashMap<>();
 //        data.put("c1","c2");
 //        ResultUtils success = ResultUtils.success(data);
@@ -33,13 +43,64 @@ public class Test {
 //         */
 ////        HttpUtilManager httpUtil = HttpUtilManager.getInstance();
 //        String result = httpUtil.requestHttpGet(url_prex,"/api/spot/v3/instruments", null);
-        ApiHttp apiHttp=new ApiHttp(new APIConfiguration("https://www.okex.com"),new OkHttpClient());
-        String result=apiHttp.get("/api/spot/v3/instruments/BTC-USDT/candles?granularity=60");
-        System.out.println(result);
+        String[] currencys={"BTC","ETH","USDT","LTC","XRP"};
+        int[] mone={2,4,6,9,11};
+        ApiHttp apiHttp = new ApiHttp(new APIConfiguration("https://www.okex.com"), new OkHttpClient());
+        for(String currency:currencys) {
+            for (int q = 2010; q <= 2021; q++) {
+                for (int i = 1; i <= 12; i++) {
+                    a:
+                    for (int j = 1; j <= 31; j++) {
+                        if (j >= 29 && i == 2) {
+                            break;
+                        }
+                        for (int n = 0; n < mone.length; n++) {
+                            if (j >= 31 && i == mone[n]) {
+                                break a;
+                            }
+                        }
+
+                        String result = apiHttp.get(getUrl(currency, q, i, j));
+//                        getUrl(currency, q, i, j);
+//                        String result="[]";
+                        if (!result.equals("[]")) {
+                            System.out.println(result);
+                            FileUtil.writeMethod("/Users/november/Desktop/未命名文件夹/" + currency + ".txt", result, true);
+                        }
+                    }
+//                    Thread.sleep(1000);
+                }
+            }
+        }
 //        String money="24859.87";
 //        String num="0.00000009";
 //        String price="23902.968";
 //
 //        System.out.println(Double.parseDouble(money)-Double.parseDouble(num)*Double.parseDouble(price));
+    }
+
+    public static String getUrl(String currency, int year, int mone, int day){
+        String url;
+        String m=getMone(mone);
+        if (day <= 9) {
+            System.out.println(year+"-" + m + "-0" + day );
+            url = "/api/spot/v3/instruments/" + currency + "-USDT/candles?granularity=3600&start="+year+"-" + m + "-0" + day + "T00:00:00.000Z&end="+year+"-" + m + "-0" + day + "T23:00:00.000Z";
+        } else {
+            System.out.println(year+"-" + m + "-" + day );
+            url = "/api/spot/v3/instruments/" + currency + "-USDT/candles?granularity=3600&start="+year+"-" + m + "-" + day + "T00:00:00.000Z&end="+year+"-" + m + "-" + day + "T23:00:00.000Z";
+        }
+        return url;
+    }
+
+    public static String getMone(int mone){
+        if(mone<10){
+          return "0"+mone;
+        }else {
+            return mone+"";
+        }
+    }
+
+    public static void main1(String[] args) {
+
     }
 }

@@ -22,7 +22,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //配置拦截的请求
         registry.addInterceptor(authInterceptor()).addPathPatterns("/api/**").excludePathPatterns("/api/web/login","/api/web/register");
-        registry.addInterceptor(adminInterceptor()).addPathPatterns("/api/admin/**");
+        registry.addInterceptor(adminInterceptor()).addPathPatterns("/api/admin/**").excludePathPatterns("/api/admin/login");
     }
 
     @Bean

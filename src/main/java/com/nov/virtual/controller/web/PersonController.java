@@ -1,6 +1,7 @@
 package com.nov.virtual.controller.web;
 
 import com.alibaba.fastjson.JSONObject;
+import com.nov.virtual.Service.OkExService;
 import com.nov.virtual.bean.resultJsonData.PersonJsonData;
 import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.client.ApiHttp;
 import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.config.APIConfiguration;
@@ -38,6 +39,9 @@ public class PersonController {
     @Autowired
     CurrencyService currencyService;
 
+    @Autowired
+    OkExService okExService;
+
     /**
      * 个人信息
      * @return
@@ -74,7 +78,7 @@ public class PersonController {
         double profitMoney=newMoneySize-moneySize;
         DecimalFormat dcmFmt = new DecimalFormat("0.0000");
         String profit = dcmFmt.format(((1-(moneySize/newMoneySize))*100));
-
+        System.out.println(profit);
         PersonJsonData personJsonData=new PersonJsonData(String.valueOf(Double.parseDouble(userVirtual.getMoney())+profitMoney),profit,profitMoney,currencyNumSize,userVirtual.getUsername());
         return ResultUtils.success(personJsonData.toJson());
     }
@@ -85,10 +89,6 @@ public class PersonController {
      * @return
      */
     private String getNewPrice(String currencyName) {
-        ApiHttp apiHttp = new ApiHttp(new APIConfiguration("https://www.okex.com"), new OkHttpClient());
-        String result = apiHttp.get("/api/index/v3/" + currencyName + "-USD/constituents");
-        JSONObject jsonObject = (JSONObject) JSONObject.parse(result);
-        jsonObject = (JSONObject) JSONObject.parse(jsonObject.getString("data"));
-        return jsonObject.getString("last");
+        return okExService.getNewMoney(currencyName);
     }
 }

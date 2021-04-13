@@ -23,6 +23,11 @@ spring:
       exclude: src/main/resources
   freemarker:
     cache: false
+  # 日志
+logging:
+  config: classpath:logback-spring.xml
+  file:
+    path: ../logs/virtual
 mybatis:
   type-aliases-package: com.nov.virtual.sql.mapper
   mapper-locations: classpath:mapping/*.xml

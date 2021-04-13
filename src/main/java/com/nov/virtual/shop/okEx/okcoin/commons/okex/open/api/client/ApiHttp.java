@@ -34,6 +34,7 @@ public class ApiHttp {
     }
 
     public String get(String url) {
+        System.out.println("==");
         Request request = new Request.Builder()
                 .url(url(url))
                 .build();

@@ -1,7 +1,6 @@
 package com.nov.virtual.exceptions;
 
-import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
-import com.nov.virtual.utils.pojo.ResultCode;
+import com.nov.virtual.enums.ResultCodeEnum;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -21,7 +20,7 @@ public class GloabllExceptionHandler {
     @ExceptionHandler(Exception.class)
     public Object handlerException(Exception e){
         e.printStackTrace();
-        return new ResultUtils(ResultCode.SYSTEM_ERROR);
+        return new ResultUtils(ResultCodeEnum.SYSTEM_ERROR);
     }
 
     /**
@@ -32,7 +31,7 @@ public class GloabllExceptionHandler {
     @ResponseBody
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Object handlerException(HttpMessageNotReadableException e){
-        return new ResultUtils(ResultCode.PARAM_IS_INVALID);
+        return new ResultUtils(ResultCodeEnum.PARAM_IS_INVALID);
     }
 
     /**
@@ -43,13 +42,13 @@ public class GloabllExceptionHandler {
     @ResponseBody
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     public Object handlerException(HttpMediaTypeNotSupportedException e){
-        return new ResultUtils(ResultCode.PARAM_IS_INVALID);
+        return new ResultUtils(ResultCodeEnum.PARAM_IS_INVALID);
     }
 
     @ResponseBody
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public Object handlerException(HttpRequestMethodNotSupportedException e){
-        return new ResultUtils(ResultCode.USER_RE);
+        return new ResultUtils(ResultCodeEnum.USER_RE);
     }
 
 }

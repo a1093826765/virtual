@@ -7,15 +7,12 @@ import com.nov.virtual.sql.model.UserVirtualKey;
 import com.nov.virtual.config.Address;
 import com.nov.virtual.utils.NetworkUtil;
 import com.nov.virtual.utils.UserContextUtil;
-import com.nov.virtual.utils.pojo.ResultCode;
-import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.utils.pojo.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 
 /**
  * token拦截器
@@ -27,7 +24,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//        System.out.println("token拦截器");
+        System.out.println("token拦截器");
         String token=request.getHeader("Authorization");
 //        System.out.println(token);
         if(token==null){

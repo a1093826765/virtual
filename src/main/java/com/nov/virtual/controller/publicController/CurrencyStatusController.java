@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.nov.virtual.bean.resultJsonData.CurrencyStatusJsonData;
 import com.nov.virtual.sql.model.*;
 import com.nov.virtual.sql.service.CurrencyStatusService;
-import com.nov.virtual.utils.pojo.ResultCode;
+import com.nov.virtual.enums.ResultCodeEnum;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.vo.CurrencyStatusVo;
 import io.swagger.annotations.Api;
@@ -49,7 +49,7 @@ public class CurrencyStatusController {
         if(currencyStatusService.save(currencyStatus)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 
     @ApiOperation(value = "删除可操作货币状态",notes = "此接口删除系统可操作货币状态信息")
@@ -60,7 +60,7 @@ public class CurrencyStatusController {
         if(currencyStatusService.deleteByKey(currencyStatusKey)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 
     @ApiOperation(value = "修改可操作货币状态",notes = "此接口修改系统可操作货币状态信息")
@@ -72,6 +72,6 @@ public class CurrencyStatusController {
         if(currencyStatusService.updateByKey(currencyStatus)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 }

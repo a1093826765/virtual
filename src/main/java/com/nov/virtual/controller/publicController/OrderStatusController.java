@@ -6,7 +6,7 @@ import com.nov.virtual.sql.model.OrderStatus;
 import com.nov.virtual.sql.model.OrderStatusExample;
 import com.nov.virtual.sql.model.OrderStatusKey;
 import com.nov.virtual.sql.service.OrderStatusService;
-import com.nov.virtual.utils.pojo.ResultCode;
+import com.nov.virtual.enums.ResultCodeEnum;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.vo.OrderStatusVo;
 import io.swagger.annotations.Api;
@@ -50,7 +50,7 @@ public class OrderStatusController {
         if(orderStatusService.save(orderStatus)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 
     @ApiOperation(value = "删除订单状态",notes = "此接口删除订单状态信息")
@@ -61,7 +61,7 @@ public class OrderStatusController {
         if(orderStatusService.deleteByKey(orderStatusKey)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 
     @ApiOperation(value = "修改订单状态",notes = "此接口修改订单状态信息")
@@ -73,6 +73,6 @@ public class OrderStatusController {
         if(orderStatusService.updateByKey(orderStatus)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 }

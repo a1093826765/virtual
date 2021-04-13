@@ -1,4 +1,4 @@
-package com.nov.virtual.vo;
+package com.nov.virtual.vo.admin.login;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

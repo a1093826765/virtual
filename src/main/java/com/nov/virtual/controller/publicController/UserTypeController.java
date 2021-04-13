@@ -6,7 +6,7 @@ import com.nov.virtual.sql.model.UserType;
 import com.nov.virtual.sql.model.UserTypeExample;
 import com.nov.virtual.sql.model.UserTypeKey;
 import com.nov.virtual.sql.service.UserTypeService;
-import com.nov.virtual.utils.pojo.ResultCode;
+import com.nov.virtual.enums.ResultCodeEnum;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.vo.UserTypeVo;
 import io.swagger.annotations.Api;
@@ -50,7 +50,7 @@ public class UserTypeController {
         if(userTypeService.save(userType)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 
     @ApiOperation(value = "删除用户类型",notes = "此接口删除用户类型信息")
@@ -61,7 +61,7 @@ public class UserTypeController {
         if(userTypeService.deleteByKey(userTypeKey)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 
     @ApiOperation(value = "修改用户类型",notes = "此接口修改用户类型信息")
@@ -73,6 +73,6 @@ public class UserTypeController {
         if(userTypeService.updateByKey(userType)==1){
             return ResultUtils.success();
         }
-        return ResultUtils.fail(ResultCode.SYSTEM_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }
 }

@@ -2,6 +2,7 @@ package com.nov.virtual.utils.pojo;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.nov.virtual.enums.ResultCodeEnum;
 
 /**
  * 返回结果工具类
@@ -25,9 +26,9 @@ public class ResultUtils {
 
     }
 
-    public ResultUtils (ResultCode resultCode){
-        this.code=resultCode.getCode();
-        this.message=resultCode.getMessage();
+    public ResultUtils (ResultCodeEnum resultCodeEnum){
+        this.code= resultCodeEnum.getCode();
+        this.message= resultCodeEnum.getMessage();
     }
 
     public Integer getCode() {
@@ -59,7 +60,7 @@ public class ResultUtils {
      * @return
      */
     public static ResultUtils success(){
-        ResultUtils resultUtils=new ResultUtils(ResultCode.SUCCESS);
+        ResultUtils resultUtils=new ResultUtils(ResultCodeEnum.SUCCESS);
         return resultUtils;
     }
 
@@ -69,7 +70,7 @@ public class ResultUtils {
      * @return
      */
     public static ResultUtils success(Object data){
-        ResultUtils resultUtils=new ResultUtils(ResultCode.SUCCESS);
+        ResultUtils resultUtils=new ResultUtils(ResultCodeEnum.SUCCESS);
         resultUtils.setData(data);
         return resultUtils;
     }
@@ -87,20 +88,20 @@ public class ResultUtils {
 
     /**
      * websocket返回
-     * @param resultCode
+     * @param resultCodeEnum
      * @return
      */
-    public static ResultUtils websocket(ResultCode resultCode){
-        return new ResultUtils(resultCode);
+    public static ResultUtils websocket(ResultCodeEnum resultCodeEnum){
+        return new ResultUtils(resultCodeEnum);
     }
 
     /**
      * 返回失败
-     * @param resultCode
+     * @param resultCodeEnum
      * @return
      */
-    public static ResultUtils fail(ResultCode resultCode){
-        return new ResultUtils(resultCode);
+    public static ResultUtils fail(ResultCodeEnum resultCodeEnum){
+        return new ResultUtils(resultCodeEnum);
     }
 
     /**

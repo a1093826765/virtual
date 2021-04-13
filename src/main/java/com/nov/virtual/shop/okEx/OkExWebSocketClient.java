@@ -150,7 +150,7 @@ public class OkExWebSocketClient {
                         try {
                             data = data.replaceAll("\\[", "");
                             data = data.replaceAll("]", "");
-                            System.out.println(getSession()+"数据：" + data);
+//                            System.out.println(getSession()+"数据：" + data);
                             WebSocketServer.sendMessage(session, data);
                         } catch (Exception e) {
                             webSocket.close(1000, "stop");

@@ -5,10 +5,10 @@ package com.nov.virtual.controller.admin;
 import com.nov.virtual.config.Address;
 import com.nov.virtual.sql.model.UserVirtual;
 import com.nov.virtual.sql.service.UserVirtualService;
-import com.nov.virtual.utils.pojo.ResultCode;
+import com.nov.virtual.enums.ResultCodeEnum;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.utils.pojo.TokenUtils;
-import com.nov.virtual.vo.LoginVo;
+import com.nov.virtual.vo.admin.login.LoginVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +45,12 @@ public class AdminLoginController {
         List<UserVirtual> userList = userVirtualServiceService.login(loginVo.getAccount(),loginVo.getPassword());
         if(userList.size()>0){
             UserVirtual userVirtual=userList.get(0);
-            if(userVirtual.getUserUsertypeid()==1) {
+            if(userVirtual.getUserUsertypeid()==2) {
                 // 账户存在，登录成功
                 return ResultUtils.success(TokenUtils.getToken(userVirtual.getUserid(), Address.TOKEN_SEC));
             }
         }
         // 账户或密码错误，登录失败
-        return ResultUtils.fail(ResultCode.USER_LOGIN_ERROR);
+        return ResultUtils.fail(ResultCodeEnum.USER_LOGIN_ERROR);
     }
 }

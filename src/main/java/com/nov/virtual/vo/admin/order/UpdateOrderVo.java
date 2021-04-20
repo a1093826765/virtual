@@ -36,6 +36,6 @@ public class UpdateOrderVo {
     @ApiModelProperty(value="订单货币数量",name="orderCurrencyNum",required=true)
     private String orderCurrencyNum;
 
-    @ApiModelProperty(value="订单货币数量",name="account",required=true)
+    @ApiModelProperty(value="账号",name="account",required=true)
     private String account;
 }

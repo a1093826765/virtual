@@ -20,7 +20,7 @@ import java.util.List;
  * 可操作货币状态接口
  * @author november
  */
-@Api(value = "可操作货币状态Controller",tags = {"可操作货币状态接口"})
+@Api(value = "公共可操作货币状态Controller",tags = {"公共可操作货币状态接口"})
 @RestController
 @RequestMapping(value = "/api/public/currencyStatus",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class CurrencyStatusController {

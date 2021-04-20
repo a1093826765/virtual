@@ -22,7 +22,7 @@ import java.util.List;
  * 订单状态接口
  * @author november
  */
-@Api(value = "订单状态Controller",tags = {"订单状态接口"})
+@Api(value = "公共订单状态Controller",tags = {"公共订单状态接口"})
 @RestController
 @RequestMapping(value = "/api/public/orderStatus",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class OrderStatusController {

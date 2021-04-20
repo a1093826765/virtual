@@ -24,8 +24,8 @@ public class InsertOrderVo {
     @ApiModelProperty(value="订单状态Id",name="orderStatusId",required=true)
     private Integer orderStatusId;
 
-    @ApiModelProperty(value="订单用户Id",name="orderUserId",required=true)
-    private long orderUserId;
+    @ApiModelProperty(value="账号",name="account",required=true)
+    private String  account;
 
     @ApiModelProperty(value="订单货币Id",name="orderCurrencyId",required=true)
     private Integer orderCurrencyId;

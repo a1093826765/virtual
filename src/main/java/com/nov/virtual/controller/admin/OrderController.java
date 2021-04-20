@@ -115,21 +115,30 @@ public class OrderController {
     @ApiOperation(value = "添加订单信息",notes = "此接口添加订单信息")
     @PostMapping("/insert")
     public ResultUtils insertOrder(@Validated @RequestBody InsertOrderVo insertOrderVo){
-        Order order=new Order();
-        order.setOrderCurrencyid(insertOrderVo.getOrderCurrencyId());
-        order.setOrderCurrencynum(insertOrderVo.getOrderNum());
-        order.setOrdernumber(insertOrderVo.getOrderNum());
-        order.setOrderprice(insertOrderVo.getOrderPrice());
-        order.setOrderStatusid(insertOrderVo.getOrderStatusId());
-        order.setOrderTypeid(insertOrderVo.getOrderTypeId());
-        if(insertOrderVo.getOrderTypeId()==1){
-            order.setOrderbuytime(new Date());
+        UserVirtualExample userVirtualExample=new UserVirtualExample();
+        UserVirtualExample.Criteria userVirtualExampleCriteria = userVirtualExample.createCriteria();
+        userVirtualExampleCriteria.andAccountEqualTo(insertOrderVo.getAccount());
+        List<UserVirtual> userVirtualList = userVirtualService.getUserByExample(userVirtualExample);
+        if (userVirtualList.size() > 0) {
+            UserVirtual userVirtual = userVirtualList.get(0);
+            Order order = new Order();
+            order.setOrderCurrencyid(insertOrderVo.getOrderCurrencyId());
+            order.setOrderCurrencynum(insertOrderVo.getOrderNum());
+            order.setOrdernumber(insertOrderVo.getOrderNum());
+            order.setOrderprice(insertOrderVo.getOrderPrice());
+            order.setOrderStatusid(insertOrderVo.getOrderStatusId());
+            order.setOrderTypeid(insertOrderVo.getOrderTypeId());
+            if (insertOrderVo.getOrderTypeId() == 1) {
+                order.setOrderbuytime(new Date());
+            } else {
+                order.setOrderselltime(new Date());
+            }
+            order.setOrderUserid(userVirtual.getUserid());
+            if (orderService.save(order) == 1) {
+                return ResultUtils.success(ResultCodeEnum.SUCCESS);
+            }
         }else{
-            order.setOrderselltime(new Date());
-        }
-        order.setOrderUserid(insertOrderVo.getOrderUserId());
-        if(orderService.save(order)==1){
-            return ResultUtils.fail(ResultCodeEnum.SUCCESS);
+            return ResultUtils.fail(ResultCodeEnum.USER_NOT);
         }
             return ResultUtils.fail(ResultCodeEnum.SYSTEM_ERROR);
     }

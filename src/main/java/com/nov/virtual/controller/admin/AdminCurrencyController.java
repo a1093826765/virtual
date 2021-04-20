@@ -40,10 +40,10 @@ public class AdminCurrencyController {
     @Autowired
     CurrencyStatusService currencyStatusService;
 
-    @ApiOperation(value = "分页货币查询",notes = "此接口分页查询系统可操作的货币信息")
+
     @PostMapping("/query")
+    @ApiOperation(value = "分页货币查询",notes = "此接口分页查询系统可操作的货币信息")
     public ResultUtils queryCurrency(@Validated @RequestBody PageVo pageVo){
-        System.out.println(212);
         PageInfo<Currency> pageInfo = currencyService.getMenus(pageVo.getPage(), pageVo.getLimit(), new CurrencyExample());
         List<Currency> currencyList=pageInfo.getList();
         JSONArray jsonArray=new JSONArray();

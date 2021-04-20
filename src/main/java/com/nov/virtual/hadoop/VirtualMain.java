@@ -1,17 +1,17 @@
-//package com.nov.virtual.hadoop;
-//
-//import com.nov.virtual.Service.CommandService;
-//import com.nov.virtual.Service.FileService;
-//import com.nov.virtual.Service.OkExService;
-//import com.nov.virtual.config.HadoopConfig;
-//import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.client.ApiHttp;
-//import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.config.APIConfiguration;
-//import com.nov.virtual.sql.model.Currency;
-//import com.nov.virtual.sql.model.CurrencyExample;
-//import com.nov.virtual.sql.service.CurrencyService;
-//import com.nov.virtual.utils.FileUtil;
-//import lombok.extern.slf4j.Slf4j;
-//import okhttp3.OkHttpClient;
+package com.nov.virtual.hadoop;
+
+import com.nov.virtual.Service.CommandService;
+import com.nov.virtual.Service.FileService;
+import com.nov.virtual.Service.OkExService;
+import com.nov.virtual.config.HadoopConfig;
+import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.client.ApiHttp;
+import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.config.APIConfiguration;
+import com.nov.virtual.sql.model.Currency;
+import com.nov.virtual.sql.model.CurrencyExample;
+import com.nov.virtual.sql.service.CurrencyService;
+import com.nov.virtual.utils.FileUtil;
+import lombok.extern.slf4j.Slf4j;
+import okhttp3.OkHttpClient;
 //import org.apache.hadoop.conf.Configuration;
 //import org.apache.hadoop.conf.Configured;
 //import org.apache.hadoop.fs.Path;
@@ -22,42 +22,42 @@
 //import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 //import org.apache.hadoop.util.Tool;
 //import org.apache.hadoop.util.ToolRunner;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Configurable;
-//import org.springframework.scheduling.annotation.EnableScheduling;
-//import org.springframework.scheduling.annotation.Scheduled;
-//import org.springframework.stereotype.Component;
-//
-//import java.io.File;
-//import java.text.SimpleDateFormat;
-//import java.util.Date;
-//import java.util.List;
-//
-///**
-// * Created by IntelliJ IDEA.
-// *
-// * @Description:
-// * @Author: november
-// * @CreateTime: 2021/4/2 5:36 下午
-// * @UpdateTIme:
-// */
-//@Component
-//@Configurable
-//@EnableScheduling
-//@Slf4j
-//public class VirtualMain extends Configured implements Tool {
-//
-//    @Autowired
-//    FileService fileService;
-//
-//    @Autowired
-//    CommandService commandService;
-//
-//    @Autowired
-//    CurrencyService currencyService;
-//
-//    @Autowired
-//    OkExService okExService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created by IntelliJ IDEA.
+ *
+ * @Description:
+ * @Author: november
+ * @CreateTime: 2021/4/2 5:36 下午
+ * @UpdateTIme:
+ */
+@Component
+@Configurable
+@EnableScheduling
+@Slf4j
+public class VirtualMain  {
+
+    @Autowired
+    FileService fileService;
+
+    @Autowired
+    CommandService commandService;
+
+    @Autowired
+    CurrencyService currencyService;
+
+    @Autowired
+    OkExService okExService;
 //
 //
 //    public static void main(String[] args) throws Exception {
@@ -90,35 +90,35 @@
 ////        }
 ////    }
 //
-//    /**
-//     *
-//     * Created by IntelliJ IDEA.
-//     * @Description: 每天更新一次
-//     * @author november
-//     * @CreateTime: 2021/4/6 5:18 下午
-//     * @UpdateTIme:
-//     * @param
-//     * @return
-//     */
-////    @Scheduled(cron = "0 0 0 * * * ")
-//    public void updateFile(){
-//        try {
-//            String url;
-//            ApiHttp apiHttp = new ApiHttp(new APIConfiguration("https://www.okex.com"), new OkHttpClient());
-//            //查询所有货币
-//            List<Currency> currencyList = currencyService.getCurrencyByExample(new CurrencyExample());
-//            for (Currency currency : currencyList) {
-//                url = "/api/spot/v3/instruments/" + currency.getCurrencyname() + "-USDT/candles?granularity=3600";
-//                String result = apiHttp.get(url);
-//                //追加数据
-//                fileService.updateTxtFile(currency.getCurrencyname() + ".txt", result, HadoopConfig.HADOOP_INPUT_FILE, true);
-//                log.info("追加数据成功:{}",currency.getCurrencyname());
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            log.error("文件更新失败",e);
-//        }
-//    }
+    /**
+     *
+     * Created by IntelliJ IDEA.
+     * @Description: 每天更新一次
+     * @author november
+     * @CreateTime: 2021/4/6 5:18 下午
+     * @UpdateTIme:
+     * @param
+     * @return
+     */
+    @Scheduled(cron = "0 0 0 * * * ")
+    public void updateFile(){
+        try {
+            String url;
+            ApiHttp apiHttp = new ApiHttp(new APIConfiguration("https://www.okex.com"), new OkHttpClient());
+            //查询所有货币
+            List<Currency> currencyList = currencyService.getCurrencyByExample(new CurrencyExample());
+            for (Currency currency : currencyList) {
+                url = "/api/spot/v3/instruments/" + currency.getCurrencyname() + "-USDT/candles?granularity=3600";
+                String result = apiHttp.get(url);
+                //追加数据
+                fileService.updateTxtFile(currency.getCurrencyname() + ".txt", result, HadoopConfig.HADOOP_INPUT_FILE, true);
+                log.info("追加数据成功:{}",currency.getCurrencyname());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error("文件更新失败",e);
+        }
+    }
 //
 //    /**
 //     *
@@ -210,4 +210,4 @@
 ////        job.submit();//此方法并不知道程序的运行情况
 //        return  job.waitForCompletion(true) ? 0 : 1;
 //    }
-//}
+}

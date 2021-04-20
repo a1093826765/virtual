@@ -22,7 +22,7 @@ import java.util.List;
  * 用户类型接口
  * @author november
  */
-@Api(value = "用户类型Controller",tags = {"用户类型接口"})
+@Api(value = "公共用户类型Controller",tags = {"公共用户类型接口"})
 @RestController
 @RequestMapping(value = "/api/public/userType",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
 public class UserTypeController {

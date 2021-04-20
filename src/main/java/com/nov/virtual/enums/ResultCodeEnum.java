@@ -20,6 +20,7 @@ public enum ResultCodeEnum {
     USER_RE(2000,"参数异常，请修改请求方式"),
     USER_NOT_MONEY(2001,"余额不足"),
     USER_NOT_CURRENCY_NUM(2002,"货币不足"),
+    USER_NOT(2003,"用户不存在"),
     SYSTEM_ERROR(500,"系统异常，请稍后重试"),
     // websocket
     CONNECT_SUCCESS(200,"websocket连接成功");

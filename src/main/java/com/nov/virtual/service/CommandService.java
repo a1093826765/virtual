@@ -1,4 +1,4 @@
-package com.nov.virtual.Service;
+package com.nov.virtual.service;
 
 /**
  * Created by IntelliJ IDEA.

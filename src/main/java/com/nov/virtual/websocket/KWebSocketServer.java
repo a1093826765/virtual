@@ -85,12 +85,6 @@ public class KWebSocketServer {
                 webSocketClient.setSession(session);
                 webSocketClient.subscribe(list);
                 sendMessage(session, ResultUtils.websocket(ResultCodeEnum.CONNECT_SUCCESS).toString());
-//                while (okExServicePd.get(split[2])) {
-//                }
-//            System.out.println("开始发送数据--------------->>");
-//
-//            sendMessage(session, "");
-
             } catch (Exception e) {
                 webSocketClient.closeConnection();
                 e.printStackTrace();

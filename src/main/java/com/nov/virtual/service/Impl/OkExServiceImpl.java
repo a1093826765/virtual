@@ -1,7 +1,7 @@
-package com.nov.virtual.Service.Impl;
+package com.nov.virtual.service.Impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.nov.virtual.Service.OkExService;
+import com.nov.virtual.service.OkExService;
 import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.client.ApiHttp;
 import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.config.APIConfiguration;
 import lombok.extern.slf4j.Slf4j;

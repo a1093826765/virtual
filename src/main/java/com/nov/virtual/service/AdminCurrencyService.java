@@ -1,4 +1,4 @@
-package com.nov.virtual.Service;
+package com.nov.virtual.service;
 
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.vo.admin.currency.InsertCurrencyVo;

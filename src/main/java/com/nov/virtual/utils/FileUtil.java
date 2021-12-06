@@ -3,6 +3,7 @@ package com.nov.virtual.utils;
 import com.nov.virtual.config.HadoopConfig;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.xml.transform.Source;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
@@ -65,12 +66,22 @@ public class FileUtil {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileNamePath), StandardCharsets.UTF_8));
             while ((line = in.readLine()) != null) {
-                str.append(line);
+                str.append(line+",");
             }
             in.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return str.toString();
+    }
+
+    public static void main(String[] args) {
+        String s = readMethod("/Users/november/Desktop/virtual/BTC.txt");
+        String[] split = s.split(",");
+        for(String a:split){
+            if(a.substring(0,1).equals("0")){
+                System.out.println(Double.parseDouble(a.substring(1)));
+            }
+        }
     }
 }

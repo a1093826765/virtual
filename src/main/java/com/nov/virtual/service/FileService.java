@@ -1,6 +1,4 @@
-package com.nov.virtual.Service;
-
-import com.alibaba.fastjson.JSONObject;
+package com.nov.virtual.service;
 
 /**
  * Created by IntelliJ IDEA.

@@ -19,7 +19,7 @@ public class HadoopConfig {
     public static final String HADOOP_INPUT_FILE="/root/apps/txt/virtual/hadoop/";
 
     //hadoop文件输出地址
-    public static final String HADOOP_OUTPUT_FILE="/root/apps/txt/virtual/hadoop/out.txt";
+    public static final String HADOOP_OUTPUT_FILE="/root/apps/txt/virtual/hadoop/out/";
 
     //cp地址
     public static final String CP_OUTPUT_FILE="/root/apps/txt/virtual/";

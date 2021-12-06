@@ -1,10 +1,7 @@
 package com.nov.virtual.controller.web;
 
-import com.alibaba.fastjson.JSONObject;
-import com.nov.virtual.Service.OkExService;
+import com.nov.virtual.service.OkExService;
 import com.nov.virtual.bean.resultJsonData.PersonJsonData;
-import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.client.ApiHttp;
-import com.nov.virtual.shop.okEx.okcoin.commons.okex.open.api.config.APIConfiguration;
 import com.nov.virtual.sql.model.*;
 import com.nov.virtual.sql.service.CurrencyService;
 import com.nov.virtual.sql.service.HoldCurrencyService;
@@ -12,7 +9,6 @@ import com.nov.virtual.utils.UserContextUtil;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;

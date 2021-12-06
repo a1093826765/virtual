@@ -1,9 +1,10 @@
-package com.nov.virtual.Service.Impl;
+package com.nov.virtual.service.Impl;
 
-import com.alibaba.fastjson.JSONObject;
-import com.nov.virtual.Service.FileService;
+import com.nov.virtual.service.FileService;
 import com.nov.virtual.utils.FileUtil;
 import org.springframework.stereotype.Service;
+
+import java.io.File;
 
 /**
  * Created by IntelliJ IDEA.
@@ -56,7 +57,20 @@ public class FileServiceImpl implements FileService {
      */
     @Override
     public boolean delete(String path) {
-        return FileUtil.deleteFile(path);
+        File file = new File(path);
+        if (!file.exists()) {
+            return false;
+        }
+
+        if (file.isFile()) {
+            return file.delete();
+        } else {
+
+            for (File filed : file.listFiles()) {
+                delete(filed.getPath());
+            }
+        }
+        return true;
     }
 
 }

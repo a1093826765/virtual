@@ -83,7 +83,6 @@ public class WebSocketServer {
                 String[] currencyStr = split[1].split(",");
                 sessionPools.put(account, session);
                 addOnlineCount();
-                System.out.println(account + "加入webSocket！当前人数为" + onlineNum);
                 final ArrayList<String> list = new ArrayList<>();
                 if ("buy".equals(currencyName)) {
                     for (int i = 0; i < currencyStr.length; i++) {
@@ -100,13 +99,6 @@ public class WebSocketServer {
                 webSocketClient.setSession(session);
                 webSocketClient.subscribe(list);
                 sendMessage(session, ResultUtils.websocket(ResultCodeEnum.CONNECT_SUCCESS).toString());
-//                while (okExServicePd.get(account)) {
-//                }
-//            System.out.println("开始发送数据--------------->>");
-//
-//            sendMessage(session, "");
-
-
             } catch (Exception e) {
                 webSocketClient.closeConnection();
                 e.printStackTrace();

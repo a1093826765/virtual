@@ -1,6 +1,6 @@
-package com.nov.virtual.Service.Impl;
+package com.nov.virtual.service.Impl;
 
-import com.nov.virtual.Service.CommandService;
+import com.nov.virtual.service.CommandService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;

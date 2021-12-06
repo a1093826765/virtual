@@ -1,9 +1,11 @@
 package com.nov.virtual.controller.web;
 
+import com.nov.virtual.service.StrategyService;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.vo.BuyVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -25,18 +27,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/web/strategy", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 public class StrategyController {
 
+    @Autowired
+    StrategyService strategyService;
+
     @ApiOperation(value = "策略买币", notes = "策略买币")
     @PostMapping("/strategyBuy")
     @Transactional
     public ResultUtils strategyBuy() {
-        return ResultUtils.success("策略买币测试数据");
+        String s = strategyService.strategyBuy();
+        return ResultUtils.success(s);
     }
 
     @ApiOperation(value = "策略卖币", notes = "策略卖币")
     @PostMapping("/strategySell")
     @Transactional
     public ResultUtils strategySell() {
-        return ResultUtils.success("策略卖币测试数据");
+        String s = strategyService.strategySell();
+        return ResultUtils.success(s);
     }
 
 }

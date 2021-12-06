@@ -1,6 +1,6 @@
-package com.nov.virtual.Service.Impl;
+package com.nov.virtual.service.Impl;
 
-import com.nov.virtual.Service.AdminCurrencyService;
+import com.nov.virtual.service.AdminCurrencyService;
 import com.nov.virtual.utils.pojo.ResultUtils;
 import com.nov.virtual.vo.admin.currency.InsertCurrencyVo;
 import com.nov.virtual.vo.config.PageVo;
